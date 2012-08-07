@@ -1,0 +1,9 @@
+# -*- Mode: Python -*- vi:si:et:sw=4:sts=4:ts=4:syntax=python
+
+class Recipe(recipe.Recipe):
+    name = 'mono-addins'
+    version = '0.6.2'
+    licenses = [License.LGPL]
+    stype = SourceType.TARBALL
+    #deps = ['mono', 'gtk-sharp']
+    url = 'http://download.mono-project.com/sources/mono-addins/mono-addins-0.6.2.tar.bz2'

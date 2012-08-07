@@ -1,0 +1,46 @@
+# -*- Mode: Python -*- vi:si:et:sw=4:sts=4:ts=4:syntax=python
+import shutil
+
+from cerbero.utils import shell
+
+MONO_REFLECTION_PC = '''\
+prefix=%s
+assemblies_dir=${prefix}/lib/mono.reflection
+Libraries=${assemblies_dir}/Mono.Reflection.dll
+
+Name: Mono.Reflection
+Description: Mono.Reflection Library
+Version: none
+Libs: -r:${Libraries}
+'''
+
+
+class Recipe(recipe.Recipe):
+    name = 'mono.reflection'
+    version = '1.0+git20110407+d2343843'
+    licenses = [License.LGPL]
+    stype = SourceType.TARBALL
+    btype = BuildType.CUSTOM
+    #deps = ['mono', 'gtk-sharp']
+    url = 'http://ftp.de.debian.org/debian/pool/main/m/mono.reflection/mono.reflection_1.0+git20110407+d2343843.orig.tar.gz'
+    strip = 1
+    patches = ['dont_set_target_framework.patch'] 
+
+    def compile(self):
+        shell.call('xbuild Mono.Reflection.csproj  /property:Configuration=Release', self.build_dir)
+
+    def install(self):
+        # Install assemblies
+        files = ['bin/Release/Mono.Reflection.dll']
+
+        assemblies_dir = os.path.join(self.config.prefix, 'lib', 'mono.reflection')
+        if not os.path.exists(assemblies_dir):
+            os.makedirs(assemblies_dir)
+        for f in files:
+            shutil.copy(os.path.join(self.build_dir, f),
+                        os.path.join(assemblies_dir, os.path.basename(f)))
+
+        # Install mono-reflection.pc
+        cecil_pc = os.path.join(self.config.prefix, 'lib', 'pkgconfig', 'cecil-flowanalysis.pc')
+        with open(cecil_pc, 'w') as f:
+            f.write(MONO_REFLECTION_PC % self.config.prefix)

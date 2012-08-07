@@ -1,0 +1,70 @@
+# -*- Mode: Python -*- vi:si:et:sw=4:sts=4:ts=4:syntax=python
+import shutil
+
+from cerbero.utils import shell
+
+DB4O_PC = '''\
+prefix=%s
+libdir=${prefix}/lib
+pkglibdir=${libdir}/cli/
+
+Name: db4o
+Description: db4o - native OODBMS for CLI
+Version: 8.0
+Libs: -r:${pkglibdir}/Db4objects.Db4o-8.0/Db4objects.Db4o.dll -r:${pkglibdir}/Db4objects.Db4o.Linq-8.0/Db4objects.Db4o.Linq.dll
+-r:${pkglibdir}/Db4objects.Db4o.Instrumentation-8.0/Db4objects.Db4o.Instrumentation.dll -r:${pkglibdir}/Db4objects.Db4o.CS-8.0/Db4objects.Db4o.CS.dll
+-r:${pkglibdir}/Db4objects.Db4o.NativeQueries-8.0/Db4objects.Db4o.NativeQueries.dll -r:${pkglibdir}/Db4objects.Db4o.Optional-8.0/Db4objects.Db4o.Optional.dll
+'''
+
+class Recipe(recipe.Recipe):
+    name = 'db4o'
+    version = '8.0.184.15484+dfsg'
+
+    licenses = [License.LGPL]
+    stype = SourceType.TARBALL
+    btype = BuildType.CUSTOM
+    #deps = ['mono']
+    url = 'http://ftp.de.debian.org/debian/pool/main/d/db4o/db4o_8.0.184.15484+dfsg.orig.tar.gz'
+    strip = 1
+    patches = [
+               'force_cecil_0.9.5.patch',
+               'port_options_code_to_Mono.Options.patch',
+               'dont_build_test_assemblies.patch',
+               'use_cecil_0.9.5_api.patch',
+                ]
+    
+    def compile(self):
+        csproj_files = [x for x in shell.find_files('*/*/*2010.csproj', self.build_dir)]
+        for f in csproj_files:
+            shell.replace(f, {'/usr': self.prefix})
+            shell.replace(f, {'..\\Libs\\net-2.0\\Cecil.FlowAnalysis.dll': '%s/lib/cecil-flowanalysis/Cecil.FlowAnalysis.dll' % self.prefix})
+        cmd = 'xbuild /property:Configuration=Release /property:DefineConstants="MONO" src/Db4o-2010.sln'
+        shell.call(cmd, self.build_dir)
+        if not os.path.exists(os.path.join(self.build_dir, 'tmp')):
+            os.makedirs(os.path.join(self.build_dir, 'tmp'))
+
+        shell.call('cp `pkg-config --variable=Libraries mono-cecil` tmp/', self.build_dir)
+        shell.call('cp `pkg-config --variable=Libraries cecil-flowanalysis` tmp/', self.build_dir)
+
+    def install(self):
+        install_files = [('src/Db4objects.Db4o/bin/Release/Db4objects.Db4o.dll', 'lib/cli/Db4objects.Db4o-8.0/'),
+                         ('src/Db4objects.Db4o.Linq/bin/Release/Db4objects.Db4o.Linq.dll', 'lib/cli/Db4objects.Db4o.Linq-8.0/'),
+                         ('src/Db4objects.Db4o.Instrumentation/bin/Release/Db4objects.Db4o.Instrumentation.dll', 'lib/cli/Db4objects.Db4o.Instrumentation-8.0/'),
+                         ('tmp/Cecil.FlowAnalysis.dll', 'lib/cli/Db4objects.Db4o.Instrumentation-8.0/'),
+                         ('tmp/Mono.Cecil.dll', 'lib/cli/Db4objects.Db4o.Instrumentation-8.0/'),
+                         ('src/Db4objects.Db4o.CS/bin/Release/Db4objects.Db4o.CS.dll', 'lib/cli/Db4objects.Db4o.CS-8.0/'),
+                         ('src/Db4objects.Db4o.NativeQueries/bin/Release/Db4objects.Db4o.NativeQueries.dll', 'lib/cli/Db4objects.Db4o.NativeQueries-8.0/'),
+                         ('tmp/Cecil.FlowAnalysis.dll', 'lib/cli/Db4objects.Db4o.NativeQueries-8.0/'),
+                         ('tmp/Mono.Cecil.dll', 'lib/cli/Db4objects.Db4o.NativeQueries-8.0/'),
+                         ('src/Db4objects.Db4o.Optional/bin/Release/Db4objects.Db4o.Optional.dll', 'lib/cli/Db4objects.Db4o.Optional-8.0/')]
+        for src, dest in install_files:
+            src = os.path.join(self.build_dir, src)
+            dest = os.path.join(self.config.prefix, dest)
+            if not os.path.exists(dest):
+                os.makedirs(dest)
+            shutil.copy(src, dest)
+
+        # Install db4o.pc
+        cecil_pc = os.path.join(self.config.prefix, 'lib', 'pkgconfig', 'db4o.pc')
+        with open(cecil_pc, 'w') as f:
+            f.write(DB4O_PC % self.config.prefix)

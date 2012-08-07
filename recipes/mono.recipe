@@ -1,0 +1,12 @@
+# -*- Mode: Python -*- vi:si:et:sw=4:sts=4:ts=4:syntax=python
+
+class Recipe(recipe.Recipe):
+    name = 'mono'
+    version = '2.10.9'
+    licenses = [License.LGPL]
+    stype = SourceType.TARBALL
+    url = 'http://download.mono-project.com/sources/mono/mono-2.10.9.tar.bz2'
+    configure_options = ' --with-gc=included --with-preview=yes' \
+                        '--without-sigaltstack --disable-dtrace ' \
+                        '--with-libgdiplus=$CERBERO_PREFIX'
+    append_env = {'LDFLAGS': ' -lcharset -lintl'}

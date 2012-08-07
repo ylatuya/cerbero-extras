@@ -1,0 +1,7 @@
+# -*- Mode: Python -*- vi:si:et:sw=4:sts=4:ts=4:syntax=python
+
+class Recipe(recipe.Recipe):
+    name = 'longomatch'
+    version = '0.17.5'
+    licenses = [License.GPL]
+    remotes = {'origin': 'git://git.gnome.org/longomatch'}

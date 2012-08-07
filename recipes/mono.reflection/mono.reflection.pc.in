@@ -1,0 +1,9 @@
+prefix=/usr
+assemblies_dir=${prefix}/lib/mono.reflection
+Libraries=${assemblies_dir}/Mono.Reflection.dll
+
+Name: Mono.Reflection
+Description: Mono.Reflection Library
+Version: none
+Libs: -r:${Libraries}
+

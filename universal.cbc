@@ -1,0 +1,11 @@
+import os
+from cerbero.config import Architecture, Platform
+
+target_arch = Architecture.UNIVERSAL
+path = os.path.dirname(os.path.abspath(__file__))
+external_recipes = {'extras': (os.path.join(path, 'recipes'), 1)}
+external_packages = {'extras': (os.path.join(path, 'packages'), 1)}
+
+if target_platform != Platform.DARWIN:
+    raise Exception("Universal configuration is only valid on Darwin platforms")
+prefix = '/Library/Frameworks/GStreamer.framework/Versions/0.10/'

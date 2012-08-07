@@ -1,0 +1,19 @@
+Index: mono.reflection/Mono.Reflection.csproj
+===================================================================
+--- mono.reflection.orig/Mono.Reflection.csproj	2011-08-09 21:53:57.000000000 +0100
++++ mono.reflection/Mono.Reflection.csproj	2011-08-09 21:54:02.000000000 +0100
+@@ -10,7 +10,6 @@
+     <AppDesignerFolder>Properties</AppDesignerFolder>
+     <RootNamespace>Mono.Reflection</RootNamespace>
+     <AssemblyName>Mono.Reflection</AssemblyName>
+-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+     <FileAlignment>512</FileAlignment>
+     <SignAssembly>true</SignAssembly>
+     <AssemblyOriginatorKeyFile>mono.snk</AssemblyOriginatorKeyFile>
+@@ -59,4 +58,4 @@
+   <Target Name="AfterBuild">
+   </Target>
+   -->
+-</Project>
+\ No newline at end of file
++</Project>

@@ -1,0 +1,54 @@
+# -*- Mode: Python -*- vi:si:et:sw=4:sts=4:ts=4:syntax=python
+import shutil
+
+from cerbero.utils import shell
+
+CECIL_FLOWANALYSIS_PC = '''\
+prefix=%s
+assemblies_dir=${prefix}/lib/cecil-flowanalysis/
+Libraries=${assemblies_dir}/Cecil.FlowAnalysis.dll
+
+Name: Cecil.Flowanalysis
+Description: Cecil.Flowanalysis Library
+Version: 0.1
+Libs: -r:${Libraries}
+'''
+
+
+class Recipe(recipe.Recipe):
+    name = 'cecil-flowanalysis'
+    version = 'vcs20110809.r1.b34edf6'
+    licenses = [License.LGPL]
+    stype = SourceType.TARBALL
+    btype = BuildType.CUSTOM
+    #deps = ['mono']
+    url = 'http://ftp.de.debian.org/debian/pool/main/c/cecil-flowanalysis/cecil-flowanalysis_0.1~vcs20110809.r1.b34edf6.orig.tar.gz'
+    tarball_name = '%(name)s-%(version)s.tar.gz'
+    tarball_dirname = 'cecil-flowanalysis-0.1~vcs20110809.r1.b34edf6'
+    patches = ['01_only_build.patch']
+    strip = 0
+
+    files_assemblies = ['lib/cecil-flowanalysis/Cecil.FlowAnalysis.dll']
+    files_devel = ['lib/pkgconfig/cecil-flowanalysis.pc']
+
+    def compile(self):
+        cecil_lib = shell.check_call('pkg-config --variable=Libraries mono-cecil').split(' ')[0]
+        shell.call('nant -v -buildfile:default.build -D:"Mono.Cecil.dll"="%s" '
+                   '-D:"keyfile"="%s"' % (cecil_lib, self.relative_path('mono.snk')),
+                   self.build_dir)
+
+    def install(self):
+        # Install assemblies
+        files = ['bin/Cecil.FlowAnalysis.dll']
+
+        assemblies_dir = os.path.join(self.config.prefix, 'lib', 'cecil-flowanalysis')
+        if not os.path.exists(assemblies_dir):
+            os.makedirs(assemblies_dir)
+        for f in files:
+            shutil.copy(os.path.join(self.build_dir, f),
+                        os.path.join(assemblies_dir, os.path.basename(f)))
+
+        # Install cecil-flowanalysis.pc
+        cecil_pc = os.path.join(self.config.prefix, 'lib', 'pkgconfig', 'cecil-flowanalysis.pc')
+        with open(cecil_pc, 'w') as f:
+            f.write(CECIL_FLOWANALYSIS_PC % self.config.prefix)

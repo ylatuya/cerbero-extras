@@ -1,0 +1,123 @@
+--- default.build	2012-07-17 12:48:23.000000000 +0200
++++ default.build	2012-07-17 12:49:10.000000000 +0200
+@@ -1,5 +1,5 @@
+ <?xml version="1.0"?>
+-<project name="Cecil.FlowAnalysis" default="test">
++<project name="Cecil.FlowAnalysis" default="build">
+ 
+ 	<include buildfile="nunit.inc" />
+ 
+@@ -14,24 +14,6 @@
+ 	<!-- allow properties to be customized in external file" -->
+ 	<include buildfile="build.properties" if="${file::exists('build.properties')}" />
+ 
+-	<target name="test" depends="build">
+-		<nunit2>
+-			<formatter type="Plain" />
+-			<test>
+-				<assemblies basedir="${build.dir}">
+-					<include name="*.Tests.dll" />
+-				</assemblies>
+-			</test>
+-		</nunit2>
+-	</target>
+-
+-	<target name="release" depends="clean, set-release, test">
+-	</target>
+-
+-	<target name="set-release">
+-		<property name="optimize" value="true" />
+-		<property name="debug" value="false" />
+-	</target>
+ 
+ 	<target name="build" depends="init">
+ 		<csc
+@@ -48,42 +30,6 @@
+ 				<include name="Mono.Cecil.dll" />
+ 			</references>
+ 		</csc>
+-
+-		<csc
+-			target="library"
+-			output="${build.dir}/Cecil.FlowAnalysis.Tests.dll"
+-			debug="${debug}"
+-			optimize="${optimize}">
+-			<sources basedir="Cecil.FlowAnalysis.Tests">
+-				<include name="**/*.cs" />
+-			</sources>
+-			<references basedir="${build.dir}">
+-				<include name="Cecil.FlowAnalysis.dll" />
+-				<include name="Mono.Cecil.dll" />
+-				<include name="${nunit.framework.dll}" />
+-			</references>
+-		</csc>
+-	</target>
+-
+-	<target name="codegen" depends="init" description="generates CodeStructure and Utilities classes">
+-		<exec program="${booi}" workingdir=".">
+-			<arg value="codegen/gen-Utilities.boo" />
+-		</exec>
+-
+-		<exec program="${booi}" workingdir=".">
+-			<arg value="codegen/gen-CodeStructure.boo" />
+-		</exec>
+-	</target>
+-
+-	<target name="cfgtestgen" depends="build" description="generates control flow graph regression tests">
+-		<exec program="${booi}">
+-			<arg value="-r:${build.dir}/Mono.Cecil.dll" />
+-			<arg value="-r:${build.dir}/Cecil.FlowAnalysis.dll" />
+-			<arg value="-r:${build.dir}/Cecil.FlowAnalysis.Tests.dll" />
+-			<arg value="codegen/gen-ControlFlowGraphRegression.boo" />
+-			<arg value="${cfg.assembly}" />
+-			<arg value="${cfg.class}" />
+-		</exec>
+ 	</target>
+ 
+ 	<target name="init">
+@@ -95,45 +41,4 @@
+ 		<delete dir="${build.dir}" if="${directory::exists(build.dir)}" />
+ 	</target>
+ 
+-	<target name="compactframework" depends="init" description="compiles cecil to run on the CompactFramework 1.0">
+-		<property name="compactframework.defines" value="CF_1_0;${csc.defines}" />
+-		<property name="compactframework.dir" value="${compactframework.v1.dir}" />
+-		<call target="compactframework-compilation" />
+-	</target>
+-
+-	<target name="compactframework2" depends="init" description="compiles cecil to run on the CompactFramework 2.0">
+-		<property name="compactframework.defines" value="CF_2_0;${csc.defines}" />
+-		<property name="compactframework.dir" value="${compactframework.v2.dir}" />
+-		<call target="compactframework-compilation" />
+-	</target>
+-
+-	<target name="compactframework-compilation">
+-	   <!--
+-	   a bug/limitation in the csc task prevents the
+-	   compact framework libraries to be referenced by their full paths
+-	   so we have to copy them to build.dir first
+-	   -->
+-	   <copy todir="${build.dir}">
+-			   <fileset basedir="${compactframework.dir}">
+-					   <include name="System.dll" />
+-					   <include name="mscorlib.dll" />
+-			   </fileset>
+-	   </copy>
+-	   <csc output="${build.dir}/Cecil.FlowAnalysis.dll"
+-			   target="library" debug="${debug}" unsafe="false" optimize="${optimize}"
+-			   noconfig="true" nostdlib="true" keyfile="${keyfile}"
+-			   define="${compactframework.defines}">
+-			
+-			   <sources basedir="Cecil.FlowAnalysis">
+-					   <include name="**/*.cs" />
+-			   </sources>
+-
+-			   <references basedir="${build.dir}">
+-					   <include name="mscorlib.dll" />
+-					   <include name="System.dll" />
+-					   <include name="Mono.Cecil.dll" />
+-			   </references>
+-	   </csc>
+-   </target>
+-
+ </project>

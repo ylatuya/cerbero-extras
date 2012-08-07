@@ -1,0 +1,14 @@
+import os
+from cerbero.config import Architecture, Platform
+
+target_arch = Architecture.X86_64
+path = os.path.dirname(os.path.abspath(__file__))
+external_recipes = {'extras': (os.path.join(path, 'recipes'), 1)}
+external_packages = {'extras': (os.path.join(path, 'packages'), 1)}
+
+if target_platform == Platform.WINDOWS:
+    prefix = 'c:/gstreamer-sdk/0.10/%s' % target_arch
+elif target_platform == Platform.LINUX:
+    prefix = '/opt/gstreamer-sdk'
+elif target_platform == Platform.DARWIN:
+    prefix = '/Library/Frameworks/GStreamer.framework/Versions/0.10/%s' % target_arch

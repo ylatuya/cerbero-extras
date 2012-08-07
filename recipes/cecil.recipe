@@ -1,0 +1,59 @@
+# -*- Mode: Python -*- vi:si:et:sw=4:sts=4:ts=4:syntax=python
+import shutil
+
+from cerbero.utils import shell
+
+
+MONO_CECIL_PC = '''\
+prefix=%s
+assemblies_dir=${prefix}/lib/mono-cecil
+Libraries=${assemblies_dir}/Mono.Cecil.dll ${assemblies_dir}/Mono.Cecil.Mdb.dll ${assemblies_dir}/Mono.Cecil.Pdb.dll ${assemblies_dir}/Mono.Cecil.Rocks.dll
+
+Name: Mono.Cecil
+Description: Mono.Cecil Library
+Version: none
+Libs: -r:${assemblies_dir}/Mono.Cecil.dll -r:${assemblies_dir}/Mono.Cecil.Mdb.dll -r:${assemblies_dir}/Mono.Cecil.Pdb.dll -r:${assemblies_dir}/Mono.Cecil.Rocks.dll
+'''
+
+
+class Recipe(recipe.Recipe):
+    name = 'cecil'
+    version = '0.9.5'
+    licenses = [License.LGPL]
+    stype = SourceType.TARBALL
+    btype = BuildType.CUSTOM
+    url = 'https://github.com/jbevain/cecil/tarball/0.9.5'
+    tarball_name = '%(name)s-%(version)s.tar.gz'
+    tarball_dirname = 'jbevain-cecil-5cb55f1'
+    srcdir = 'src'
+
+    files_assemblies = ['lib/mono-cecil/Mono.Cecil.Mdb.dll',
+                        'lib/mono-cecil/Mono.Cecil.Pdb.dll',
+                        'lib/mono-cecil/Mono.Cecil.Rocks.dll',
+                        'lib/mono-cecil/Mono.Cecil.dll']
+    files_devel = ['lib/pkgconfig/mono-cecil.pc']
+
+    def compile(self):
+        shell.call('xbuild /property:Configuration=net_4_0_Release',
+            self.build_dir)
+
+    def install(self):
+        # Install assemblies
+        files = ['bin/net_4_0_Release/Mono.Cecil.dll',
+                 'bin/net_4_0_Release/Mono.Cecil.Mdb.dll',
+                 'bin/net_4_0_Release/Mono.Cecil.Pdb.dll',
+                 'bin/net_4_0_Release/Mono.Cecil.Rocks.dll',
+                 ]
+
+        assemblies_dir = os.path.join(self.config.prefix, 'lib', 'mono-cecil')
+        if not os.path.exists(assemblies_dir):
+            os.makedirs(assemblies_dir)
+        assemblies_dir = os.path.join(self.config.prefix, 'lib', 'mono-cecil')
+        for f in files:
+            shutil.copy(os.path.join(self.build_dir, f),
+                        os.path.join(assemblies_dir, os.path.basename(f)))
+
+        # Install mono-cecil.pc
+        cecil_pc = os.path.join(self.config.prefix, 'lib', 'pkgconfig', 'mono-cecil.pc')
+        with open(cecil_pc, 'w') as f:
+            f.write(MONO_CECIL_PC % self.config.prefix)
