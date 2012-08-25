@@ -307,7 +307,7 @@ Index: db4o/src/Db4oTool/Db4oTool/Db4oTool-2010.csproj
      <Compile Include="Core\ByAttributeFilter.cs"/>
      <Compile Include="Core\ByNameFilter.cs"/>
 --- db4o/src/Db4oTool/Db4oTool/Options.cs	2011-08-14 19:29:46.000000000 +0100
---- db4o/src/Db4oTool/Db4oTool/Optioncs.cs	2011-08-14 19:29:46.000000000 +0100
+--- db4o/src/Db4oTool/Db4oTool/Options.cs	2011-08-14 19:29:46.000000000 +0100
 @@ -0,0 +1,1300 @@
 +//
 +// Options.cs

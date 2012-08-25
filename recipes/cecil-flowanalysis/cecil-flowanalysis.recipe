@@ -21,7 +21,7 @@ class Recipe(recipe.Recipe):
     licenses = [License.LGPL]
     stype = SourceType.TARBALL
     btype = BuildType.CUSTOM
-    #deps = ['mono']
+    deps = ['mono', 'cecil']
     url = 'http://ftp.de.debian.org/debian/pool/main/c/cecil-flowanalysis/cecil-flowanalysis_0.1~vcs20110809.r1.b34edf6.orig.tar.gz'
     tarball_name = '%(name)s-%(version)s.tar.gz'
     tarball_dirname = 'cecil-flowanalysis-0.1~vcs20110809.r1.b34edf6'

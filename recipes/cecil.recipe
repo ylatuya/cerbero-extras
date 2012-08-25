@@ -26,6 +26,7 @@ class Recipe(recipe.Recipe):
     tarball_name = '%(name)s-%(version)s.tar.gz'
     tarball_dirname = 'jbevain-cecil-5cb55f1'
     srcdir = 'src'
+    deps = ['mono']
 
     files_assemblies = ['lib/mono-cecil/Mono.Cecil.Mdb.dll',
                         'lib/mono-cecil/Mono.Cecil.Pdb.dll',

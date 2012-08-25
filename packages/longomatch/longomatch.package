@@ -1,0 +1,31 @@
+# vi:si:et:sw=4:sts=4:ts=4:syntax=python
+# -*- Mode: Python -*-
+
+
+class App(package.App):
+
+    name = 'longomatch'
+    app_name = 'LongoMatch'
+    shortdesc = 'LongMatch Video Analysis'
+    url = "http://www.longomatch.org/"
+    version = '0.17.5'
+    license = License.GPL
+    vendor = 'LongoMatch Project'
+    uuid = '5f444646-4165-511f-8287-e8f2a895f853'
+    org = "org.longomatch"
+    app_recipe = 'longomatch'
+    deps = ['base-system', 'gstreamer-core', 'gstreamer-codecs', 'gstreamer-system',
+            'gstreamer-capture', 'gstreamer-libav', 'gstreamer-editing', 'gstreamer-codecs-gpl',
+            'gstreamer-codecs-restricted', 'gstreamer-playback', 'gtk+-2.0', 'mono']
+    commands = [('LongoMatch', 'bin/LongoMatch', False, None),
+    ]
+    wix_upgrade_code = {
+        PackageType.DEVEL: {
+            Architecture.X86 : '02fe67b2-4565-411f-8287-e8faa892f853',
+            Architecture.X86_64: '12fe67b2-4565-411f-8287-e8faa892f853',
+            },
+        PackageType.RUNTIME: {
+            Architecture.X86 : '22fe67b2-4565-411f-8287-e8faa892f853',
+            Architecture.X86_64: '32fe67b2-4565-411f-8287-e8faa892f853',
+            },
+        }

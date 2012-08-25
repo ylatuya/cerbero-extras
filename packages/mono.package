@@ -1,0 +1,17 @@
+# vi:si:et:sw=4:sts=4:ts=4:syntax=python
+# -*- Mode: Python -*-
+
+
+class Package(package.Package):
+
+    name = 'mono'
+    shortdesc = 'Mono and Gtk#'
+    url = "http://www.gstreamer.com"
+    version = '2012.7'
+    license = License.LGPL
+    vendor = 'GStreamer Project'
+    org = 'org.gstreamer'
+    uuid = '5fce6233-4122-511f-8287-e8f2a895f853'
+
+    files = ['mono:libs:posix_helper', 'gtk-sharp:glue']
+

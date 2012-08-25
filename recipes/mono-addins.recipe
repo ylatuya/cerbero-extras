@@ -5,5 +5,5 @@ class Recipe(recipe.Recipe):
     version = '0.6.2'
     licenses = [License.LGPL]
     stype = SourceType.TARBALL
-    #deps = ['mono', 'gtk-sharp']
+    deps = ['mono', 'gtk-sharp']
     url = 'http://download.mono-project.com/sources/mono-addins/mono-addins-0.6.2.tar.bz2'

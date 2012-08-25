@@ -24,7 +24,7 @@ class Recipe(recipe.Recipe):
     #deps = ['mono', 'gtk-sharp']
     url = 'http://ftp.de.debian.org/debian/pool/main/m/mono.reflection/mono.reflection_1.0+git20110407+d2343843.orig.tar.gz'
     strip = 1
-    patches = ['dont_set_target_framework.patch'] 
+    patches = ['dont_set_target_framework.patch']
 
     def compile(self):
         shell.call('xbuild Mono.Reflection.csproj  /property:Configuration=Release', self.build_dir)
@@ -41,6 +41,6 @@ class Recipe(recipe.Recipe):
                         os.path.join(assemblies_dir, os.path.basename(f)))
 
         # Install mono-reflection.pc
-        cecil_pc = os.path.join(self.config.prefix, 'lib', 'pkgconfig', 'cecil-flowanalysis.pc')
+        cecil_pc = os.path.join(self.config.prefix, 'lib', 'pkgconfig', 'mono.reflection.pc')
         with open(cecil_pc, 'w') as f:
             f.write(MONO_REFLECTION_PC % self.config.prefix)
