@@ -1,0 +1,18 @@
+# -*- Mode: Python -*- vi:si:et:sw=4:sts=4:ts=4:syntax=python
+
+
+class Recipe(recipe.Recipe):
+    version = '20120827-2245'
+    name = 'x264'
+    licenses = [License.GPL]
+    stype = SourceType.TARBALL
+    configure_tpl = "%(config-sh)s --prefix=%(prefix)s "\
+                    "--libdir=%(libdir)s %(options)s"
+    configure_options = '--enable-shared'
+    url = 'ftp://ftp.videolan.org/pub/x264/snapshots/x264-snapshot-20120827-2245-stable.tar.bz2'
+    tarball_dirname= 'x264-snapshot-20120827-2245-stable'
+
+    files_libs = ['libx264']
+    files_bins = ['x264']
+    files_devel = ['lib/pkgconfig/x264.pc', 'include/x264.h',
+                   'include/x264_config.h']
