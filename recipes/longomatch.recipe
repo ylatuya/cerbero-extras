@@ -2,6 +2,7 @@
 import shutil
 
 from cerbero.utils import shell
+from cerbero.build.build import modify_environment
 
 class Recipe(recipe.Recipe):
     name = 'longomatch'
@@ -36,21 +37,30 @@ class Recipe(recipe.Recipe):
         if self.config.target_platform in [Platform.WINDOWS, Platform.DARWIN]:
             search_paths = ['lib/longomatch', 'lib/cli/Db4objects.Db4o-8.0']
             search_paths = [os.path.join(self.config.prefix, f) for f in search_paths]
-            self.new_env['MONO_PATH'] = ':'.join(search_paths)
-            self.new_env['AS'] = 'as -arch i386'
+            if self.config.target_platform == Platform.WINDOWS:
+                self.new_env['MONO_PATH'] = ';'.join(search_paths)
+            else:
+                self.new_env['MONO_PATH'] = ':'.join(search_paths)
+            if self.config.target_platform == Platform.DARWIN:
+                self.new_env['AS'] = 'as -arch i386'
             cc = os.environ.get('CC', 'gcc')
             self.new_env['CC'] = '%s %s' % (cc, os.environ['CFLAGS'])
 
+    @modify_environment
     def post_install(self):
         if self.config.target_platform == Platform.WINDOWS:
-            shutil.move(os.path.join(self.config.prefix, 'lib', 'bin', 'libcesaplayer-0.dll'),
-                os.path.join(self.config.prefix, 'bin', 'libcesaplayer-0.dll'),
+            shutil.copy(os.path.join(self.config.prefix, 'lib', 'bin', 'libcesarplayer-0.dll'),
+                os.path.join(self.config.prefix, 'lib', 'longomatch', 'libcesarplayer-0.dll'),
             )
         if self.config.target_platform in [Platform.WINDOWS, Platform.DARWIN]:
             libdir = os.path.join(self.config.prefix, 'lib')
             longomatchlib = os.path.join(libdir, 'longomatch')
-            libcesarplayer = os.path.join(longomatchlib,
-                'libcesarplayer.0%(srext)s' % self.extensions)
+            if self.config.target_platform == Platform.WINDOWS:
+                libcesarplayer = os.path.join(longomatchlib,
+                    'libcesarplayer-0%(srext)s' % self.extensions)
+            elif self.config.target_platform == Platform.DARWIN:
+                libcesarplayer = os.path.join(longomatchlib,
+                    'libcesarplayer.0%(srext)s' % self.extensions)
             shutil.copy(libcesarplayer, libdir)
             binary = os.path.join(self.config.prefix, self.extensions['sdir'],
                     'LongoMatchGtk')
