@@ -14,6 +14,9 @@ class Recipe(recipe.Recipe):
     files_libs = ['libmono-2.0']
     files_posix_helper = ['%(sdir)s/libMonoPosixHelper%(srext)s']
 
+    def prepare(self):
+        if self.config.target_platform == Platform.DARWIN:
+            self.configure_options += ' --without-x'
     def post_install(self):
         config = os.path.join(self.config.prefix, 'etc', 'mono', 'config')
         shell.replace(config, {'libintl.dylib': 'libintl.8.dylib'})
