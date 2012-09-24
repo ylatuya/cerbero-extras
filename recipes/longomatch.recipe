@@ -42,6 +42,10 @@ class Recipe(recipe.Recipe):
             self.new_env['CC'] = '%s %s' % (cc, os.environ['CFLAGS'])
 
     def post_install(self):
+        if self.config.target_platform == Platform.WINDOWS:
+            shutil.move(os.path.join(self.config.prefix, 'lib', 'bin', 'libcesaplayer-0.dll'),
+                os.path.join(self.config.prefix, 'bin', 'libcesaplayer-0.dll'),
+            )
         if self.config.target_platform in [Platform.WINDOWS, Platform.DARWIN]:
             libdir = os.path.join(self.config.prefix, 'lib')
             longomatchlib = os.path.join(libdir, 'longomatch')
