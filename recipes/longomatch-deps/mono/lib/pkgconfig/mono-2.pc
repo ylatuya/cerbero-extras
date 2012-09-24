@@ -1,0 +1,12 @@
+prefix=C:/Mono-2.10.8
+exec_prefix=${pcfiledir}/../..
+libdir=${prefix}/lib
+includedir=${prefix}/include/mono-2.0
+sysconfdir=${prefix}/etc
+
+Name: Mono
+Description: Mono Runtime
+Version: 2.10.8
+Requires: glib-2.0
+Libs: -L${libdir}  -lmono-2.0 -mms-bitfields -mwindows -lmswsock -lws2_32 -lpsapi -lole32 -lwinmm -loleaut32 -ladvapi32 -lversion
+Cflags: -I${includedir} -mms-bitfields -mwindows

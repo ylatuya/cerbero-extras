@@ -1,0 +1,9 @@
+prefix=$CERBERO_PREFIX
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+
+
+Name: Db4o
+Description: Db4o
+Version:  2.4
+Libs: -r:${libdir}/mono/mono-addins/Mono.Addins.dll
