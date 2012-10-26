@@ -6,9 +6,9 @@ class App(package.App):
 
     name = 'longomatch'
     app_name = 'LongoMatch'
-    shortdesc = 'LongMatch Video Analysis'
+    shortdesc = 'LongoMatch Video Analysis'
     url = "http://www.longomatch.org/"
-    version = '0.17.5'
+    version = '0.17.99'
     license = License.GPL
     vendor = 'LongoMatch Project'
     uuid = '5f444646-4165-511f-8287-e8f2a895f853'
@@ -16,9 +16,12 @@ class App(package.App):
     app_recipe = 'longomatch'
     deps = ['base-system', 'gstreamer-core', 'gstreamer-codecs', 'gstreamer-system',
             'gstreamer-capture', 'gstreamer-libav', 'gstreamer-editing', 'gstreamer-codecs-gpl',
-            'gstreamer-codecs-restricted', 'gstreamer-playback', 'gtk+-2.0', 'mono']
-    commands = [('LongoMatch', 'lib/LongoMatchGtk', True, 'wrapper'),
-    ]
+            'gstreamer-codecs-restricted', 'gstreamer-playback', 'gtk+-2.0']
+    commands = {
+        Platform.LINUX: [('LongoMatch', 'bin/longomatch', True, 'wrapper')],
+        Platform.DARWIN: [('LongoMatch', 'lib/LongoMatchGtk', True, 'wrapper')],
+        Platform.WINDOWS: [('LongoMatch', 'LongoMatchGtk.exe', False, None)],
+        }
     wix_upgrade_code = {
         PackageType.DEVEL: {
             Architecture.X86 : '02fe67b2-4565-411f-8287-e8faa892f853',

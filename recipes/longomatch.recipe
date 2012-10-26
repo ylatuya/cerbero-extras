@@ -21,9 +21,9 @@ class Recipe(recipe.Recipe):
     files_share = ['share/longomatch']
     platform_files_bin = {
         Platform.DARWIN: ['%(sdir)s/LongoMatchGtk'],
+        Platform.WINDOWS: ['%(sdir)s/LongoMatchGtk.exe'],
     }
     platform_files_bins = {
-        Platform.WINDOWS: ['LongoMatch'],
         Platform.LINUX: ['longomatch']
     }
 
@@ -32,6 +32,14 @@ class Recipe(recipe.Recipe):
                          'share/icons/hicolor/48x48/apps/longomatch.png',
                          'share/icons/hicolor/scalable/apps/longomatch.svg']
     }
+    platform_files_deps = {
+        Platform.WINDOWS: [
+            'bin/zlib1.dll', 'bin/intl.dll', 'bin/mono-2.0.dll',
+            'bin/MonoPosixHelper.dll', 'bin/atksharpglue-2.dll',
+            'bin/gdksharpglue-2.dll', 'bin/gdksharpglue-2.dll',
+            'bin/glibsharpglue-2.dll', 'bin/gtksharpglue-2.dll',
+            'bin/pangosharpglue-2.dll']
+            }
 
     def prepare(self):
         if self.config.target_platform in [Platform.WINDOWS, Platform.DARWIN]:
@@ -53,14 +61,15 @@ class Recipe(recipe.Recipe):
                 os.path.join(self.config.prefix, 'lib', 'longomatch', 'libcesarplayer-0.dll'),
             )
         if self.config.target_platform in [Platform.WINDOWS, Platform.DARWIN]:
-            libdir = os.path.join(self.config.prefix, 'lib')
-            longomatchlib = os.path.join(libdir, 'longomatch')
+            longomatchlib = os.path.join(self.config.prefix, 'lib', 'longomatch')
             if self.config.target_platform == Platform.WINDOWS:
                 libcesarplayer = os.path.join(longomatchlib,
                     'libcesarplayer-0%(srext)s' % self.extensions)
+                libdir = os.path.join(self.config.prefix, 'bin')
             elif self.config.target_platform == Platform.DARWIN:
                 libcesarplayer = os.path.join(longomatchlib,
                     'libcesarplayer.0%(srext)s' % self.extensions)
+                libdir = os.path.join(self.config.prefix, 'lib')
             shutil.copy(libcesarplayer, libdir)
             binary = os.path.join(self.config.prefix, self.extensions['sdir'],
                     'LongoMatchGtk')
