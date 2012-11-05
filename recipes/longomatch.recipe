@@ -11,7 +11,7 @@ class Recipe(recipe.Recipe):
     remotes = {'origin': 'git://git.gnome.org/longomatch'}
     config_sh = 'sh autogen.sh'
     commit = 'origin/master'
-    deps = ['gstreamer', 'gst-plugins-base', 'mono-addins', 'db4o', 'gtk-sharp']
+    deps = ['gstreamer', 'gst-plugins-base', 'mono', 'mono-addins', 'db4o', 'gtk-sharp']
 
     platform_files_libs = {
         Platform.DARWIN: ['libcesarplayer'],
