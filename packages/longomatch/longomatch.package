@@ -8,7 +8,7 @@ class App(package.App):
     app_name = 'LongoMatch'
     shortdesc = 'LongoMatch Video Analysis'
     url = "http://www.longomatch.org/"
-    version = '0.17.99'
+    version = '0.18.0'
     license = License.GPL
     vendor = 'LongoMatch Project'
     uuid = '5f444646-4165-511f-8287-e8f2a895f853'
