@@ -6,28 +6,28 @@ class Recipe(recipe.Recipe):
     version = '0.10.31'
     licenses = [License.LGPLv2Plus]
     config_sh = 'sh ./autogen.sh --noconfigure && ./configure'
-    configure_options = '--disable-introspection --disable-examples --disable-oss4 --disable-oss --disable-dv1394 --disable-aalib --disable-libcaca --disable-esd --disable-hal --disable-jack --disable-cairo --disable-shout2 --with-package-origin="http://www.gstreamer.com" --with-package-name=\'GStreamer Good Plugins (GStreamer SDK)\' '
-    #remotes = {'upstream': 'git://anongit.freedesktop.org/gstreamer/gst-plugins-good'}
+    configure_options = '--disable-introspection --disable-examples --disable-oss4 --disable-oss --disable-dv1394 --disable-aalib --disable-libcaca --disable-esd --disable-hal --disable-jack --disable-shout2 --with-package-origin="http://www.gstreamer.com" --with-package-name=\'GStreamer Good Plugins (GStreamer SDK)\' '
+    remotes = {'upstream': 'git://anongit.freedesktop.org/gstreamer/gst-plugins-good'}
     deps = ['gstreamer', 'gst-plugins-base', 'jpeg', 'libpng',
-            'speex', 'gdk-pixbuf', 'libsoup',
-            'orc', 'wavpack', 'flac', 'taglib', 'bzip2', 'zlib',
-            'GConf']
+            'speex', 'gdk-pixbuf', 'libsoup','taglib',
+            'orc', 'wavpack', 'flac', 'bzip2', 'zlib',
+            'cairo', 'GConf']
     platform_deps = {Platform.LINUX: ['libdv'],
                      Platform.DARWIN: ['libdv']}
-    use_system_libs = True
 
 
     files_lang = ['gst-plugins-good-0.10']
 
-    files_core = [
+    files_plugins_core = [
              'lib/gstreamer-0.10/libgstautodetect%(mext)s',
              'lib/gstreamer-0.10/libgstvideofilter%(mext)s',
     ]
 
-    files_effects = [
+    files_plugins_effects = [
              'lib/gstreamer-0.10/libgstalpha%(mext)s',
              'lib/gstreamer-0.10/libgstalphacolor%(mext)s',
              'lib/gstreamer-0.10/libgstaudiofx%(mext)s',
+             'lib/gstreamer-0.10/libgstcairo%(mext)s',
              'lib/gstreamer-0.10/libgstcutter%(mext)s',
              'lib/gstreamer-0.10/libgstdebug%(mext)s',
              'lib/gstreamer-0.10/libgstdeinterlace%(mext)s',
@@ -47,7 +47,7 @@ class Recipe(recipe.Recipe):
              'lib/gstreamer-0.10/libgstvideomixer%(mext)s',
     ]
 
-    files_codecs = [
+    files_plugins_codecs = [
              'lib/gstreamer-0.10/libgstalaw%(mext)s',
              'lib/gstreamer-0.10/libgstannodex%(mext)s',
              'lib/gstreamer-0.10/libgstapetag%(mext)s',
@@ -73,7 +73,7 @@ class Recipe(recipe.Recipe):
              'lib/gstreamer-0.10/libgsty4menc%(mext)s',
     ]
 
-    files_net = [
+    files_plugins_net = [
              'lib/gstreamer-0.10/libgstrtsp%(mext)s',
              'lib/gstreamer-0.10/libgstrtp%(mext)s',
              'lib/gstreamer-0.10/libgstrtpmanager%(mext)s',
@@ -81,19 +81,19 @@ class Recipe(recipe.Recipe):
              'lib/gstreamer-0.10/libgstudp%(mext)s',
     ]
 
-    files_vis = [
+    files_plugins_vis = [
              'lib/gstreamer-0.10/libgstgoom%(mext)s',
              'lib/gstreamer-0.10/libgstgoom2k1%(mext)s',
             ]
 
-    platform_files_capture = {
+    platform_files_plugins_capture = {
         Platform.LINUX: [
              'lib/gstreamer-0.10/libgstvideo4linux2%(mext)s',
              'lib/gstreamer-0.10/libgstximagesrc%(mext)s',
             ]
     }
 
-    platform_files_codecs = {
+    platform_files_plugins_codecs = {
         Platform.LINUX: [
              'lib/gstreamer-0.10/libgstdv%(mext)s',
             ],
@@ -102,7 +102,7 @@ class Recipe(recipe.Recipe):
             ]
     }
 
-    platform_files_sys = {
+    platform_files_plugins_sys = {
         Platform.WINDOWS: [
              'lib/gstreamer-0.10/libgstdirectsoundsink%(mext)s',
             ],
@@ -121,3 +121,9 @@ class Recipe(recipe.Recipe):
                 '--disable-dv --disable-gtk-doc'
         if self.config.target_platform == Platform.DARWIN:
             self.configure_options += '--disable-gtk-doc'
+        if self.config.target_platform == Platform.ANDROID:
+            self.configure_options += '--disable-libdv --disable-pulse'
+        if self.config.target_platform == Platform.LINUX:
+            self.use_system_libs = True
+        if self.config.variants.nodebug:
+            self.configure_options += ' --disable-gst-debug'

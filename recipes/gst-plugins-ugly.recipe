@@ -6,12 +6,12 @@ class Recipe(recipe.Recipe):
     version = '0.10.19'
     licenses = [License.LGPLv2Plus]
     config_sh = 'sh ./autogen.sh --noconfigure && ./configure'
-    configure_options = "--disable-introspection --disable-examples --disable-iec958 --disable-mpegstream --disable-cdio --disable-sidplay --disable-twolame  --with-package-origin='http://www.gstreamer.com' --with-package-name='GStreamer Ugly Plugins (GStreamer SDK)' "
+    configure_options = "--disable-introspection --disable-examples --disable-iec958 --disable-mpegstream --disable-cdio --disable-sidplay --disable-twolame --with-package-origin='http://www.gstreamer.com' --with-package-name='GStreamer Ugly Plugins (GStreamer SDK)' "
     remotes = {'upstream': 'git://anongit.freedesktop.org/gstreamer/gst-plugins-ugly'}
     deps = ['gstreamer', 'gst-plugins-base', 'a52dec', 'opencore-amr',
             'libdvdread', 'libmpeg2', 'libmad', 'x264', 'faac']
 
-    files_codecs_restricted = [
+    files_plugins_codecs_restricted = [
              'lib/gstreamer-0.10/libgsta52dec%(mext)s',
              'lib/gstreamer-0.10/libgstamrnb%(mext)s',
              'lib/gstreamer-0.10/libgstamrwbdec%(mext)s',
@@ -25,7 +25,7 @@ class Recipe(recipe.Recipe):
              'lib/gstreamer-0.10/libgstfaac%(mext)s',
     ]
 
-    files_dvd = [
+    files_plugins_dvd = [
              'lib/gstreamer-0.10/libgstdvdlpcmdec%(mext)s',
              'lib/gstreamer-0.10/libgstdvdread%(mext)s',
     ]
@@ -35,3 +35,5 @@ class Recipe(recipe.Recipe):
     def prepare(self):
         if self.config.target_platform in [Platform.WINDOWS, Platform.DARWIN]:
             self.configure_options += '--disable-gtk-doc '
+        if self.config.variants.nodebug:
+            self.configure_options += ' --disable-gst-debug'
