@@ -16,5 +16,6 @@ class Recipe(recipe.Recipe):
         '%(sdir)s/libglibsharpglue-2%(mext)s',
         '%(sdir)s/libgtksharpglue-2%(mext)s',
         '%(sdir)s/libpangosharpglue-2%(mext)s',
+        '%(sdir)s/libgladesharpglue-2%(mext)s',
         ]
 
