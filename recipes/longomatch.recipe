@@ -6,7 +6,7 @@ from cerbero.build.build import modify_environment
 
 class Recipe(recipe.Recipe):
     name = 'longomatch'
-    version = '0.18.1'
+    version = '0.18.2'
     licenses = [License.GPL]
     remotes = {'origin': 'git://git.gnome.org/longomatch'}
     config_sh = 'sh autogen.sh'
