@@ -1,0 +1,12 @@
+# -*- Mode: Python -*- vi:si:et:sw=4:sts=4:ts=4:syntax=python
+
+
+class Recipe(recipe.Recipe):
+    version = '2.6.4'
+    name = 'libglade'
+    licenses = [License.LGPL]
+    stype = SourceType.TARBALL
+    url = 'http://ftp.gnome.org/pub/gnome/sources/libglade/2.6/libglade-2.6.4.tar.bz2'
+    deps = ['gtk+', 'pygtk']
+
+    files_libs = ['libglade-2']
