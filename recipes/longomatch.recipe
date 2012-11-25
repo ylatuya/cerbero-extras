@@ -6,12 +6,17 @@ from cerbero.build.build import modify_environment
 
 class Recipe(recipe.Recipe):
     name = 'longomatch'
-    version = '0.18.2'
+    version = '0.18.3'
     licenses = [License.GPL]
     remotes = {'origin': 'git://git.gnome.org/longomatch'}
     config_sh = 'sh autogen.sh'
     commit = 'origin/master'
-    deps = ['gstreamer', 'gst-plugins-base', 'mono', 'mono-addins', 'db4o', 'gtk-sharp']
+    deps = ['gstreamer', 'gst-plugins-base']
+    platform_deps = {
+        Platform.WINDOWS: ['longomatch-deps'],
+        Platform.LINUX: ['mono', 'mono-addins', 'db4o', 'gtk-sharp'],
+        Platform.DARWIN: ['mono', 'mono-addins', 'db4o', 'gtk-sharp'],
+        }
 
     platform_files_libs = {
         Platform.DARWIN: ['libcesarplayer'],
