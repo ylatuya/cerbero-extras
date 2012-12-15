@@ -1,8 +1,10 @@
 # -*- Mode: Python -*- vi:si:et:sw=4:sts=4:ts=4:syntax=python
 import shutil
 
+from cerbero.errors import FatalError
 from cerbero.utils import shell
 from cerbero.build.build import modify_environment
+from cerbero.build.filesprovider import FilesProvider
 
 class Recipe(recipe.Recipe):
     name = 'longomatch'
@@ -68,6 +70,14 @@ class Recipe(recipe.Recipe):
                 os.path.join(self.config.prefix, 'lib', 'longomatch', 'libcesarplayer-0.dll'),
             )
         if self.config.target_platform in [Platform.WINDOWS, Platform.DARWIN]:
+            # Run some sanity checks for plugins
+            import pdb; pdb.set_trace()
+            for p in ['x264', 'faac', 'lame']:
+                path = os.path.join(self.config.prefix, 'lib', 'gstreamer-0.10',
+                    'libgst%s%s' % (p, FilesProvider.EXTENSIONS[self.config.target_platform]['mext']))
+                if not os.path.exists (path):
+                    raise FatalError ("File %s is missing" % path)
+
             longomatchlib = os.path.join(self.config.prefix, 'lib', 'longomatch')
             if self.config.target_platform == Platform.WINDOWS:
                 libcesarplayer = os.path.join(longomatchlib,
