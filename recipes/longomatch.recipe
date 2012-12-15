@@ -6,12 +6,14 @@ from cerbero.build.build import modify_environment
 
 class Recipe(recipe.Recipe):
     name = 'longomatch'
-    version = '0.18.3'
+    version = '0.18.4'
     licenses = [License.GPL]
     remotes = {'origin': 'git://git.gnome.org/longomatch'}
     config_sh = 'sh autogen.sh'
     commit = 'origin/master'
     deps = ['gstreamer', 'gst-plugins-base']
+
+    files_bins = ['ffmpeg']
     platform_deps = {
         Platform.WINDOWS: ['longomatch-deps'],
         Platform.LINUX: ['mono', 'mono-addins', 'db4o', 'gtk-sharp'],
