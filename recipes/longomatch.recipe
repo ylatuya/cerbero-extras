@@ -8,7 +8,7 @@ from cerbero.build.filesprovider import FilesProvider
 
 class Recipe(recipe.Recipe):
     name = 'longomatch'
-    version = '0.18.4'
+    version = '0.18.5'
     licenses = [License.GPL]
     remotes = {'origin': 'git://git.gnome.org/longomatch'}
     config_sh = 'sh autogen.sh'
