@@ -25,7 +25,7 @@ class Recipe(recipe.Recipe):
                 asflags = ' -arch i386 -m32'
             elif self.config.target_arch == Architecture.PPC:
                 asflags = ' -arch ppc'
-            self.configure_options += ' ASFLAGS="%s"' % asflags
+            self.new_env = {'ASFLAGS':asflags}
 
         if self.config.target_platform == Platform.WINDOWS:
             self.configure_options += '--cross-prefix=%s- --target-os=mingw32 --arch=%s --enable-w32threads' %\
@@ -38,5 +38,5 @@ class Recipe(recipe.Recipe):
             if self.config.target_arch == Architecture.X86:
                 replacements = {'HAVE_EBX_AVAILABLE=yes': 'HAVE_EBX_AVAILABLE=no',
                                 'HAVE_EBX_AVAILABLE 1': 'HAVE_EBX_AVAILABLE 0',}
-                shell.replace(os.path.join(self.config.build_dir, 'config.mak'), replacements)
-                shell.replace(os.path.join(self.config.build_dir, 'config.h'), replacements)
+                shell.replace(os.path.join(self.build_dir, 'config.mak'), replacements)
+                shell.replace(os.path.join(self.build_dir, 'config.h'), replacements)

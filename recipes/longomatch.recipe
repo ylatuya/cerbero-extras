@@ -43,12 +43,18 @@ class Recipe(recipe.Recipe):
         'lib/mono/4.0/System.Xml.dll',
         'lib/mono/4.0/System.Security.dll',
         'lib/mono/gtk-sharp-2.0/atk-sharp.dll',
+        'lib/mono/gtk-sharp-2.0/atk-sharp.dll.config',
         'lib/mono/gtk-sharp-2.0/gdk-sharp.dll',
+        'lib/mono/gtk-sharp-2.0/gdk-sharp.dll.config',
         'lib/mono/gtk-sharp-2.0/glade-sharp.dll',
+        'lib/mono/gtk-sharp-2.0/glade-sharp.dll.config',
         'lib/mono/gtk-sharp-2.0/glib-sharp.dll',
+        'lib/mono/gtk-sharp-2.0/glib-sharp.dll.config',
         'lib/mono/gtk-sharp-2.0/gtk-sharp.dll',
+        'lib/mono/gtk-sharp-2.0/gtk-sharp.dll.config',
         'lib/mono/gtk-sharp-2.0/pango-sharp.dll',
-        'lib/mono/db4o/Db4objects.Db4o.dll',
+        'lib/mono/gtk-sharp-2.0/pango-sharp.dll.config',
+        'lib/cli/Db4objects.Db4o-8.0/Db4objects.Db4o.dll',
         'lib/mono/mono-addins/Mono.Addins.dll',
         'lib/longomatch/LongoMatch.Addins.dll',
         'lib/longomatch/LongoMatch.GUI.Multimedia.dll',
@@ -86,14 +92,16 @@ class Recipe(recipe.Recipe):
             search_paths = [os.path.join(self.config.prefix, f) for f in search_paths]
             if self.config.target_platform == Platform.WINDOWS:
                 self.new_env['MONO_PATH'] = ';'.join(search_paths)
+                sdir = 'bin'
             else:
                 self.new_env['MONO_PATH'] = ':'.join(search_paths)
+                sdir = 'lib'
             if self.config.target_platform == Platform.DARWIN:
                 self.new_env['AS'] = 'as -arch i386'
             cc = os.environ.get('CC', 'gcc')
             self.new_env['CC'] = '%s %s' % (cc, os.environ['CFLAGS'])
             self._mono_assemblies = [x for x in self.files_mono]
-            self.files_mono = [os.path.join('bin', x.split('/')[-1])
+            self.files_mono = [os.path.join(sdir, x.split('/')[-1])
                                for x in self.files_mono]
 
     @modify_environment
@@ -120,7 +128,7 @@ class Recipe(recipe.Recipe):
 
             shutil.copy(libcesarplayer, libdir)
             for path in self._mono_assemblies:
-                shutil.copy (os.path.join(self.config.prefix, path), bindir)
+                shutil.copy (os.path.join(self.config.prefix, path), libdir)
 
             binary = os.path.join(self.config.prefix, self.extensions['sdir'],
                     'LongoMatchGtk')
