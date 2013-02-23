@@ -43,18 +43,11 @@ class Recipe(recipe.Recipe):
         'lib/mono/4.0/System.Xml.dll',
         'lib/mono/4.0/System.Security.dll',
         'lib/mono/gtk-sharp-2.0/atk-sharp.dll',
-        'lib/mono/gtk-sharp-2.0/atk-sharp.dll.config',
         'lib/mono/gtk-sharp-2.0/gdk-sharp.dll',
-        'lib/mono/gtk-sharp-2.0/gdk-sharp.dll.config',
         'lib/mono/gtk-sharp-2.0/glade-sharp.dll',
-        'lib/mono/gtk-sharp-2.0/glade-sharp.dll.config',
         'lib/mono/gtk-sharp-2.0/glib-sharp.dll',
-        'lib/mono/gtk-sharp-2.0/glib-sharp.dll.config',
         'lib/mono/gtk-sharp-2.0/gtk-sharp.dll',
-        'lib/mono/gtk-sharp-2.0/gtk-sharp.dll.config',
         'lib/mono/gtk-sharp-2.0/pango-sharp.dll',
-        'lib/mono/gtk-sharp-2.0/pango-sharp.dll.config',
-        'lib/cli/Db4objects.Db4o-8.0/Db4objects.Db4o.dll',
         'lib/mono/mono-addins/Mono.Addins.dll',
         'lib/longomatch/LongoMatch.Addins.dll',
         'lib/longomatch/LongoMatch.GUI.Multimedia.dll',
@@ -64,6 +57,20 @@ class Recipe(recipe.Recipe):
         'lib/longomatch/LongoMatch.Services.dll',
         'lib/longomatch/LongoMatch.dll',
     ]
+    platform_files_mono = {
+        Platform.DARWIN: [
+            'lib/mono/gtk-sharp-2.0/atk-sharp.dll.config',
+            'lib/mono/gtk-sharp-2.0/gtk-sharp.dll.config',
+            'lib/mono/gtk-sharp-2.0/pango-sharp.dll.config',
+            'lib/mono/gtk-sharp-2.0/gdk-sharp.dll.config',
+            'lib/mono/gtk-sharp-2.0/glib-sharp.dll.config',
+            'lib/mono/gtk-sharp-2.0/glade-sharp.dll.config',
+            'lib/cli/Db4objects.Db4o-8.0/Db4objects.Db4o.dll',
+        ],
+        Platform.WINDOWS: [
+            'lib/mono/db4o/Db4objects.Db4o.dll',
+        ],
+    }
     platform_files_bin = {
         Platform.DARWIN: ['%(sdir)s/LongoMatchGtk'],
         Platform.WINDOWS: ['%(sdir)s/LongoMatchGtk.exe'],
@@ -101,14 +108,16 @@ class Recipe(recipe.Recipe):
             cc = os.environ.get('CC', 'gcc')
             self.new_env['CC'] = '%s %s' % (cc, os.environ['CFLAGS'])
             self._mono_assemblies = [x for x in self.files_mono]
+            self._mono_assemblies += [x for x in self.platform_files_mono[self.config.target_platform]]
             self.files_mono = [os.path.join(sdir, x.split('/')[-1])
                                for x in self.files_mono]
+            self.platform_files_mono[self.config.target_platform] = [os.path.join(sdir, x.split('/')[-1])
+                               for x in self.platform_files_mono[self.config.target_platform]]
 
     @modify_environment
     def post_install(self):
         if self.config.target_platform in [Platform.WINDOWS, Platform.DARWIN]:
             # Run some sanity checks for plugins
-            import pdb; pdb.set_trace()
             for p in ['x264', 'faac', 'lame']:
                 path = os.path.join(self.config.prefix, 'lib', 'gstreamer-0.10',
                     'libgst%s%s' % (p, FilesProvider.EXTENSIONS[self.config.target_platform]['mext']))
