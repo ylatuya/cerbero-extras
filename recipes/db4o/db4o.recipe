@@ -43,7 +43,6 @@ class Recipe(recipe.Recipe):
         if not os.path.exists(os.path.join(self.build_dir, 'tmp')):
             os.makedirs(os.path.join(self.build_dir, 'tmp'))
 
-        import pdb; pdb.set_trace()
         shell.call('cp `pkg-config --variable=Libraries mono-cecil` tmp/', self.build_dir)
         shell.call('cp `pkg-config --variable=Libraries cecil-flowanalysis` tmp/', self.build_dir)
 
