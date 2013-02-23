@@ -7,3 +7,6 @@ class Recipe(recipe.Recipe):
     licenses = [License.LGPL]
     stype = SourceType.CUSTOM
     btype = BuildType.CUSTOM
+
+    def install(self):
+        shell.copy_dir(self.relative_path('mono'), self.config.prefix)
