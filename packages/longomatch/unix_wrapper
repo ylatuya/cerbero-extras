@@ -30,4 +30,4 @@ export DYLD_FALLBACK_LIBRARY_PATH=$PREFIX/lib:/usr/lib
 export PATH=$PATH:$PREFIX/bin
 
 cd $PREFIX/lib
-./LongoMatchGtk
+./LongoMatchGtk.exe
