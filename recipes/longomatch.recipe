@@ -8,12 +8,12 @@ from cerbero.build.filesprovider import FilesProvider
 
 class Recipe(recipe.Recipe):
     name = 'longomatch'
-    version = '0.18.5'
+    version = '0.18.8'
     licenses = [License.GPL]
     remotes = {'origin': 'git://git.gnome.org/longomatch'}
-    config_sh = 'sh autogen.sh'
     commit = 'origin/master'
-    deps = ['gstreamer', 'gst-plugins-base']
+    config_sh = 'sh autogen.sh'
+    deps = ['gstreamer', 'gst-plugins-base', 'libav']
 
     platform_deps = {
         Platform.WINDOWS: ['longomatch-deps'],
@@ -126,8 +126,10 @@ class Recipe(recipe.Recipe):
 
             longomatchlib = os.path.join(self.config.prefix, 'lib', 'longomatch')
             if self.config.target_platform == Platform.WINDOWS:
-                libcesarplayer = os.path.join(longomatchlib,
-                    'libcesarplayer-0%(srext)s' % self.extensions)
+                dll = 'libcesarplayer-0%(srext)s' % self.extensions
+                libcesarplayer = os.path.join(longomatchlib, dll)
+                shutil.copy(os.path.join(longomatchlib, '..', 'bin', dll),
+                            libcesarplayer)
                 libdir = os.path.join(self.config.prefix, 'bin')
             elif self.config.target_platform == Platform.DARWIN:
                 libcesarplayer = os.path.join(longomatchlib,
