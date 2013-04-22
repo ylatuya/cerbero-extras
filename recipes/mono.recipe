@@ -11,7 +11,9 @@ class Recipe(recipe.Recipe):
                         '--without-sigaltstack --disable-dtrace ' \
                         '--with-libgdiplus=$CERBERO_PREFIX'
     append_env = {'LDFLAGS': ' -lcharset -lintl'}
+    files_bins = ['mono']
     files_libs = ['libmono-2.0']
+    files_config = ['etc/mono/config']
     files_posix_helper = ['%(sdir)s/libMonoPosixHelper%(srext)s']
 
     def prepare(self):

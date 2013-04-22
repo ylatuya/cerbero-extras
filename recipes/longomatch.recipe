@@ -8,7 +8,7 @@ from cerbero.build.filesprovider import FilesProvider
 
 class Recipe(recipe.Recipe):
     name = 'longomatch'
-    version = '0.18.8'
+    version = '0.18.11'
     licenses = [License.GPL]
     remotes = {'origin': 'git://git.gnome.org/longomatch'}
     commit = 'origin/master'
@@ -49,14 +49,26 @@ class Recipe(recipe.Recipe):
         'lib/mono/gtk-sharp-2.0/gtk-sharp.dll',
         'lib/mono/gtk-sharp-2.0/pango-sharp.dll',
         'lib/mono/mono-addins/Mono.Addins.dll',
+    ]
+    files_longomatch = [
         'lib/longomatch/LongoMatch.Addins.dll',
+        'lib/longomatch/LongoMatch.Addins.dll.mdb',
         'lib/longomatch/LongoMatch.GUI.Multimedia.dll',
         'lib/longomatch/LongoMatch.GUI.dll',
+        'lib/longomatch/LongoMatch.GUI.dll.mdb',
         'lib/longomatch/LongoMatch.Multimedia.dll',
         'lib/longomatch/LongoMatch.Multimedia.dll.config',
+        'lib/longomatch/LongoMatch.Multimedia.dll.mdb',
         'lib/longomatch/LongoMatch.Services.dll',
+        'lib/longomatch/LongoMatch.Services.dll.mdb',
         'lib/longomatch/LongoMatch.dll',
+        'lib/longomatch/LongoMatch.dll.mdb',
+        'lib/longomatch/LongoMatchGtk.exe',
+        'lib/longomatch/plugins/LongoMatch.Plugins.dll',
     ]
+    platform_files_longomatch = {
+        Platform.DARWIN: ['lib/longomatch/libcesarplayer.0.dylib']
+        }
     platform_files_mono = {
         Platform.DARWIN: [
             'lib/mono/gac/atk-sharp/2.12.0.0__35e10195dab3c99f/atk-sharp.dll.config',
@@ -72,10 +84,10 @@ class Recipe(recipe.Recipe):
         ],
     }
     platform_files_bin = {
-        Platform.DARWIN: ['%(sdir)s/LongoMatchGtk.exe'],
         Platform.WINDOWS: ['%(sdir)s/LongoMatchGtk.exe'],
     }
     platform_files_bins = {
+        Platform.DARWIN: ['longomatch'],
         Platform.LINUX: ['longomatch']
     }
 
@@ -102,13 +114,16 @@ class Recipe(recipe.Recipe):
                 sdir = 'bin'
             else:
                 self.new_env['MONO_PATH'] = ':'.join(search_paths)
-                sdir = 'lib'
+                sdir = 'lib/mono/4.0'
             if self.config.target_platform == Platform.DARWIN:
                 self.new_env['AS'] = 'as -arch i386'
             cc = os.environ.get('CC', 'gcc')
             self.new_env['CC'] = '%s %s' % (cc, os.environ['CFLAGS'])
             self._mono_assemblies = [x for x in self.files_mono]
             self._mono_assemblies += [x for x in self.platform_files_mono[self.config.target_platform]]
+            if self.config.target_platform == Platform.WINDOWS:
+                self._mono_assemblies += [x for x in self.files_longomatch]
+                self.files_longomatch = []
             self.files_mono = [os.path.join(sdir, x.split('/')[-1])
                                for x in self.files_mono]
             self.platform_files_mono[self.config.target_platform] = [os.path.join(sdir, x.split('/')[-1])
@@ -117,13 +132,6 @@ class Recipe(recipe.Recipe):
     @modify_environment
     def post_install(self):
         if self.config.target_platform in [Platform.WINDOWS, Platform.DARWIN]:
-            # Run some sanity checks for plugins
-            for p in ['x264', 'faac', 'lame']:
-                path = os.path.join(self.config.prefix, 'lib', 'gstreamer-0.10',
-                    'libgst%s%s' % (p, FilesProvider.EXTENSIONS[self.config.target_platform]['mext']))
-                if not os.path.exists (path):
-                    raise FatalError ("File %s is missing" % path)
-
             longomatchlib = os.path.join(self.config.prefix, 'lib', 'longomatch')
             if self.config.target_platform == Platform.WINDOWS:
                 dll = 'libcesarplayer-0%(srext)s' % self.extensions
@@ -134,19 +142,20 @@ class Recipe(recipe.Recipe):
             elif self.config.target_platform == Platform.DARWIN:
                 libcesarplayer = os.path.join(longomatchlib,
                     'libcesarplayer.0%(srext)s' % self.extensions)
-                libdir = os.path.join(self.config.prefix, 'lib')
+                libdir = os.path.join(self.config.prefix, 'lib', 'mono', '4.0')
             bindir = os.path.join(self.config.prefix, 'bin')
 
             shutil.copy(libcesarplayer, libdir)
             for path in self._mono_assemblies:
-                shutil.copy (os.path.join(self.config.prefix, path), libdir)
+                try:
+                    shutil.copy (os.path.join(self.config.prefix, path), libdir)
+                except:
+                    pass
 
-            binary = os.path.join(self.config.prefix, self.extensions['sdir'],
-                    'LongoMatchGtk.exe')
-            assembly = os.path.join(longomatchlib, 'LongoMatchGtk.exe')
-            mkbundle = 'mkbundle -o %s %s --config %s --nodeps ' % (binary, assembly,
-                    os.path.join(self.config.prefix, 'etc', 'mono', 'config'))
-            extra_assemblies = []
-            for assembly in extra_assemblies:
-                mkbundle += ' %s' % os.path.join(self.config.prefix, assembly)
-            shell.call(mkbundle)
+            if self.config.target_platform == Platform.WINDOWS:
+                binary = os.path.join(self.config.prefix, self.extensions['sdir'],
+                        'LongoMatchGtk.exe')
+                assembly = os.path.join(longomatchlib, 'LongoMatchGtk.exe')
+                mkbundle = 'mkbundle -o %s %s --config %s --nodeps ' % (binary, assembly,
+                        os.path.join(self.config.prefix, 'etc', 'mono', 'config'))
+                shell.call(mkbundle)
