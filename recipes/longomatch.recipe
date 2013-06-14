@@ -21,7 +21,7 @@ class Recipe(recipe.Recipe):
         Platform.DARWIN: ['mono', 'mono-addins', 'db4o', 'gtk-sharp'],
         }
 
-    files_bins = ['ffmpeg']
+    files_bins = ['avconv']
     platform_files_libs = {
         Platform.DARWIN: ['libcesarplayer'],
         Platform.WINDOWS: ['libcesarplayer'],
