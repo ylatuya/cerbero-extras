@@ -63,6 +63,7 @@ class Recipe(recipe.Recipe):
         'lib/longomatch/LongoMatch.Services.dll.mdb',
         'lib/longomatch/LongoMatch.dll',
         'lib/longomatch/LongoMatch.dll.mdb',
+        'lib/longomatch/OxyPlotMono.dll',
         'lib/longomatch/LongoMatchGtk.exe',
         'lib/longomatch/plugins/LongoMatch.Plugins.dll',
     ]
