@@ -122,9 +122,12 @@ class Recipe(recipe.Recipe):
             self.new_env['CC'] = '%s %s' % (cc, os.environ['CFLAGS'])
             self._mono_assemblies = [x for x in self.files_mono]
             self._mono_assemblies += [x for x in self.platform_files_mono[self.config.target_platform]]
+
             if self.config.target_platform == Platform.WINDOWS:
                 self._mono_assemblies += [x for x in self.files_longomatch]
+                self.files_mono += [x for x in self.files_longomatch]
                 self.files_longomatch = []
+
             self.files_mono = [os.path.join(sdir, x.split('/')[-1])
                                for x in self.files_mono]
             self.platform_files_mono[self.config.target_platform] = [os.path.join(sdir, x.split('/')[-1])
