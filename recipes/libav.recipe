@@ -16,7 +16,7 @@ class Recipe(recipe.Recipe):
         ' --disable-devices --disable-network --disable-hwaccels --disable-filters' \
         ' --disable-doc --enable-optimizations '
 
-    files_bins = ['ffmpeg']
+    files_bins = ['avconv']
 
     def prepare(self):
         if self.config.target_platform == Platform.DARWIN:
