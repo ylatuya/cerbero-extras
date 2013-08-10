@@ -24,8 +24,8 @@ class Recipe(recipe.Recipe):
         elif self.config.target_platform == Platform.IOS:
             self.configure_options = '--with-python=no'
 
-    def fetch(self):
+    def extract(self):
         if self.config.target_platform == Platform.DARWIN:
-            super(recipe.Recipe, self).fetch()
+            super(recipe.Recipe, self).extract()
             shell.call('git reset --hard', self.build_dir)
         shell.apply_patch(self.relative_path('xml.patch'), self.build_dir, strip=1)
