@@ -14,6 +14,9 @@ class App(package.App):
     uuid = '5f444646-4165-511f-8287-e8f2a895f853'
     org = "org.longomatch"
     app_recipe = 'longomatch'
+    strip = True
+    strip_dirs = ['bin', 'lib/gstreamer-0.10']
+    strip_excludes = ['zlib1.dll']
     deps = ['base-system', 'gstreamer-core', 'gstreamer-codecs', 'gstreamer-system',
             'gstreamer-capture', 'gstreamer-libav', 'gstreamer-editing', 'gstreamer-codecs-gpl',
             'gstreamer-codecs-restricted', 'gstreamer-playback', 'gstreamer-effects',

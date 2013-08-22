@@ -120,18 +120,6 @@ class Recipe(recipe.Recipe):
                 self.new_env['AS'] = 'as -arch i386'
             cc = os.environ.get('CC', 'gcc')
             self.new_env['CC'] = '%s %s' % (cc, os.environ['CFLAGS'])
-            self._mono_assemblies = [x for x in self.files_mono]
-            self._mono_assemblies += [x for x in self.platform_files_mono[self.config.target_platform]]
-
-            if self.config.target_platform == Platform.WINDOWS:
-                self._mono_assemblies += [x for x in self.files_longomatch]
-                self.files_mono += [x for x in self.files_longomatch]
-                self.files_longomatch = []
-
-            self.files_mono = [os.path.join(sdir, x.split('/')[-1])
-                               for x in self.files_mono]
-            self.platform_files_mono[self.config.target_platform] = [os.path.join(sdir, x.split('/')[-1])
-                               for x in self.platform_files_mono[self.config.target_platform]]
 
     @modify_environment
     def post_install(self):
@@ -148,18 +136,15 @@ class Recipe(recipe.Recipe):
                     'libcesarplayer.0%(srext)s' % self.extensions)
                 libdir = os.path.join(self.config.prefix, 'lib', 'mono', '4.0')
             bindir = os.path.join(self.config.prefix, 'bin')
-
             shutil.copy(libcesarplayer, libdir)
-            for path in self._mono_assemblies:
-                try:
-                    shutil.copy (os.path.join(self.config.prefix, path), libdir)
-                except:
-                    pass
 
             if self.config.target_platform == Platform.WINDOWS:
                 binary = os.path.join(self.config.prefix, self.extensions['sdir'],
                         'LongoMatchGtk.exe')
                 assembly = os.path.join(longomatchlib, 'LongoMatchGtk.exe')
-                mkbundle = 'mkbundle -o %s %s --config %s --nodeps ' % (binary, assembly,
+                mkbundle = 'mkbundle -o %s %s --config %s --nodeps --keeptemp ' % (binary, assembly,
                         os.path.join(self.config.prefix, 'etc', 'mono', 'config'))
-                shell.call(mkbundle)
+                shell.call(mkbundle, self.build_dir)
+                rebuild_bundle = '$CC $CFLAGS -o %s %s `pkg-config --cflags --libs mono-2 glib-2.0` temp.o' % \
+                    (binary, self.relative_path ('temp.c'))
+                shell.call(rebuild_bundle, self.build_dir)
