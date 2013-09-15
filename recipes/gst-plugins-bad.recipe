@@ -120,6 +120,9 @@ class Recipe(recipe.Recipe):
     platform_files_plugins_capture = {
         Platform.LINUX: [
              'lib/gstreamer-0.10/libgstdvb%(mext)s',
+            ],
+        Platform.DARWIN: [
+             'lib/gstreamer-0.10/libgstosxvideosrc%(mext)s',
             ]
     }
 
