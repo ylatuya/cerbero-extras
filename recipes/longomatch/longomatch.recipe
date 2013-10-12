@@ -62,8 +62,14 @@ class Recipe(recipe.Recipe):
         'lib/longomatch/plugins/LongoMatch.Plugins.dll',
     ]
     platform_files_longomatch = {
-        Platform.DARWIN: ['lib/longomatch/libcesarplayer.0.dylib']
-        }
+        Platform.DARWIN: [
+            'lib/longomatch/libcesarplayer.0.dylib'
+        ],
+        # We need a copy of LongoMatch.Addins in the same folder as LongoMatchGtk.exe
+        Platform.WINDOWS: [
+            'bin/LongoMatch.Addins.dll',
+        ]
+    }
     platform_files_mono = {
         Platform.DARWIN: [
             'lib/cli/Db4objects.Db4o-8.0/Db4objects.Db4o.dll',
@@ -118,6 +124,8 @@ class Recipe(recipe.Recipe):
                 libcesarplayer = os.path.join(longomatchlib, dll)
                 shutil.copy(os.path.join(longomatchlib, '..', 'bin', dll),
                             libcesarplayer)
+                shutil.copy(os.path.join(longomatchlib, 'LongoMatch.Addins.dll'),
+                            os.path.join(self.config.prefix, 'bin'))
                 libdir = os.path.join(self.config.prefix, 'bin')
             elif self.config.target_platform == Platform.DARWIN:
                 libcesarplayer = os.path.join(longomatchlib,
