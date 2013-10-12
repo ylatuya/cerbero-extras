@@ -29,6 +29,27 @@ class Recipe(recipe.Recipe):
     platform_files_bins = {
         Platform.LINUX: ['chronojump']
     }
+    files_mscorlib = [
+        'lib/mono/4.0/mscorlib.dll',]
+    files_mono = [
+        'lib/mono/4.0/Mono.Cairo.dll',
+        'lib/mono/4.0/Mono.Data.Sqlite.dll',
+        'lib/mono/4.0/Mono.Posix.dll',
+        'lib/mono/4.0/Mono.Security.dll',
+        'lib/mono/4.0/Mono.Security.dll',
+        'lib/mono/4.0/System.dll',
+        'lib/mono/4.0/System.Configuration.dll',
+        'lib/mono/4.0/System.Core.dll',
+        'lib/mono/4.0/System.Data.dll',
+        'lib/mono/4.0/System.Drawing.dll',
+        'lib/mono/4.0/System.Xml.dll',
+        'lib/mono/4.0/System.Security.dll',
+        'lib/mono/4.0/System.Transactions.dll',
+    ]
+    files_chronojump = ['lib/chronojump']
+    platform_files_chronojump = {
+        Platform.DARWIN: ['lib/longomatch/libcesarplayer.0.dylib']
+        }
 
     def prepare(self):
         if self.config.target_platform in [Platform.WINDOWS, Platform.DARWIN]:
@@ -46,6 +67,21 @@ class Recipe(recipe.Recipe):
     @modify_environment
     def post_install(self):
         if self.config.target_platform in [Platform.WINDOWS, Platform.DARWIN]:
+            longomatchlib = os.path.join(self.config.prefix, 'lib', 'longomatch')
+            if self.config.target_platform == Platform.WINDOWS:
+                dll = 'libcesarplayer-0%(srext)s' % self.extensions
+                libcesarplayer = os.path.join(longomatchlib, dll)
+                shutil.copy(os.path.join(longomatchlib, '..', 'bin', dll),
+                            libcesarplayer)
+                libdir = os.path.join(self.config.prefix, 'bin')
+            elif self.config.target_platform == Platform.DARWIN:
+                libcesarplayer = os.path.join(longomatchlib,
+                    'libcesarplayer.0%(srext)s' % self.extensions)
+                libdir = os.path.join(self.config.prefix, 'lib', 'mono', '4.0')
+            bindir = os.path.join(self.config.prefix, 'bin')
+            shutil.copy(libcesarplayer, libdir)
+
+
             crlib = os.path.join(self.config.prefix, 'lib', 'chronojump')
             binary = os.path.join(self.config.prefix, self.extensions['sdir'],
                     'Chronojump.exe')
