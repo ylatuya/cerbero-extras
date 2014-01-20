@@ -25,7 +25,7 @@ class Recipe(recipe.Recipe):
             self.configure_options = '--with-python=no'
 
     def extract(self):
+        super(recipe.Recipe, self).extract()
         if self.config.target_platform == Platform.DARWIN:
-            super(recipe.Recipe, self).extract()
             shell.call('git reset --hard', self.build_dir)
-        shell.apply_patch(self.relative_path('xml.patch'), self.build_dir, strip=1)
+            shell.apply_patch(self.relative_path('xml.patch'), self.build_dir, strip=1)
