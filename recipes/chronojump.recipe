@@ -9,9 +9,14 @@ class Recipe(recipe.Recipe):
     version = '1.0'
     licenses = [License.GPL]
     remotes = {'origin': 'git://git.gnome.org/chronojump'}
-    config_sh = 'sh autogen.sh'
+    autoreconf = True
+    autoreconf_sh = 'sh autogen.sh'
     commit = 'origin/master'
-    deps = ['gstreamer', 'gst-plugins-base', 'mono', 'gtk-sharp']
+    deps = ['gstreamer', 'gst-plugins-base']
+    platform_deps = {
+        Platform.DARWIN: ['mono', 'gtk-sharp'],
+        Platform.WINDOWS: ['longomatch-deps'],
+    }
 
     platform_files_libs = {
         Platform.DARWIN: ['libcesarplayer'],
@@ -67,7 +72,7 @@ class Recipe(recipe.Recipe):
     @modify_environment
     def post_install(self):
         if self.config.target_platform in [Platform.WINDOWS, Platform.DARWIN]:
-            longomatchlib = os.path.join(self.config.prefix, 'lib', 'longomatch')
+            longomatchlib = os.path.join(self.config.prefix, 'lib', 'chronojump')
             if self.config.target_platform == Platform.WINDOWS:
                 dll = 'libcesarplayer-0%(srext)s' % self.extensions
                 libcesarplayer = os.path.join(longomatchlib, dll)
