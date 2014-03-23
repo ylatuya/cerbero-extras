@@ -13,7 +13,9 @@ class Recipe(recipe.Recipe):
             'orc', 'wavpack', 'flac', 'bzip2', 'zlib',
             'cairo']
     platform_deps = {Platform.LINUX: ['libdv'],
-                     Platform.DARWIN: ['libdv']}
+                     Platform.DARWIN: ['libdv'],
+                     Platform.WINDOWS: ['libdv'],
+                     }
 
 
     files_lang = ['gst-plugins-good-0.10']
@@ -98,6 +100,9 @@ class Recipe(recipe.Recipe):
              'lib/gstreamer-0.10/libgstdv%(mext)s',
             ],
         Platform.DARWIN: [
+             'lib/gstreamer-0.10/libgstdv%(mext)s',
+            ],
+        Platform.WINDOWS: [
              'lib/gstreamer-0.10/libgstdv%(mext)s',
             ]
     }
