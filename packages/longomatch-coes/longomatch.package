@@ -1,0 +1,40 @@
+# vi:si:et:sw=4:sts=4:ts=4:syntax=python
+# -*- Mode: Python -*-
+
+
+class App(package.App):
+
+    name = 'longomatch-coes'
+    app_name = 'LongoMatch (COES)'
+    shortdesc = 'LongoMatch Video Analysis COES'
+    url = "http://www.longomatch.org/"
+    version = '0.20.1'
+    license = License.GPL
+    vendor = 'LongoMatch Project'
+    uuid = '5f444646-4165-511f-8287-e8f2a895f853'
+    org = "org.longomatch"
+    app_recipe = 'longomatch-coes'
+    strip = True
+    strip_dirs = ['bin', 'lib/gstreamer-0.10']
+    strip_excludes = ['zlib1.dll', 'LongoMatch.Addins.dll',
+            'lib/gstreamer-0.10/libgstdshowvideosink.dll',
+            'lib/gstreamer-0.10/libgstdshowsrcwrapper.dll']
+    deps = ['base-system', 'gstreamer-core', 'gstreamer-codecs', 'gstreamer-system',
+            'gstreamer-capture', 'gstreamer-libav', 'gstreamer-editing', 'gstreamer-codecs-gpl',
+            'gstreamer-codecs-restricted', 'gstreamer-playback', 'gstreamer-effects',
+            'gstreamer-networking', 'gtk+-2.0', 'mono']
+    commands = {
+        Platform.LINUX: [('LongoMatch', 'bin/longomatch', True, 'wrapper')],
+        Platform.DARWIN: [('LongoMatch', 'lib/LongoMatchGtk', True, 'wrapper')],
+        Platform.WINDOWS: [('LongoMatch', 'LongoMatchGtk.exe', False, None)],
+        }
+    wix_upgrade_code = {
+        PackageType.DEVEL: {
+            Architecture.X86 : '02fe67b2-4565-411f-8287-e8faa892f853',
+            Architecture.X86_64: '12fe67b2-4565-411f-8287-e8faa892f853',
+            },
+        PackageType.RUNTIME: {
+            Architecture.X86 : '22fe67b2-4565-411f-8287-e8faa892f853',
+            Architecture.X86_64: '32fe67b2-4565-411f-8287-e8faa892f853',
+            },
+        }
