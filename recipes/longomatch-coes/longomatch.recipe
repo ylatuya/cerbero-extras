@@ -36,11 +36,13 @@ class Recipe(recipe.Recipe):
         'lib/mono/4.0/Mono.Posix.dll',
         'lib/mono/4.0/Mono.Security.dll',
         'lib/mono/4.0/Mono.Security.dll',
+        'lib/mono/4.0/WindowsBase.dll',
         'lib/mono/4.0/System.dll',
         'lib/mono/4.0/System.Configuration.dll',
         'lib/mono/4.0/System.Core.dll',
         'lib/mono/4.0/System.Drawing.dll',
         'lib/mono/4.0/System.Xml.dll',
+        'lib/mono/4.0/System.Xaml.dll',
         'lib/mono/4.0/System.Security.dll',
         'lib/mono/mono-addins/Mono.Addins.dll',
     ]
