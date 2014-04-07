@@ -39,17 +39,25 @@ class Recipe(recipe.Recipe):
     files_mono = [
         'lib/mono/4.0/Mono.Cairo.dll',
         'lib/mono/4.0/Mono.Data.Sqlite.dll',
+        'lib/mono/4.0/Mono.Data.Tds.dll',
         'lib/mono/4.0/Mono.Posix.dll',
         'lib/mono/4.0/Mono.Security.dll',
         'lib/mono/4.0/Mono.Security.dll',
+        'lib/mono/4.0/Mono.Web.dll',
         'lib/mono/4.0/System.dll',
         'lib/mono/4.0/System.Configuration.dll',
         'lib/mono/4.0/System.Core.dll',
         'lib/mono/4.0/System.Data.dll',
         'lib/mono/4.0/System.Drawing.dll',
-        'lib/mono/4.0/System.Xml.dll',
+        'lib/mono/4.0/System.EnterpriseServices.dll',
+        'lib/mono/4.0/System.Numerics.dll',
         'lib/mono/4.0/System.Security.dll',
         'lib/mono/4.0/System.Transactions.dll',
+        'lib/mono/4.0/System.Web.dll',
+        'lib/mono/4.0/System.Web.Services.dll',
+        'lib/mono/4.0/System.Web.ApplicationServices.dll',
+        'lib/mono/4.0/System.Xml.dll',
+        'lib/mono/4.0/mscorlib.dll',
     ]
     files_chronojump = ['lib/chronojump']
     platform_files_chronojump = {
@@ -65,27 +73,24 @@ class Recipe(recipe.Recipe):
             else:
                 self.new_env['MONO_PATH'] = ':'.join(search_paths)
             if self.config.target_platform == Platform.DARWIN:
-                self.new_env['AS'] = 'as -arch i386'
+                if self.config.target_arch == Architecture.X86:
+                    self.new_env['AS'] = 'as -arch i386'
+                else:
+                    self.new_env['AS'] = 'as -arch x86_64'
             cc = os.environ.get('CC', 'gcc')
             self.new_env['CC'] = '%s %s' % (cc, os.environ['CFLAGS'])
 
     @modify_environment
     def post_install(self):
-        if self.config.target_platform in [Platform.WINDOWS, Platform.DARWIN]:
+        if self.config.target_platform in [Platform.WINDOWS]:
             longomatchlib = os.path.join(self.config.prefix, 'lib', 'chronojump')
-            if self.config.target_platform == Platform.WINDOWS:
-                dll = 'libcesarplayer-0%(srext)s' % self.extensions
-                libcesarplayer = os.path.join(longomatchlib, dll)
-                shutil.copy(os.path.join(longomatchlib, '..', 'bin', dll),
-                            libcesarplayer)
-                libdir = os.path.join(self.config.prefix, 'bin')
-            elif self.config.target_platform == Platform.DARWIN:
-                libcesarplayer = os.path.join(longomatchlib,
-                    'libcesarplayer.0%(srext)s' % self.extensions)
-                libdir = os.path.join(self.config.prefix, 'lib', 'mono', '4.0')
+            dll = 'libcesarplayer-0%(srext)s' % self.extensions
+            libcesarplayer = os.path.join(longomatchlib, dll)
+            shutil.copy(os.path.join(longomatchlib, '..', 'bin', dll),
+                        libcesarplayer)
+            libdir = os.path.join(self.config.prefix, 'bin')
             bindir = os.path.join(self.config.prefix, 'bin')
             shutil.copy(libcesarplayer, libdir)
-
 
             crlib = os.path.join(self.config.prefix, 'lib', 'chronojump')
             binary = os.path.join(self.config.prefix, self.extensions['sdir'],

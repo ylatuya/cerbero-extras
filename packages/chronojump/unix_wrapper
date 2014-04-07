@@ -30,5 +30,5 @@ export DYLD_FALLBACK_LIBRARY_PATH=$PREFIX/lib:/usr/lib
 export PATH=$PREFIX/bin:$PATH
 
 export MONO_PATH=$PREFIX/lib/mono/4.0:$PREFIX/lib/mono/gtk-sharp-2.0/
-cd $PREFIX/lib
-mono $PREFIX/lib/chronojump/ChronoJump.exe
+cd $PREFIX/bin
+./mono --config $PREFIX/etc/mono/config $PREFIX/lib/chronojump/ChronoJump.exe
