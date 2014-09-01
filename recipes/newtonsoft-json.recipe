@@ -8,14 +8,20 @@ class Recipe(recipe.Recipe):
     btype = BuildType.CUSTOM
     deps = ['mono', 'gtk-sharp']
     url = 'https://github.com/JamesNK/Newtonsoft.Json/archive/%(version)s.tar.gz'
+    patches = ['newtonsoft-json/0001-Fix-build-with-the-Client-target-profile.patch']
     config_sh = 'sh autogen.sh'
+    files_cli = ['lib/cli/Newtonsoft.Json-5.0/Newtonsoft.Json.dll']
 
     def compile(self):
-        shell.call('xbuild Src/Newtonsoft.Json/Newtonsoft.Json.Net40.csproj /property:Configuration=Release /property:DefineConstants=',
+        shell.call('xbuild Src/Newtonsoft.Json/Newtonsoft.Json.Net40.csproj ' \
+                   '/property:SignAssembly=true ' \
+                   '/property:AssemblyOriginatorKeyFile=Dynamic.snk ' \
+                   '/property:Configuration=Release ' \
+                   '/property:DefineConstants=\'SIGNED NET40 TRACE\' ',
             self.build_dir)
 
     def install(self):
-        destdir = os.path.join(self.config.prefix, 'lib/cli/Newtonsoft.Json-6.0')
+        destdir = os.path.join(self.config.prefix, 'lib/cli/Newtonsoft.Json-5.0')
         if not os.path.exists(destdir):
             os.makedirs(destdir)
         shell.call('cp Src/Newtonsoft.Json/bin/Release/Net40/Newtonsoft.Json.dll %s' % destdir,
@@ -24,3 +30,5 @@ class Recipe(recipe.Recipe):
         shell.call('cp %s %s' % (self.relative_path("Newtonsoft-Json/newtonsoft-json.pc.in"),
                                  jsonpc))
         shell.replace(jsonpc, {'@VERSION@': self.version})
+        for f in self.files_cli:
+            shell.call('gacutil -i %s' % os.path.join(self.config.prefix, f))
