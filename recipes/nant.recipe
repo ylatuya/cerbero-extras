@@ -1,0 +1,13 @@
+# -*- Mode: Python -*- vi:si:et:sw=4:sts=4:ts=4:syntax=python
+from cerbero.utils import shell
+
+class Recipe(recipe.Recipe):
+    name = 'nant'
+    version = '0.92'
+    licenses = [License.LGPL]
+    stype = SourceType.GIT
+    btype = BuildType.MAKEFILE
+    remotes = {'origin': 'https://github.com/letiemble/nant.git'}
+    commit = 'origin/master'
+    make = "make MONO=mono MCS=\"gmcs -sdk:4\" TARGET=mono-4.5 prefix=$CERBERO_PREFIX "
+    make_install = "make install TARGET=mono-4.5 MONO=mono MCS=\"gmcs -sdk:4\" prefix=$CERBERO_PREFIX"

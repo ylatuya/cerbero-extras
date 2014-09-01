@@ -10,10 +10,10 @@ class Recipe(recipe.Recipe):
     name = 'longomatch'
     version = '0.20.5'
     licenses = [License.GPL]
-    remotes = {'origin': 'git://git.gnome.org/longomatch'}
+    remotes = {'origin': 'https://github.com/ylatuya/longomatch.git'}
     commit = 'origin/master'
     config_sh = 'sh autogen.sh'
-    deps = ['gstreamer', 'gst-plugins-base', 'libav']
+    deps = ['gstreamer', 'gst-plugins-base', 'libav', 'Newtonsoft.Json']
 
     platform_deps = {
         Platform.WINDOWS: ['longomatch-deps'],

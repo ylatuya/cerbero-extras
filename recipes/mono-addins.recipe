@@ -2,10 +2,10 @@
 
 class Recipe(recipe.Recipe):
     name = 'mono-addins'
-    version = '1.0'
+    version = '1.1'
     licenses = [License.LGPL]
     stype = SourceType.TARBALL
     deps = ['mono', 'gtk-sharp']
-    url = 'https://github.com/mono/mono-addins/archive/mono-addins-1.0.tar.gz'
-    tarball_dirname = 'mono-addins-mono-addins-1.0'
+    url = 'https://github.com/mono/mono-addins/archive/mono-addins-1.1.tar.gz'
+    tarball_dirname = 'mono-addins-mono-addins-1.1'
     config_sh = 'sh autogen.sh'

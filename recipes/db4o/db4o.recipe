@@ -31,6 +31,7 @@ class Recipe(recipe.Recipe):
                'port_options_code_to_Mono.Options.patch',
                'dont_build_test_assemblies.patch',
                'use_cecil_0.9.5_api.patch',
+               '0001-Fix-CS1024-and-CS1024.patch',
                 ]
     files_mono = ['lib/cli/Db4objects.Db4o-8.0/Db4objects.Db4o.dll']
 
@@ -39,7 +40,7 @@ class Recipe(recipe.Recipe):
         for f in csproj_files:
             shell.replace(f, {'/usr': self.config.prefix})
             shell.replace(f, {'..\\Libs\\net-2.0\\Cecil.FlowAnalysis.dll': '%s/lib/cecil-flowanalysis/Cecil.FlowAnalysis.dll' % self.config.prefix})
-        cmd = 'xbuild /property:Configuration=Release /property:DefineConstants="MONO" src/Db4o-2010.sln'
+        cmd = 'xbuild /property:Configuration=Release /property:DefineConstants="MONO" /property:DocumentationFile="Db4objects.Db4o.dll.xml" src/Db4o-2010.sln'
         shell.call(cmd, self.build_dir)
         if not os.path.exists(os.path.join(self.build_dir, 'tmp')):
             os.makedirs(os.path.join(self.build_dir, 'tmp'))
