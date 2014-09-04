@@ -1,16 +1,18 @@
 import os
 from cerbero.config import Architecture, Platform
 
-target_arch = Architecture.X86
 path = os.path.dirname(os.path.abspath(__file__))
 external_recipes = {'extras': (os.path.join(path, 'recipes'), 1)}
 external_packages = {'extras': (os.path.join(path, 'packages'), 1)}
 
+_home_dir = os.path.expanduser('~/longomatch-build')
 if target_platform == Platform.WINDOWS:
+    target_arch = Architecture.X86
     prefix = 'c:/gstreamer-sdk/0.10/%s' % target_arch
 elif target_platform == Platform.LINUX:
-    prefix = '/opt/gstreamer-sdk'
+    prefix = '/opt/longomatch'
+    sources = os.path.join(_home_dir, 'sources', '%s_%s' % (target_platform, target_arch))
 elif target_platform == Platform.DARWIN:
+    target_arch = Architecture.X86
     prefix = os.path.expanduser('~/LongoMatchDist/x86')
-
-recipes_commits = {'gnonlin': 'RELEASE-0.10.17'}
+    sources = os.path.join(_home_dir, 'sources', '%s_%s' % (target_platform, target_arch))
