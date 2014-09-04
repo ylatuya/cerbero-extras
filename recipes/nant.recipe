@@ -9,5 +9,6 @@ class Recipe(recipe.Recipe):
     btype = BuildType.MAKEFILE
     remotes = {'origin': 'https://github.com/letiemble/nant.git'}
     commit = 'origin/master'
+    allow_parallel_build = False
     make = "make MONO=mono MCS=\"gmcs -sdk:4\" TARGET=mono-4.5 prefix=$CERBERO_PREFIX "
     make_install = "make install TARGET=mono-4.5 MONO=mono MCS=\"gmcs -sdk:4\" prefix=$CERBERO_PREFIX"
