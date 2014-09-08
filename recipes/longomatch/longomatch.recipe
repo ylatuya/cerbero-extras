@@ -14,11 +14,11 @@ class Recipe(recipe.Recipe):
     commit = 'origin/master'
     config_sh = 'sh autogen.sh'
     deps = ['gstreamer', 'gst-plugins-base', 'libav', 'Newtonsoft.Json', 'librsvg', 'ubuntu-font-family']
+            'mono', 'mono-addins', 'db4o']
 
     platform_deps = {
-        Platform.WINDOWS: ['longomatch-deps'],
-        Platform.LINUX: ['mono', 'mono-addins', 'db4o', 'gtk-sharp'],
-        Platform.DARWIN: ['mono', 'mono-addins', 'db4o', 'gtk-sharp'],
+        Platform.LINUX: ['gtk-sharp'],
+        Platform.DARWIN: ['gtk-sharp'],
         }
 
     files_bins = ['avconv']

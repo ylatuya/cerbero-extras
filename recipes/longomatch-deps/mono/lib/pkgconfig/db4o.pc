@@ -1,9 +1,0 @@
-prefix=$CERBERO_PREFIX
-exec_prefix=${prefix}
-libdir=${exec_prefix}/lib
-
-
-Name: Db4o
-Description: Db4o
-Version:  7.4
-Libs: -r:${libdir}/mono/db4o/Db4objects.Db4o.dll
