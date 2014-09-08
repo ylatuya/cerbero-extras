@@ -1,0 +1,30 @@
+# -*- Mode: Python -*- vi:si:et:sw=4:sts=4:ts=4:syntax=python
+from cerbero.utils import shell
+import shutil
+
+class Recipe(recipe.Recipe):
+    name = 'ubuntu-font'
+    version = '0.80'
+    stype = SourceType.CUSTOM
+    btype = BuildType.CUSTOM
+    url = 'http://font.ubuntu.com/download/ubuntu-font-family-%s.zip' % version
+    files_fonts = [ 'Ubuntu-R.ttf' ]
+    def fetch(self):
+        self.local_source = os.path.join(self.config.local_sources, 'ubuntu-font-family')
+        if not os.path.exists(self.local_source):
+            os.makedirs(self.local_source)
+        zip_path = os.path.join(self.local_source, 'ubuntu-font-family-%s.zip' % self.version)
+        shell.download(self.url, zip_path)
+        shell.unpack(zip_path, self.local_source)
+
+    def configure(self):
+        pass
+
+    def install(self):
+        source_dir = os.path.join(self.local_source, 'ubuntu-font-family-%s' % self.version)
+        fonts_dir = os.path.join(self.config.prefix, 'share', 'fonts', 'truetype')
+        if not os.path.exists(fonts_dir):
+            os.makedirs(fonts_dir)
+        for f in self.files_fonts:
+            shutil.copy(os.path.join(source_dir, f),
+                        os.path.join(fonts_dir))
