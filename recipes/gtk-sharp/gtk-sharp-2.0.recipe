@@ -6,11 +6,7 @@ class Recipe(recipe.Recipe):
     version = '2.12.10'
     licenses = [License.LGPL]
     stype = SourceType.TARBALL
-    deps = ['gtk+', 'libglade']
-    platform_deps = {
-        Platform.DARWIN: ['mono'],
-        Platform.WINDOWS: ['longomatch-deps'],
-        }
+    deps = ['gtk+', 'libglade', 'mono']
     url = 'http://ftp.gnome.org/pub/gnome/sources/gtk-sharp/2.12/gtk-sharp-2.12.10.tar.gz'
     patches = ['0001-fix_glib_imports.patch']
     strip = '1'
