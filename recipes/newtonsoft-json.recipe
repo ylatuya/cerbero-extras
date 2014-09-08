@@ -6,7 +6,7 @@ class Recipe(recipe.Recipe):
     licenses = [License.LGPL]
     stype = SourceType.TARBALL
     btype = BuildType.CUSTOM
-    deps = ['mono', 'gtk-sharp']
+    deps = ['mono']
     url = 'https://github.com/JamesNK/Newtonsoft.Json/archive/%(version)s.tar.gz'
     patches = ['newtonsoft-json/0001-Fix-build-with-the-Client-target-profile.patch']
     config_sh = 'sh autogen.sh'
