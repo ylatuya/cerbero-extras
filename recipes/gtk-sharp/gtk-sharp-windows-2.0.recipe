@@ -1,43 +1,32 @@
-# -*- Mode: Python -*- vi:si:et:sw=4:sts=4:ts=4:syntax=python
+
 import shutil
 from cerbero.utils import shell
 
 class Recipe(recipe.Recipe):
-    name = 'mono'
-    version = '3.2.3'
+    name = 'gtk-sharp'
+    version = '2.12.10'
     licenses = [License.LGPL]
     stype = SourceType.CUSTOM
     btype = BuildType.CUSTOM
 
+    files_glue = [
+        'bin/atksharpglue-2.dll',
+        'bin/gdksharpglue-2.dll',
+        'bin/gladesharpglue-2.dll',
+        'bin/glibsharpglue-2.dll',
+        'bin/gtksharpglue-2.dll',
+        'bin/pangosharpglue-2.dll',
+        'lib/mono/gtk-sharp-2.0',
+    ]
+
     files_mono = [
-        'bin/dmcs',
-        'bin/dmcs.bat',
-        'bin/gmcs',
-        'bin/gmcs.bat',
-        'bin/gacutil',
-        'bin/gluezilla.dll',
-        'bin/intl.dll',
-        'bin/mkbundle',
-        'bin/libmonosgen-2.0.dll',
-        'bin/mono-2.0.dll',
-        'bin/mono.exe',
-        'bin/MonoPosixHelper.dll',
-        'bin/resgen',
-        'bin/sqlite3.dll',
-        'bin/xbuild',
-        'bin/zlib1.dll',
-        'etc/mono',
-        'lib/mono/gac',
-        'lib/mono/4.0',
-        'lib/mono/4.5',
+        'lib/mono/gtk-sharp-2.0',
     ]
 
     files_mono_devel = [
-        'include/mono-2.0',
-        'lib/libmono-2.0.a',
-        'lib/pkgconfig/mono-2.pc',
-        'lib/pkgconfig/mono-addins.pc',
-        'lib/pkgconfig/mono.pc',
+        'lib/pkgconfig/glade-sharp-2.0.pc',
+        'lib/pkgconfig/glib-sharp-2.0.pc',
+        'lib/pkgconfig/gtk-sharp-2.0.pc',
     ]
 
     def prepare(self):
@@ -46,7 +35,7 @@ class Recipe(recipe.Recipe):
 
     def install(self):
         mono_prefix_dir = 'c:/Program Files (x86)/Mono-3.2.3'
-        for f in self.files_mono + self.files_mono_devel:
+        for f in self.files_glue + self.files_mono + self.files_mono_devel:
             src = os.path.join(mono_prefix_dir, f)
             dest = os.path.join(self.config.prefix, f)
             if os.path.isdir(src):
