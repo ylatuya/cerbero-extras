@@ -56,9 +56,3 @@ class Recipe(recipe.Recipe):
                 if not os.path.exists(os.path.dirname(dest)):
                     os.makedirs(os.path.dirname(dest))
                 shutil.copy(src, dest)
-
-        monodir = os.path.join(self.config.prefix, 'lib', 'mono')
-        for d in ['atk', 'gdk', 'glade', 'glib', 'gtk', 'pango']:
-            gtkdir = os.path.join(monodir, 'gtk-sharp-2.0')
-            apath = os.path.join(gtkdir, '%s-sharp.dll' % d)
-            shell.call('gacutil -i %s' % apath)
