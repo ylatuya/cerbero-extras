@@ -135,12 +135,13 @@ class Recipe(recipe.Recipe):
             shutil.copy(libcesarplayer, libdir)
 
             if self.config.target_platform == Platform.WINDOWS:
+                return
                 binary = os.path.join(self.config.prefix, self.extensions['sdir'],
                         'LongoMatchGtk.exe')
                 assembly = os.path.join(longomatchlib, 'LongoMatchGtk.exe')
                 mkbundle = 'mkbundle -o %s %s --config %s --nodeps --keeptemp ' % (binary, assembly,
                         os.path.join(self.config.prefix, 'etc', 'mono', 'config'))
                 shell.call(mkbundle, self.build_dir)
-                rebuild_bundle = '$CC $CFLAGS -o %s %s `pkg-config --cflags --libs mono-2 glib-2.0` temp.o' % \
+                rebuild_bundle = '$CC $CFLAGS -o %s %s `pkg-config --cflags --libs mono-2 glib-2.0` -lwsock32 temp.o' % \
                     (binary, self.relative_path ('temp.c'))
                 shell.call(rebuild_bundle, self.build_dir)
