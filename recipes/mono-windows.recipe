@@ -22,7 +22,7 @@ class Recipe(recipe.Recipe):
         'bin/libmonosgen-2.0.dll',
         'bin/mono-2.0.dll',
         'bin/mono.exe',
-        'bin/MonoPosixHelper.dll',
+        'bin/libMonoPosixHelper.dll',
         'bin/resgen',
         'bin/sqlite3.dll',
         'bin/xbuild',
