@@ -22,9 +22,9 @@ class App(package.App):
             'lib/gstreamer-0.10/libgstdshowvideosink.dll',
             'lib/gstreamer-0.10/libgstdshowsrcwrapper.dll']
     deps = ['base-system', 'gstreamer-core', 'gstreamer-codecs', 'gstreamer-system',
-            'gstreamer-capture', 'gstreamer-editing', 'gstreamer-codecs-gpl',
-            'gstreamer-playback', 'gstreamer-effects',
-            'gstreamer-networking', 'gtk+-2.0', 'mono', 'longomatch-deps']
+            'gstreamer-capture', 'gstreamer-codecs-gpl',
+            'gstreamer-playback', 'gstreamer-effects', 'gstreamer-networking',
+            'gtk+-2.0', 'mono', 'longomatch-deps']
     commands = {
         Platform.LINUX: [('LongoMatch', 'bin/longomatch', True, 'wrapper')],
         Platform.DARWIN: [('LongoMatch', 'lib/LongoMatchGtk', True, 'wrapper')],

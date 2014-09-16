@@ -4,6 +4,34 @@
 
 class Package(package.Package):
     name = 'longomatch-deps'
-    shortdesc  = 'LongoMatch dependencies' 
+    shortdesc  = 'LongoMatch dependencies'
     longdesc  = 'LongoMatch dependencies'
-    files = [ 'ubuntu-font-family:fonts' ] 
+    files = ['ubuntu-font-family:fonts',
+             'gtk-sharp',
+             'Newtonsoft.Json:cli',
+             'db4o:cli',
+             'mono-addins:cli',
+             ]
+
+
+    def files_list(self):
+        r = package.Package.files_list(self)
+        import pdb; pdb.set_trace()
+        r += [
+            'lib/mono/4.5/mscorlib.dll',
+            'lib/mono/4.5/Mono.Cairo.dll',
+            'lib/mono/4.5/Mono.Posix.dll',
+            'lib/mono/4.5/Mono.Security.dll',
+            'lib/mono/4.5/Mono.Security.dll',
+            'lib/mono/4.5/System.dll',
+            'lib/mono/4.5/System.Configuration.dll',
+            'lib/mono/4.5/System.Core.dll',
+            'lib/mono/4.5/System.Data.dll',
+            'lib/mono/4.5/System.Drawing.dll',
+            'lib/mono/4.5/System.Numerics.dll',
+            'lib/mono/4.5/System.Runtime.Serialization.dll',
+            'lib/mono/4.5/System.Security.dll',
+            'lib/mono/4.5/System.Xml.dll',
+            'lib/mono/4.5/System.Xml.Linq.dll',
+        ]
+        return r

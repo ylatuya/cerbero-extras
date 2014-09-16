@@ -16,11 +16,21 @@ class Recipe(recipe.Recipe):
         'bin/glibsharpglue-2.dll',
         'bin/gtksharpglue-2.dll',
         'bin/pangosharpglue-2.dll',
-        'lib/mono/gtk-sharp-2.0',
     ]
 
     files_mono = [
-        'lib/mono/gtk-sharp-2.0',
+        'lib/mono/gtk-sharp-2.0/atk-sharp.dll',
+        'lib/mono/gtk-sharp-2.0/gtk-sharp.dll',
+        'lib/mono/gtk-sharp-2.0/gdk-sharp.dll',
+        'lib/mono/gtk-sharp-2.0/pango-sharp.dll',
+        'lib/mono/gtk-sharp-2.0/glib-sharp.dll',
+        'lib/mono/gtk-sharp-2.0/glade-sharp.dll',
+        'lib/mono/gtk-sharp-2.0/atk-sharp.dll.config',
+        'lib/mono/gtk-sharp-2.0/gtk-sharp.dll.config',
+        'lib/mono/gtk-sharp-2.0/gdk-sharp.dll.config',
+        'lib/mono/gtk-sharp-2.0/pango-sharp.dll.config',
+        'lib/mono/gtk-sharp-2.0/glib-sharp.dll.config',
+        'lib/mono/gtk-sharp-2.0/glade-sharp.dll.config',
     ]
 
     files_mono_devel = [
@@ -31,7 +41,7 @@ class Recipe(recipe.Recipe):
 
     def prepare(self):
         if self.config.target_platform != Platform.WINDOWS:
-            raise InvalidRecipeException()
+            raise InvalidRecipeError()
 
     def install(self):
         mono_prefix_dir = 'c:/Program Files (x86)/Mono-3.2.3'

@@ -33,7 +33,7 @@ class Recipe(recipe.Recipe):
                'use_cecil_0.9.5_api.patch',
                '0001-Fix-CS1024-and-CS1024.patch',
                 ]
-    files_mono = ['lib/cli/Db4objects.Db4o-8.0/Db4objects.Db4o.dll']
+    files_cli = ['lib/cli/Db4objects.Db4o-8.0/Db4objects.Db4o.dll']
 
     def compile(self):
         csproj_files = [x for x in shell.find_files('*/*/*2010.csproj', self.build_dir)]

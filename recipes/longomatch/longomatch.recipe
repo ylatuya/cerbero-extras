@@ -29,27 +29,18 @@ class Recipe(recipe.Recipe):
     files_lang = ['longomatch']
     files_share = ['share/longomatch']
     files_plugins = ['lib/longomatch/plugins']
-    files_mscorlib = [
-        'lib/mono/4.0/mscorlib.dll',]
-    files_mono = [
-        'lib/mono/4.0/Mono.Cairo.dll',
-        'lib/mono/4.0/Mono.Posix.dll',
-        'lib/mono/4.0/Mono.Security.dll',
-        'lib/mono/4.0/Mono.Security.dll',
-        'lib/mono/4.0/System.dll',
-        'lib/mono/4.0/System.Configuration.dll',
-        'lib/mono/4.0/System.Core.dll',
-        'lib/mono/4.0/System.Drawing.dll',
-        'lib/mono/4.0/System.Xml.dll',
-        'lib/mono/4.0/System.Security.dll',
-        'lib/mono/mono-addins/Mono.Addins.dll',
-    ]
     files_longomatch = [
         'lib/longomatch/LongoMatch.Addins.dll',
         'lib/longomatch/LongoMatch.Addins.dll.mdb',
         'lib/longomatch/LongoMatch.GUI.Multimedia.dll',
         'lib/longomatch/LongoMatch.GUI.dll',
         'lib/longomatch/LongoMatch.GUI.dll.mdb',
+        'lib/longomatch/LongoMatch.GUI.Helpers.dll',
+        'lib/longomatch/LongoMatch.GUI.Helpers.dll.mdb',
+        'lib/longomatch/LongoMatch.Drawing.dll',
+        'lib/longomatch/LongoMatch.Drawing.dll.mdb',
+        'lib/longomatch/LongoMatch.Drawing.Cairo.dll',
+        'lib/longomatch/LongoMatch.Drawing.Cairo.dll.mdb',
         'lib/longomatch/LongoMatch.Multimedia.dll',
         'lib/longomatch/LongoMatch.Multimedia.dll.config',
         'lib/longomatch/LongoMatch.Multimedia.dll.mdb',
