@@ -14,11 +14,10 @@ class Recipe(recipe.Recipe):
     commit = 'origin/master'
     config_sh = 'sh autogen.sh'
     deps = ['gstreamer', 'gst-plugins-base', 'libav', 'Newtonsoft.Json', 'librsvg', 'ubuntu-font-family',
-            'mono', 'mono-addins', 'db4o']
+            'mono', 'mono-addins', 'db4o', 'gtk-sharp']
 
     platform_deps = {
-        Platform.LINUX: ['gtk-sharp'],
-        Platform.DARWIN: ['gtk-sharp'],
+        Platform.WINDOWS: ['mkbundle'],
         }
 
     files_bins = ['avconv']
@@ -126,13 +125,16 @@ class Recipe(recipe.Recipe):
             shutil.copy(libcesarplayer, libdir)
 
             if self.config.target_platform == Platform.WINDOWS:
-                return
                 binary = os.path.join(self.config.prefix, self.extensions['sdir'],
                         'LongoMatchGtk.exe')
                 assembly = os.path.join(longomatchlib, 'LongoMatchGtk.exe')
                 mkbundle = 'mkbundle -o %s %s --config %s --nodeps --keeptemp ' % (binary, assembly,
                         os.path.join(self.config.prefix, 'etc', 'mono', 'config'))
                 shell.call(mkbundle, self.build_dir)
-                rebuild_bundle = '$CC $CFLAGS -o %s %s `pkg-config --cflags --libs mono-2 glib-2.0` -lwsock32 temp.o' % \
-                    (binary, self.relative_path ('temp.c'))
+                libs = shell.check_call("pkg-config --cflags --libs mono-2 glib-2.0")
+                libs = libs.replace('\n', ' ').replace('\r', '')
+                # Use mono sgen GC
+                libs = libs.replace('-lmono-2.0', '-lmonosgen-2.0')
+                shell.apply_patch(self.relative_path('temp.c.diff'), self.build_dir, 0)
+                rebuild_bundle = '$CC $CFLAGS -o %s temp.c %s temp.o' % (binary, libs)
                 shell.call(rebuild_bundle, self.build_dir)
