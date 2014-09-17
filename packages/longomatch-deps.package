@@ -16,7 +16,6 @@ class Package(package.Package):
 
     def files_list(self):
         r = package.Package.files_list(self)
-        import pdb; pdb.set_trace()
         r += [
             'lib/mono/4.5/mscorlib.dll',
             'lib/mono/4.5/Mono.Cairo.dll',
