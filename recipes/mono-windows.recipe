@@ -18,7 +18,6 @@ class Recipe(recipe.Recipe):
         'bin/gacutil',
         'bin/gluezilla.dll',
         'bin/intl.dll',
-        'bin/mkbundle',
         'bin/libmonosgen-2.0.dll',
         'bin/mono-2.0.dll',
         'bin/mono.exe',
