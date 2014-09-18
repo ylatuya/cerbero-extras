@@ -13,4 +13,4 @@ class Package(package.Package):
     org = 'org.gstreamer'
     uuid = '5fce6233-4122-511f-8287-e8f2a895f853'
 
-    files = ['mono:libs:bins:config:posix_helper']
+    files = ['mono:libs:bins:bin:config:posix_helper']

@@ -42,7 +42,9 @@ class Recipe(recipe.Recipe):
         'lib/pkgconfig/mono.pc',
     ]
 
-    files_bin = ['mono']
+    files_bins = ['mono']
+    files_bin = ['bin/zlib1.dll',
+                 'bin/intl.dll']
     files_libs = ['libmonosgen-2.0']
     files_posix_helper = ['%(sdir)s/libMonoPosixHelper%(srext)s']
     files_config = ['etc/mono/config']

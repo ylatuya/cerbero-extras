@@ -60,14 +60,6 @@ class Recipe(recipe.Recipe):
             'bin/LongoMatch.Addins.dll',
         ]
     }
-    platform_files_mono = {
-        Platform.DARWIN: [
-            'lib/cli/Db4objects.Db4o-8.0/Db4objects.Db4o.dll',
-        ],
-        Platform.WINDOWS: [
-            'lib/mono/db4o/Db4objects.Db4o.dll',
-        ],
-    }
     platform_files_bin = {
         Platform.WINDOWS: ['%(sdir)s/LongoMatchGtk.exe'],
     }
@@ -81,14 +73,6 @@ class Recipe(recipe.Recipe):
                          'share/icons/hicolor/48x48/apps/longomatch.png',
                          'share/icons/hicolor/scalable/apps/longomatch.svg']
     }
-    platform_files_deps = {
-        Platform.WINDOWS: [
-            'bin/zlib1.dll', 'bin/intl.dll', 'bin/mono-2.0.dll',
-            'bin/MonoPosixHelper.dll', 'bin/atksharpglue-2.dll',
-            'bin/gdksharpglue-2.dll', 'bin/gdksharpglue-2.dll',
-            'bin/glibsharpglue-2.dll', 'bin/gtksharpglue-2.dll',
-            'bin/pangosharpglue-2.dll']
-            }
 
     def prepare(self):
         if self.config.target_platform in [Platform.WINDOWS, Platform.DARWIN]:
