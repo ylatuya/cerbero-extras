@@ -27,7 +27,6 @@ class Recipe(recipe.Recipe):
     }
     files_lang = ['longomatch']
     files_share = ['share/longomatch']
-    files_plugins = ['lib/longomatch/plugins']
     files_longomatch = [
         'lib/longomatch/LongoMatch.Addins.dll',
         'lib/longomatch/LongoMatch.Addins.dll.mdb',
