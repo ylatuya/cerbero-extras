@@ -47,20 +47,20 @@ class Recipe(recipe.Recipe):
         'lib/longomatch/LongoMatch.Core.dll',
         'lib/longomatch/LongoMatch.Core.dll.mdb',
         'lib/longomatch/OxyPlotMono.dll',
-        'lib/longomatch/LongoMatchGtk.exe',
+        'lib/longomatch/LongoMatch.exe',
         'lib/longomatch/plugins/LongoMatch.Plugins.dll',
     ]
     platform_files_longomatch = {
         Platform.DARWIN: [
             'lib/longomatch/libcesarplayer.0.dylib'
         ],
-        # We need a copy of LongoMatch.Addins in the same folder as LongoMatchGtk.exe
+        # We need a copy of LongoMatch.Addins in the same folder as LongoMatch.exe
         Platform.WINDOWS: [
             'bin/LongoMatch.Addins.dll',
         ]
     }
     platform_files_bin = {
-        Platform.WINDOWS: ['%(sdir)s/LongoMatchGtk.exe'],
+        Platform.WINDOWS: ['%(sdir)s/LongoMatch.exe'],
     }
     platform_files_bins = {
         Platform.DARWIN: ['longomatch'],
@@ -109,8 +109,8 @@ class Recipe(recipe.Recipe):
 
             if self.config.target_platform == Platform.WINDOWS:
                 binary = os.path.join(self.config.prefix, self.extensions['sdir'],
-                        'LongoMatchGtk.exe')
-                assembly = os.path.join(longomatchlib, 'LongoMatchGtk.exe')
+                        'LongoMatch.exe')
+                assembly = os.path.join(longomatchlib, 'LongoMatch.exe')
                 mkbundle = 'mkbundle -o %s %s --config %s --nodeps --keeptemp ' % (binary, assembly,
                         os.path.join(self.config.prefix, 'etc', 'mono', 'config'))
                 shell.call(mkbundle, self.build_dir)

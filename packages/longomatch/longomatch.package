@@ -27,8 +27,8 @@ class App(package.App):
             'gtk+-2.0', 'mono', 'longomatch-deps']
     commands = {
         Platform.LINUX: [('LongoMatch', 'bin/longomatch', True, 'wrapper')],
-        Platform.DARWIN: [('LongoMatch', 'lib/LongoMatchGtk', True, 'wrapper')],
-        Platform.WINDOWS: [('LongoMatch', 'LongoMatchGtk.exe', False, None)],
+        Platform.DARWIN: [('LongoMatch', 'lib/LongoMatch', True, 'wrapper')],
+        Platform.WINDOWS: [('LongoMatch', 'LongoMatch.exe', False, None)],
         }
     wix_upgrade_code = {
         PackageType.DEVEL: {

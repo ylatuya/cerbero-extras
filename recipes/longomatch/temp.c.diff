@@ -6,8 +6,8 @@
  #include <mono/metadata/assembly.h>
 +#include <glib.h>
  
- extern const unsigned char assembly_data_LongoMatchGtk_exe [];
- static const MonoBundledAssembly assembly_bundle_LongoMatchGtk_exe = {"LongoMatchGtk.exe", assembly_data_LongoMatchGtk_exe, 8192};
+ extern const unsigned char assembly_data_LongoMatch_exe [];
+ static const MonoBundledAssembly assembly_bundle_LongoMatch_exe = {"LongoMatch.exe", assembly_data_LongoMatch_exe, 8192};
 @@ -76,6 +78,8 @@
  {
  	char **newargs;

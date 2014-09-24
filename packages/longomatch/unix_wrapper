@@ -31,4 +31,4 @@ export PATH=$PREFIX/bin:$PATH
 
 export MONO_PATH=$PREFIX/lib/mono/4.5:$PREFIX/lib/mono/gtk-sharp-2.0/:$PREFIX/lib/mono/mono-addins:$PREFIX/lib/cli/Db4objects.Db4o-8.0/:$PREFIX/lib/cli/Newtonsoft.Json-5.0
 cd $PREFIX/lib
-../bin/mono-sgen $PREFIX/lib/longomatch/LongoMatchGtk.exe
+../bin/mono-sgen $PREFIX/lib/longomatch/LongoMatch.exe
