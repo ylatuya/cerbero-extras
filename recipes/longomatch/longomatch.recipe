@@ -10,8 +10,9 @@ class Recipe(recipe.Recipe):
     name = 'longomatch'
     version = '0.20.5'
     licenses = [License.GPL]
-    remotes = {'origin': 'https://github.com/ylatuya/longomatch.git'}
-    commit = 'origin/master'
+    remotes = {'github': 'https://github.com/ylatuya/longomatch.git',
+               'gnome': 'git://git.gnome.org/longomatch'}
+    commit = 'github/master'
     config_sh = 'sh autogen.sh'
     deps = ['gstreamer', 'gst-plugins-base', 'libav', 'Newtonsoft.Json', 'librsvg', 'ubuntu-font-family',
             'mono', 'mono-addins', 'db4o', 'gtk-sharp']
