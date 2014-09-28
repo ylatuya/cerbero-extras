@@ -14,8 +14,8 @@ class App(package.App):
     uuid = '5f444646-4165-511f-8287-e8f2a895f853'
     org = "org.longomatch"
     app_recipe = 'longomatch'
-    osx_create_dmg = True
-    osx_create_pkg = False
+    osx_create_dmg = False
+    osx_create_pkg = True
     strip = True
     strip_dirs = ['bin', 'lib/gstreamer-0.10']
     strip_excludes = ['zlib1.dll', 'LongoMatch.Addins.dll',
@@ -25,6 +25,12 @@ class App(package.App):
             'gstreamer-capture', 'gstreamer-codecs-gpl',
             'gstreamer-playback', 'gstreamer-effects', 'gstreamer-networking',
             'gtk+-2.0', 'mono', 'longomatch-deps']
+
+    install_dir = {
+        Platform.WINDOWS: 'LongoMatch Video Analysis',
+        Platform.LINUX: '/opt/longomatch/',
+        Platform.DARWIN: '/Applications/LongoMatch.app'}
+
     commands = {
         Platform.LINUX: [('LongoMatch', 'bin/longomatch', True, 'wrapper')],
         Platform.DARWIN: [('LongoMatch', 'lib/LongoMatch', True, 'wrapper')],
