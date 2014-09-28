@@ -12,7 +12,7 @@ class Recipe(recipe.Recipe):
     deps = ['longomatch']
     config_sh = 'sh autogen.sh'
     make_install = 'make -C LongoMatch.Plugins.GStreamer install'
-    deps = ['longomatch', 'gst-plugins-bad', 'gst-plugins-ugly']
+    deps = ['longomatch', 'gst-plugins-bad', 'gst-plugins-ugly', 'gst-ffmpeg']
 
     files_longomatch = [
         'lib/longomatch/plugins/LongoMatch.Plugins.GStreamer'
@@ -20,6 +20,7 @@ class Recipe(recipe.Recipe):
 
     _files = ['a52dec:libs', 'opencore-amr:libs', 'libmad:libs', 'libmpeg2:libs',
               'faad2:libs', 'libdca:libs', 'x264:libs',
+              'gst-ffmpeg:plugins_codecs_restricted',
               'gst-plugins-ugly:plugins_codecs_restricted',
               'gst-plugins-bad:plugins_codecs_restricted']
 
