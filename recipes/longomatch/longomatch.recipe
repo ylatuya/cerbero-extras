@@ -10,9 +10,11 @@ class Recipe(recipe.Recipe):
     name = 'longomatch'
     version = '0.20.5'
     licenses = [License.GPL]
-    remotes = {'github': 'https://github.com/ylatuya/longomatch.git',
-               'gnome': 'git://git.gnome.org/longomatch'}
-    commit = 'github/master'
+    remotes = {
+        'github': 'https://github.com/ylatuya/longomatch.git',
+        'gnome': 'git://git.gnome.org/longomatch',
+        }
+    commit = 'gnome/0.20'
     config_sh = 'sh autogen.sh'
     deps = ['gstreamer', 'gst-plugins-base', 'libav', 'Newtonsoft.Json', 'librsvg', 'ubuntu-font-family',
             'mono', 'mono-addins', 'db4o', 'gtk-sharp']
@@ -34,22 +36,15 @@ class Recipe(recipe.Recipe):
         'lib/longomatch/LongoMatch.GUI.Multimedia.dll',
         'lib/longomatch/LongoMatch.GUI.dll',
         'lib/longomatch/LongoMatch.GUI.dll.mdb',
-        'lib/longomatch/LongoMatch.GUI.dll.config',
-        'lib/longomatch/LongoMatch.GUI.Helpers.dll',
-        'lib/longomatch/LongoMatch.GUI.Helpers.dll.mdb',
-        'lib/longomatch/LongoMatch.Drawing.dll',
-        'lib/longomatch/LongoMatch.Drawing.dll.mdb',
-        'lib/longomatch/LongoMatch.Drawing.Cairo.dll',
-        'lib/longomatch/LongoMatch.Drawing.Cairo.dll.mdb',
         'lib/longomatch/LongoMatch.Multimedia.dll',
         'lib/longomatch/LongoMatch.Multimedia.dll.config',
         'lib/longomatch/LongoMatch.Multimedia.dll.mdb',
         'lib/longomatch/LongoMatch.Services.dll',
         'lib/longomatch/LongoMatch.Services.dll.mdb',
-        'lib/longomatch/LongoMatch.Core.dll',
-        'lib/longomatch/LongoMatch.Core.dll.mdb',
+        'lib/longomatch/LongoMatch.dll',
+        'lib/longomatch/LongoMatch.dll.mdb',
         'lib/longomatch/OxyPlotMono.dll',
-        'lib/longomatch/LongoMatch.exe',
+        'lib/longomatch/LongoMatchGtk.exe',
         'lib/longomatch/plugins/LongoMatch.Plugins.dll',
     ]
     platform_files_longomatch = {
@@ -62,7 +57,7 @@ class Recipe(recipe.Recipe):
         ]
     }
     platform_files_bin = {
-        Platform.WINDOWS: ['%(sdir)s/LongoMatch.exe'],
+        Platform.WINDOWS: ['%(sdir)s/LongoMatchGtk.exe'],
     }
     platform_files_bins = {
         Platform.DARWIN: ['longomatch'],
@@ -111,8 +106,8 @@ class Recipe(recipe.Recipe):
 
             if self.config.target_platform == Platform.WINDOWS:
                 binary = os.path.join(self.config.prefix, self.extensions['sdir'],
-                        'LongoMatch.exe')
-                assembly = os.path.join(longomatchlib, 'LongoMatch.exe')
+                        'LongoMatchGtk.exe')
+                assembly = os.path.join(longomatchlib, 'LongoMatchGtk.exe')
                 mkbundle = 'mkbundle -o %s %s --config %s --nodeps --keeptemp ' % (binary, assembly,
                         os.path.join(self.config.prefix, 'etc', 'mono', 'config'))
                 shell.call(mkbundle, self.build_dir)

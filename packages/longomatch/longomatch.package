@@ -24,6 +24,7 @@ class App(package.App):
     deps = ['base-system', 'gstreamer-core', 'gstreamer-codecs', 'gstreamer-system',
             'gstreamer-capture', 'gstreamer-codecs-gpl',
             'gstreamer-playback', 'gstreamer-effects', 'gstreamer-networking',
+            'gstreamer-libav', 'gstreamer-codecs-restricted',
             'gtk+-2.0', 'mono', 'longomatch-deps']
 
     install_dir = {
@@ -34,7 +35,7 @@ class App(package.App):
     commands = {
         Platform.LINUX: [('LongoMatch', 'bin/longomatch', True, 'wrapper')],
         Platform.DARWIN: [('LongoMatch', 'lib/LongoMatch', True, 'wrapper')],
-        Platform.WINDOWS: [('LongoMatch', 'LongoMatch.exe', False, None)],
+        Platform.WINDOWS: [('LongoMatch', 'LongoMatchGtk.exe', False, None)],
         }
     wix_upgrade_code = {
         PackageType.DEVEL: {
