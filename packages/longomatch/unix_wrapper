@@ -26,7 +26,7 @@ export XDG_CONFIG_DIRS=$PREFIX/etc/xdg
 export GDK_PIXBUF_MODULEDIR=$PREFIX/lib/gdk-pixbuf-2.0/2.10.0/loaders/
 export GDK_PIXBUF_MODULE_FILE=$PREFIX/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache
 
-export DYLD_FALLBACK_LIBRARY_PATH=$PREFIX/lib:/usr/lib
+export DYLD_FALLBACK_LIBRARY_PATH=$PREFIX/lib:$PREFIX/lib/longomatch/plugins/gstreamer-0.10:/usr/lib
 export PATH=$PREFIX/bin:$PATH
 
 export MONO_PATH=$PREFIX/lib/mono/4.5:$PREFIX/lib/mono/gtk-sharp-2.0/:$PREFIX/lib/mono/mono-addins:$PREFIX/lib/cli/Db4objects.Db4o-8.0/:$PREFIX/lib/cli/Newtonsoft.Json-5.0

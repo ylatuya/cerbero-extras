@@ -34,6 +34,7 @@ class Recipe(recipe.Recipe):
         'lib/longomatch/LongoMatch.GUI.Multimedia.dll',
         'lib/longomatch/LongoMatch.GUI.dll',
         'lib/longomatch/LongoMatch.GUI.dll.mdb',
+        'lib/longomatch/LongoMatch.GUI.dll.config',
         'lib/longomatch/LongoMatch.GUI.Helpers.dll',
         'lib/longomatch/LongoMatch.GUI.Helpers.dll.mdb',
         'lib/longomatch/LongoMatch.Drawing.dll',

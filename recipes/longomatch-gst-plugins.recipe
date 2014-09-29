@@ -19,15 +19,27 @@ class Recipe(recipe.Recipe):
     ]
 
     _files = ['a52dec:libs', 'opencore-amr:libs', 'libmad:libs', 'libmpeg2:libs',
-              'faad2:libs', 'libdca:libs', 'x264:libs',
+              'faad2:libs', 'libdca:libs', 'x264:libs', 'lame:libs', 'faac:libs',
               'gst-ffmpeg:plugins_codecs_restricted',
               'gst-plugins-ugly:plugins_codecs_restricted',
               'gst-plugins-bad:plugins_codecs_restricted']
 
     def prepare(self):
         self.repo_dir = os.path.join(self.config.local_sources, 'longomatch')
+        self.pluginsdir = 'lib/longomatch/plugins/gstreamer-0.10'
+
+    def dist_files_list(self):
+        return recipe.Recipe.dist_files_list(self) + self._get_files_list()[1]
 
     def post_install(self):
+        src_files, _ = self._get_files_list()
+        if not os.path.exists(self.pluginsdir):
+            os.makedirs (self.pluginsdir)
+        for f in src_files:
+            shutil.copy(os.path.join(self.config.prefix, f),
+                        os.path.join(self.config.prefix, self.pluginsdir))
+
+    def _get_files_list(self):
         cookbook = CookBook(self.config)
         recipes_files = {}
         for r in self._files:
@@ -42,9 +54,4 @@ class Recipe(recipe.Recipe):
             else:
                 rfiles = recipe.files_list_by_categories(categories)
             files.extend(rfiles)
-
-        pluginsdir = os.path.join(self.config.prefix, self.files_longomatch[0], 'gstreamer-0.10')
-        if not os.path.exists(pluginsdir):
-            os.makedirs (pluginsdir)
-        for f in files:
-            shutil.copy(os.path.join(self.config.prefix, f), pluginsdir)
+        return (files, [os.path.join(self.pluginsdir, f.split('/')[-1]) for f in files])
