@@ -39,6 +39,12 @@ class Recipe(recipe.Recipe):
 
     def install(self):
         mono_prefix_dir = 'c:/Program Files (x86)/Mono-3.2.3'
+        if not os.path.exists(mono_prefix_dir):
+            mono_prefix_dir = 'c:/Program Files/Mono-3.2.3'
+            if not os.path.exists(mono_prefix_dir):
+                m.error("ERROR: Mono not found!")
+                raise FatalError("Mono not found!")
+
         for f in self.files_glue + self.files_mono + self.files_mono_devel:
             src = os.path.join(mono_prefix_dir, f)
             dest = os.path.join(self.config.prefix, f)
