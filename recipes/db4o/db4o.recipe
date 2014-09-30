@@ -70,3 +70,5 @@ class Recipe(recipe.Recipe):
         cecil_pc = os.path.join(self.config.prefix, 'lib', 'pkgconfig', 'db4o.pc')
         with open(cecil_pc, 'w') as f:
             f.write(DB4O_PC % self.config.prefix)
+        for f in self.files_cli:
+            shell.call('gacutil -i %s' % os.path.join(self.config.prefix, f))
