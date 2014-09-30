@@ -8,7 +8,8 @@ class App(package.App):
     app_name = 'LongoMatch'
     shortdesc = 'LongoMatch Video Analysis'
     url = "http://www.longomatch.org/"
-    version = '0.20.7'
+    version = '0.20.8'
+    version_mayor = '0.20'
     license = License.GPL
     vendor = 'LongoMatch Project'
     uuid = '5f444646-4165-511f-8287-e8f2a895f853'
@@ -47,3 +48,7 @@ class App(package.App):
             Architecture.X86_64: '32fe67b2-4565-411f-8287-e8faa892f853',
             },
         }
+
+    def recipes_dependencies(self):
+        return [x for x in package.App.recipes_dependencies(self)
+            if not x.endswith("-static")]
