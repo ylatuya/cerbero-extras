@@ -33,11 +33,11 @@ class Recipe(recipe.Recipe):
 
     def post_install(self):
         src_files, _ = self._get_files_list()
-        if not os.path.exists(self.pluginsdir):
-            os.makedirs (self.pluginsdir)
+        pluginsdir = os.path.join(self.config.prefix, self.pluginsdir)
+        if not os.path.exists(pluginsdir):
+            os.makedirs (pluginsdir)
         for f in src_files:
-            shutil.copy(os.path.join(self.config.prefix, f),
-                        os.path.join(self.config.prefix, self.pluginsdir))
+            shutil.copy(os.path.join(self.config.prefix, f), pluginsdir)
 
     def _get_files_list(self):
         cookbook = CookBook(self.config)
