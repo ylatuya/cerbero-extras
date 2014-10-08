@@ -6,6 +6,7 @@ class App(package.App):
 
     name = 'longomatch'
     app_name = 'LongoMatch'
+    app_version = '1.0'
     shortdesc = 'LongoMatch Video Analysis 1.0'
     url = "http://www.longomatch.org/"
     version = '0.90'
