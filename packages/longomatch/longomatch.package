@@ -28,7 +28,7 @@ class App(package.App):
             'gtk+-2.0', 'mono', 'longomatch-deps']
 
     install_dir = {
-        Platform.WINDOWS: 'LongoMatch Video Analysis',
+        Platform.WINDOWS: 'LongoMatch Video Analysis 1.0',
         Platform.LINUX: '/opt/longomatch/',
         Platform.DARWIN: '/Applications/LongoMatch.app'}
 
