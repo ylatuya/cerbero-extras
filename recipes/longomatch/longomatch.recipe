@@ -50,6 +50,7 @@ class Recipe(recipe.Recipe):
         'lib/longomatch/LongoMatch.Core.dll.mdb',
         'lib/longomatch/OxyPlotMono.dll',
         'lib/longomatch/LongoMatch.exe',
+        'lib/longomatch/migration/LongoMatch.exe',
         'lib/longomatch/plugins/LongoMatch.Plugins.dll',
     ]
     platform_files_longomatch = {
