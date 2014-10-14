@@ -1,0 +1,21 @@
+# vi:si:et:sw=4:sts=4:ts=4:syntax=python
+# -*- Mode: Python -*-
+
+class AppExtensionPackage(package.AppExtensionPackage):
+    name = 'longomatch-gstreamer-plugins'
+    shortdesc = 'GStreamer Free Sotfware plugins for LongoMatch'
+    url = "http://www.longomatch.org/"
+    version = '1.0'
+    license = License.GPL
+    vendor = 'LongoMatch Project'
+    uuid = '5f444646-4165-3455-8287-e8f2a895f853'
+    org = "org.longomatch"
+    strip = True
+    strip_dirs = ['bin', 'lib/gstreamer-0.10']
+    app_package = 'longomatch'
+    files = ['longomatch-gstreamer-plugins']
+
+    install_dir = {
+        Platform.WINDOWS: 'LongoMatch Video Analysis',
+        Platform.LINUX: '/opt/longomatch/',
+        Platform.DARWIN: '/Applications/LongoMatch.app/Contents/Home'}
