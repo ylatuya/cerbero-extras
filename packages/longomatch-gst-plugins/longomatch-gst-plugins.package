@@ -15,18 +15,7 @@ class AppExtensionPackage(package.AppExtensionPackage):
     app_package = 'longomatch'
     files = ['longomatch-gstreamer-plugins']
 
-    wix_upgrade_code = {
-        PackageType.DEVEL: {
-            Architecture.X86 : '02fe67b2-4065-411f-8287-e8faa892f810',
-            Architecture.X86_64: '12fe67b2-4065-411f-8287-e8faa892f811',
-            },
-        PackageType.RUNTIME: {
-            Architecture.X86 : '22fe67b2-4065-411f-8287-e8faa892f812',
-            Architecture.X86_64: '32fe67b2-4065-411f-8287-e8faa892f813',
-            },
-        }
-
     install_dir = {
-        Platform.WINDOWS: 'LongoMatch Video Analysis 1.0',
+        Platform.WINDOWS: 'LongoMatch Video Analysis',
         Platform.LINUX: '/opt/longomatch/',
         Platform.DARWIN: '/Applications/LongoMatch.app/Contents/Home'}
