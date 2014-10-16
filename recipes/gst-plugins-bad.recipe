@@ -138,7 +138,7 @@ class Recipe(recipe.Recipe):
              'lib/gstreamer-0.10/libgstwinscreencap%(mext)s',
             ],
         Platform.DARWIN: [
-             'lib/gstreamer-0.10/libgstosxvideosrc%(mext)s',
+             'lib/gstreamer-0.10/libgstavfvideosrc%(mext)s',
             ]
     }
 
