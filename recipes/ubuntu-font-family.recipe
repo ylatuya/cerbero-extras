@@ -5,27 +5,16 @@ import shutil
 class Recipe(recipe.Recipe):
     name = 'ubuntu-font-family'
     version = '0.80'
-    stype = SourceType.CUSTOM
+    stype = SourceType.TARBALL
     btype = BuildType.CUSTOM
     url = 'http://font.ubuntu.com/download/ubuntu-font-family-%s.zip' % version
-    fonts = [ 'Ubuntu-R.ttf' ]
     files_fonts = [ 'share/fonts/truetype/ubuntu-font-family' ]
-    def fetch(self):
-        self.local_source = os.path.join(self.config.local_sources, 'ubuntu-font-family')
-        if not os.path.exists(self.local_source):
-            os.makedirs(self.local_source)
-        zip_path = os.path.join(self.local_source, 'ubuntu-font-family-%s.zip' % self.version)
-        shell.download(self.url, zip_path)
-        shell.unpack(zip_path, self.local_source)
-
-    def configure(self):
-        pass
 
     def install(self):
-        source_dir = os.path.join(self.local_source, 'ubuntu-font-family-%s' % self.version)
         fonts_dir = os.path.join(self.config.prefix, 'share', 'fonts', 'truetype', 'ubuntu-font-family')
         if not os.path.exists(fonts_dir):
             os.makedirs(fonts_dir)
-        for f in self.fonts:
-            shutil.copy(os.path.join(source_dir, f),
-                        os.path.join(fonts_dir))
+        for f in os.listdir(self.build_dir):
+            if not f.endswith(".ttf"):
+                continue
+            shutil.copy(os.path.join(self.build_dir, f), fonts_dir)
