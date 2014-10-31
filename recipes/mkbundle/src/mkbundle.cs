@@ -736,8 +736,8 @@ void          mono_register_config_for_assembly (const char* assembly_name, cons
 			Console.WriteLine (cmdLine);
 			ProcessStartInfo dos2unix = new ProcessStartInfo ();
 			dos2unix.UseShellExecute = false;
-			dos2unix.FileName = "cmd";
-			dos2unix.Arguments = String.Format ("/c \"{0}\"", cmdLine);
+			dos2unix.FileName = "sh";
+			dos2unix.Arguments = String.Format ("-c \"{0}\"", cmdLine);
 
 			using (Process p = Process.Start (dos2unix)) {
 				p.WaitForExit ();
