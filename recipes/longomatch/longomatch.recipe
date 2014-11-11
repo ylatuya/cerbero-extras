@@ -52,6 +52,7 @@ class Recipe(recipe.Recipe):
         'lib/longomatch/LongoMatch.exe',
         'lib/longomatch/migration/LongoMatch.exe',
         'lib/longomatch/plugins/LongoMatch.Plugins.dll',
+        'lib/longomatch/plugins/LongoMatch.Plugins.Stats.dll',
     ]
     platform_files_longomatch = {
         Platform.DARWIN: [
