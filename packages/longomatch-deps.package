@@ -8,7 +8,7 @@ class Package(package.Package):
     longdesc  = 'LongoMatch dependencies'
     files = ['ubuntu-font-family:fonts',
              'gtk-sharp',
-             'libglade',
+             'libglade:libs',
              'Newtonsoft.Json:cli',
              'db4o:cli',
              'mono-addins:cli',

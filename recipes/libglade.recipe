@@ -10,4 +10,4 @@ class Recipe(recipe.Recipe):
     deps = ['gtk+', 'pygtk']
     append_env = {'LDFLAGS': '-lgmodule-2.0'}
 
-    files_libs = ['libglade-2']
+    files_libs = ['libglade-2.0']
