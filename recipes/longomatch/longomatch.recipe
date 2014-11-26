@@ -94,6 +94,9 @@ class Recipe(recipe.Recipe):
 
     @modify_environment
     def post_install(self):
+        if self.config.target_platform in [Platform.LINUX, Platform.DARWIN]:
+            bindir = os.path.join(self.config.prefix, 'bin')
+            shutil.copy(self.relative_path('longomatch'), bindir)
         if self.config.target_platform in [Platform.WINDOWS, Platform.DARWIN]:
             longomatchlib = os.path.join(self.config.prefix, 'lib', 'longomatch')
             if self.config.target_platform == Platform.WINDOWS:
