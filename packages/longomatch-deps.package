@@ -45,6 +45,6 @@ class Package(package.Package):
                 files.append(p.replace(prefix, ''))
                 config = p+'.config'
                 if os.path.exists(config):
-                    files.append(config).replace(prefix, '')
+                    files.append(config.replace(prefix, ''))
             r = list(set(r+files))
         return r
