@@ -1,5 +1,6 @@
 # vi:si:et:sw=4:sts=4:ts=4:syntax=python
 # -*- Mode: Python -*-
+import os
 
 
 class Package(package.Package):
@@ -34,4 +35,10 @@ class Package(package.Package):
             'lib/mono/4.5/System.Xml.dll',
             'lib/mono/4.5/System.Xml.Linq.dll',
         ]
+        if self.config.target_platform == Platform.LINUX:
+            prefix = self.config.prefix
+            if not prefix.endswith('/'):
+                prefix += '/'
+            r += [os.path.realpath(os.path.join(prefix, x)).replace(prefix, '') for x in r]
+            r = list(set(r))
         return r
