@@ -23,6 +23,7 @@ class Recipe(recipe.Recipe):
 
     files_bins = ['avconv']
     platform_files_libs = {
+        Platform.LINUX: ['libcesarplayer'],
         Platform.DARWIN: ['libcesarplayer'],
         Platform.WINDOWS: ['libcesarplayer'],
     }
@@ -55,9 +56,6 @@ class Recipe(recipe.Recipe):
         'lib/longomatch/plugins/LongoMatch.Plugins.Stats.dll',
     ]
     platform_files_longomatch = {
-        Platform.DARWIN: [
-            'lib/longomatch/libcesarplayer.0.dylib'
-        ],
         # We need a copy of LongoMatch.Addins in the same folder as LongoMatch.exe
         Platform.WINDOWS: [
             'bin/LongoMatch.Addins.dll',
@@ -97,34 +95,22 @@ class Recipe(recipe.Recipe):
         if self.config.target_platform in [Platform.LINUX, Platform.DARWIN]:
             bindir = os.path.join(self.config.prefix, 'bin')
             shutil.copy(self.relative_path('longomatch'), bindir)
-        if self.config.target_platform in [Platform.WINDOWS, Platform.DARWIN]:
-            longomatchlib = os.path.join(self.config.prefix, 'lib', 'longomatch')
-            if self.config.target_platform == Platform.WINDOWS:
-                dll = 'libcesarplayer-0%(srext)s' % self.extensions
-                libcesarplayer = os.path.join(longomatchlib, dll)
-                shutil.copy(os.path.join(longomatchlib, '..', 'bin', dll),
-                            libcesarplayer)
-                shutil.copy(os.path.join(longomatchlib, 'LongoMatch.Addins.dll'),
-                            os.path.join(self.config.prefix, 'bin'))
-                libdir = os.path.join(self.config.prefix, 'bin')
-            elif self.config.target_platform == Platform.DARWIN:
-                libcesarplayer = os.path.join(longomatchlib,
-                    'libcesarplayer.0%(srext)s' % self.extensions)
-                libdir = os.path.join(self.config.prefix, 'lib', 'mono', '4.0')
-            bindir = os.path.join(self.config.prefix, 'bin')
-            shutil.copy(libcesarplayer, libdir)
 
-            if self.config.target_platform == Platform.WINDOWS:
-                binary = os.path.join(self.config.prefix, self.extensions['sdir'],
-                        'LongoMatch.exe')
-                assembly = os.path.join(longomatchlib, 'LongoMatch.exe')
-                mkbundle = 'mkbundle -o %s %s --config %s --nodeps --keeptemp ' % (binary, assembly,
-                        os.path.join(self.config.prefix, 'etc', 'mono', 'config'))
-                shell.call(mkbundle, self.build_dir)
-                libs = shell.check_call("pkg-config --cflags --libs mono-2 glib-2.0")
-                libs = libs.replace('\n', ' ').replace('\r', '')
-                # Use mono sgen GC
-                libs = libs.replace('-lmono-2.0', '-lmonosgen-2.0')
-                shell.apply_patch(self.relative_path('temp.c.diff'), self.build_dir, 0)
-                rebuild_bundle = '$CC $CFLAGS -o %s temp.c %s temp.o' % (binary, libs)
-                shell.call(rebuild_bundle, self.build_dir)
+        if self.config.target_platform in [Platform.WINDOWS]:
+            longomatchlib = os.path.join(self.config.prefix, 'lib', 'longomatch')
+            shutil.copy(os.path.join(longomatchlib, 'LongoMatch.Addins.dll'),
+                os.path.join(self.config.prefix, 'bin'))
+
+            binary = os.path.join(self.config.prefix, self.extensions['sdir'],
+                    'LongoMatch.exe')
+            assembly = os.path.join(longomatchlib, 'LongoMatch.exe')
+            mkbundle = 'mkbundle -o %s %s --config %s --nodeps --keeptemp ' % (binary, assembly,
+                    os.path.join(self.config.prefix, 'etc', 'mono', 'config'))
+            shell.call(mkbundle, self.build_dir)
+            libs = shell.check_call("pkg-config --cflags --libs mono-2 glib-2.0")
+            libs = libs.replace('\n', ' ').replace('\r', '')
+            # Use mono sgen GC
+            libs = libs.replace('-lmono-2.0', '-lmonosgen-2.0')
+            shell.apply_patch(self.relative_path('temp.c.diff'), self.build_dir, 0)
+            rebuild_bundle = '$CC $CFLAGS -o %s temp.c %s temp.o' % (binary, libs)
+            shell.call(rebuild_bundle, self.build_dir)
