@@ -5,7 +5,7 @@ from cerbero.utils import shell
 
 class Recipe(recipe.Recipe):
     name = 'mono'
-    version = '3.2.3'
+    version = '3.10.0'
     licenses = [License.LGPL]
     stype = SourceType.CUSTOM
     btype = BuildType.CUSTOM
@@ -55,9 +55,9 @@ class Recipe(recipe.Recipe):
             raise InvalidRecipeError()
 
     def install(self):
-        mono_prefix_dir = 'c:/Program Files (x86)/Mono-3.2.3'
+        mono_prefix_dir = 'c:/Program Files (x86)/Mono-3.10.0'
         if not os.path.exists(mono_prefix_dir):
-            mono_prefix_dir = 'c:/Program Files/Mono-3.2.3'
+            mono_prefix_dir = 'c:/Program Files/Mono-3.10.0'
             if not os.path.exists(mono_prefix_dir):
                 m.error("ERROR: Mono not found!")
                 raise FatalError("Mono not found!")
