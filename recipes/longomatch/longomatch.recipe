@@ -114,5 +114,6 @@ class Recipe(recipe.Recipe):
             # Use mono sgen GC
             libs = libs.replace('-lmono-2.0', '-lmonosgen-2.0')
             shell.apply_patch(self.relative_path('temp.c.diff'), self.build_dir, 0)
-            rebuild_bundle = '$CC $CFLAGS -o %s temp.c %s temp.o' % (binary, libs)
+            shell.call('$WINDRES %s -o logo.o' % self.relative_path ('logo.rc'), self.build_dir)
+            rebuild_bundle = '$CC $CFLAGS -o %s temp.c %s temp.o logo.o' % (binary, libs)
             shell.call(rebuild_bundle, self.build_dir)
