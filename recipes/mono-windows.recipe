@@ -5,10 +5,12 @@ from cerbero.utils import shell
 
 class Recipe(recipe.Recipe):
     name = 'mono'
-    version = '3.2.3'
+    version = '3.10.0'
     licenses = [License.LGPL]
-    stype = SourceType.CUSTOM
+    stype = SourceType.TARBALL
     btype = BuildType.CUSTOM
+    url = 'http://www.dynamicdevices.co.uk/downloads/Mono-3.10.0.zip'
+    tarball_dirname = 'Mono-%(version)s'
 
     _mono = [
         'bin/al',
@@ -20,8 +22,9 @@ class Recipe(recipe.Recipe):
         'bin/gluezilla.dll',
         'bin/intl.dll',
         'bin/libmonosgen-2.0.dll',
-        'bin/mono-2.0.dll',
-        'bin/mono.exe',
+        'bin/libmonoboehm-2.0.dll',
+        'bin/mono-boehm.exe',
+        'bin/mono-sgen.exe',
         'bin/libMonoPosixHelper.dll',
         'bin/resgen',
         'bin/sqlite3.dll',
@@ -55,14 +58,8 @@ class Recipe(recipe.Recipe):
             raise InvalidRecipeError()
 
     def install(self):
-        mono_prefix_dir = 'c:/Program Files (x86)/Mono-3.2.3'
-        if not os.path.exists(mono_prefix_dir):
-            mono_prefix_dir = 'c:/Program Files/Mono-3.2.3'
-            if not os.path.exists(mono_prefix_dir):
-                m.error("ERROR: Mono not found!")
-                raise FatalError("Mono not found!")
         for f in self._mono:
-            src = os.path.join(mono_prefix_dir, f)
+            src = os.path.join(self.build_dir, f)
             dest = os.path.join(self.config.prefix, f)
             if os.path.isdir(src):
                 shell.copy_dir (src, dest)
@@ -70,3 +67,13 @@ class Recipe(recipe.Recipe):
                 if not os.path.exists(os.path.dirname(dest)):
                     os.makedirs(os.path.dirname(dest))
                 shutil.copy(src, dest)
+            if os.path.isfile(src):
+                if not os.path.splitext(dest)[1] in ['.dll', '.a', '.la', '.pc', '.exe']:
+                    shell.replace(dest, {'C:/cygwin/usr/local': self.config.prefix})
+                    shell.replace(dest, {'/usr/local': self.config.prefix})
+        # Remove broken links
+        shutil.copy (os.path.join(self.config.prefix, 'bin', 'mono-boehm.exe'),
+            os.path.join(self.config.prefix, 'bin', 'mono.exe'))
+        for e in ['a', 'la', 'dll.a']:
+            shutil.copy (os.path.join(self.config.prefix, 'lib', 'libmonosgen-2.0.' + e),
+                         os.path.join(self.config.prefix, 'lib', 'libmono-2.0.' + e))
