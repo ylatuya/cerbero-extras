@@ -79,6 +79,8 @@ class Recipe(recipe.Recipe):
         if self.config.target_platform in [Platform.WINDOWS, Platform.DARWIN]:
             search_paths = ['lib/longomatch', 'lib/cli/Db4objects.Db4o-8.0']
             search_paths = [os.path.join(self.config.prefix, f) for f in search_paths]
+            if 'MONO_PATH' in os.environ:
+                search_paths.insert (0, os.environ['MONO_PATH'])
             if self.config.target_platform == Platform.WINDOWS:
                 self.new_env['MONO_PATH'] = ';'.join(search_paths)
                 sdir = 'bin'
