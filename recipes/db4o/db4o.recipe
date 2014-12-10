@@ -29,6 +29,8 @@ class Recipe(recipe.Recipe):
         # Install assembly
         src = self.relative_path('Db4objects.Db4o.dll')
         dest = os.path.join(self.config.prefix, self.files_cli[0])
+        if not os.path.exists(os.path.dirname(dest)):
+            os.makedirs(os.path.dirname(dest))
         shutil.copy(src, dest)
 
         # Install db4o.pc
