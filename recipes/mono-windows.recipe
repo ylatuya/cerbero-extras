@@ -20,7 +20,6 @@ class Recipe(recipe.Recipe):
         'bin/gmcs.bat',
         'bin/gacutil',
         'bin/gluezilla.dll',
-        'bin/intl.dll',
         'bin/libmonosgen-2.0.dll',
         'bin/libmonoboehm-2.0.dll',
         'bin/mono-boehm.exe',
@@ -29,7 +28,6 @@ class Recipe(recipe.Recipe):
         'bin/resgen',
         'bin/sqlite3.dll',
         'bin/xbuild',
-        'bin/zlib1.dll',
         'etc/mono',
         'lib/mono',
         'include/mono-2.0',
@@ -45,8 +43,6 @@ class Recipe(recipe.Recipe):
     ]
 
     files_bins = ['mono-sgen']
-    files_bin = ['bin/zlib1.dll',
-                 'bin/intl.dll']
     files_libs = ['libmonosgen-2.0']
     files_posix_helper = ['%(sdir)s/libMonoPosixHelper%(srext)s']
     files_config = ['etc/mono/config']
