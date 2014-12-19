@@ -71,3 +71,4 @@ class Recipe(recipe.Recipe):
         for e in ['a', 'la', 'dll.a']:
             shutil.copy (os.path.join(self.config.prefix, 'lib', 'libmonosgen-2.0.' + e),
                          os.path.join(self.config.prefix, 'lib', 'libmono-2.0.' + e))
+        shutil.copy(self.relative_path('config'), os.path.join(self.config.prefix, 'etc', 'mono'))
