@@ -8,7 +8,7 @@ from cerbero.build.filesprovider import FilesProvider
 
 class Recipe(recipe.Recipe):
     name = 'longomatch'
-    version = '0.20.5'
+    version = 'git-master'
     licenses = [License.GPL]
     remotes = {'github': 'https://github.com/ylatuya/longomatch.git',
                'gnome': 'git://git.gnome.org/longomatch'}
@@ -28,6 +28,9 @@ class Recipe(recipe.Recipe):
         Platform.WINDOWS: ['libcesarplayer'],
     }
     files_lang = ['longomatch']
+    langs = ['cs', 'de', 'es', 'eu', 'fr', 'hu', 'it', 'nb', 'nl', 'no',
+             'pt_BR', 'ro', 'sr']
+
     files_share = ['share/longomatch']
     files_longomatch = [
         'lib/longomatch/LongoMatch.Addins.dll',
@@ -91,6 +94,14 @@ class Recipe(recipe.Recipe):
                 self.new_env['AS'] = 'as -arch i386'
             cc = os.environ.get('CC', 'gcc')
             self.new_env['CC'] = '%s %s' % (cc, os.environ['CFLAGS'])
+
+    def _search_langfiles(self, files):
+        fs = []
+        for x in super(Recipe, self)._search_langfiles(files):
+            lang = x.split('/')[2]
+            if lang in self.langs:
+                fs.append(x)
+        return fs
 
     @modify_environment
     def post_install(self):
