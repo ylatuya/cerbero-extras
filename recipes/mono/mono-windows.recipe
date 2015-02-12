@@ -69,3 +69,5 @@ class Recipe(recipe.Recipe):
                     os.path.join(self.config.prefix, 'bin', 'libmono-2.0.dll'))
         shutil.copy(self.relative_path('cygpath'),
                     os.path.join(self.config.prefix, 'bin', 'cygpath'))
+        shutil.copy(self.relative_path('config'),
+                    os.path.join(self.config.prefix, 'etc', 'mono', 'config'))
