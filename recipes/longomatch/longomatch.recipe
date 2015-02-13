@@ -29,7 +29,7 @@ class Recipe(recipe.Recipe):
     }
     files_lang = ['longomatch']
     langs = ['cs', 'de', 'es', 'eu', 'fr', 'hu', 'it', 'nb', 'nl', 'no',
-             'pt_BR', 'ro', 'sr']
+             'pt_BR', 'ro', 'ru', 'sr', 'sr@latin', 'sv', 'zh_CN']
 
     files_share = ['share/longomatch']
     files_longomatch = [
