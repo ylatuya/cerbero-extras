@@ -34,31 +34,6 @@ class Recipe(recipe.Recipe):
     platform_files_bins = {
         Platform.LINUX: ['chronojump']
     }
-    files_mscorlib = [
-        'lib/mono/4.0/mscorlib.dll',]
-    files_mono = [
-        'lib/mono/4.0/Mono.Cairo.dll',
-        'lib/mono/4.0/Mono.Data.Sqlite.dll',
-        'lib/mono/4.0/Mono.Data.Tds.dll',
-        'lib/mono/4.0/Mono.Posix.dll',
-        'lib/mono/4.0/Mono.Security.dll',
-        'lib/mono/4.0/Mono.Security.dll',
-        'lib/mono/4.0/Mono.Web.dll',
-        'lib/mono/4.0/System.dll',
-        'lib/mono/4.0/System.Configuration.dll',
-        'lib/mono/4.0/System.Core.dll',
-        'lib/mono/4.0/System.Data.dll',
-        'lib/mono/4.0/System.Drawing.dll',
-        'lib/mono/4.0/System.EnterpriseServices.dll',
-        'lib/mono/4.0/System.Numerics.dll',
-        'lib/mono/4.0/System.Security.dll',
-        'lib/mono/4.0/System.Transactions.dll',
-        'lib/mono/4.0/System.Web.dll',
-        'lib/mono/4.0/System.Web.Services.dll',
-        'lib/mono/4.0/System.Web.ApplicationServices.dll',
-        'lib/mono/4.0/System.Xml.dll',
-        'lib/mono/4.0/mscorlib.dll',
-    ]
     files_chronojump = ['lib/chronojump']
     platform_files_chronojump = {
         Platform.DARWIN: ['lib/longomatch/libcesarplayer.0.dylib']

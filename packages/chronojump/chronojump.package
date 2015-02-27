@@ -16,7 +16,7 @@ class App(package.App):
     app_recipe = 'chronojump'
     deps = ['base-system', 'gstreamer-core', 'gstreamer-codecs', 'gstreamer-system',
             'gstreamer-capture', 'gstreamer-libav', 'gstreamer-editing', 'gstreamer-codecs-gpl',
-            'gstreamer-codecs-restricted', 'gstreamer-playback', 'gtk+-2.0']
+            'gstreamer-codecs-restricted', 'gstreamer-playback', 'gtk+-2.0', 'chronojump-deps']
     platform_deps = {
         Platform.DARWIN: ['mono'],
     }
