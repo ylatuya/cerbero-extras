@@ -1,0 +1,12 @@
+import os
+from cerbero.config import Architecture, Platform
+
+path = os.path.dirname(os.path.abspath(__file__))
+external_recipes = {'extras': (os.path.join(path, 'recipes'), 1)}
+external_packages = {'extras': (os.path.join(path, 'packages'), 1)}
+
+home_dir = os.path.expanduser('~/chronojump-build')
+cache_file='chronojump-build'
+build_tools_cache='chronojump-build-tools'
+if target_platform == Platform.WINDOWS:
+    target_arch = Architecture.X86
