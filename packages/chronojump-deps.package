@@ -1,0 +1,53 @@
+# vi:si:et:sw=4:sts=4:ts=4:syntax=python
+# -*- Mode: Python -*-
+import os
+
+
+class Package(package.Package):
+    name = 'chronojump-deps'
+    shortdesc  = 'Chronojump dependencies'
+    longdesc  = 'Chronojump dependencies'
+    files = [
+             'gtk-sharp',
+             'libglade:libs',
+             ]
+
+
+    def files_list(self):
+        r = package.Package.files_list(self)
+        r += [
+             'lib/mono/4.5/Mono.Cairo.dll',
+             'lib/mono/4.5/Mono.Data.Sqlite.dll',
+             'lib/mono/4.5/Mono.Data.Tds.dll',
+             'lib/mono/4.5/Mono.Posix.dll',
+             'lib/mono/4.5/Mono.Security.dll',
+             'lib/mono/4.5/Mono.Security.dll',
+             'lib/mono/4.5/Mono.Web.dll',
+             'lib/mono/4.5/System.dll',
+             'lib/mono/4.5/System.Configuration.dll',
+             'lib/mono/4.5/System.Core.dll',
+             'lib/mono/4.5/System.Data.dll',
+             'lib/mono/4.5/System.Drawing.dll',
+             'lib/mono/4.5/System.EnterpriseServices.dll',
+             'lib/mono/4.5/System.Numerics.dll',
+             'lib/mono/4.5/System.Security.dll',
+             'lib/mono/4.5/System.Transactions.dll',
+             'lib/mono/4.5/System.Web.dll',
+             'lib/mono/4.5/System.Web.Services.dll',
+             'lib/mono/4.5/System.Web.ApplicationServices.dll',
+             'lib/mono/4.5/System.Xml.dll',
+             'lib/mono/4.5/mscorlib.dll',
+        ]
+        if self.config.target_platform == Platform.LINUX:
+            prefix = self.config.prefix
+            if not prefix.endswith('/'):
+                prefix += '/'
+            files = []
+            for x in r:
+                p = os.path.realpath(os.path.join(prefix, x))
+                files.append(p.replace(prefix, ''))
+                config = p+'.config'
+                if os.path.exists(config):
+                    files.append(config.replace(prefix, ''))
+            r = list(set(r+files))
+        return r
