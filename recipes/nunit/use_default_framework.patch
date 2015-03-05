@@ -1,0 +1,940 @@
+Description: use default framework
+ generated with: 
+ find . -name "*.csproj" | xargs sed -i "s/ToolsVersion=\"3.5\"//"
+ find . -name "*.csproj" | xargs sed -i -n '/TargetFrameworkVersion/ !p'
+Index: nunit/src/ClientUtilities/tests/nunit.util.tests.csproj
+===================================================================
+--- nunit.orig/src/ClientUtilities/tests/nunit.util.tests.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/ClientUtilities/tests/nunit.util.tests.csproj	2014-09-16 12:23:32.066569221 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <ProjectType>Local</ProjectType>
+     <ProductVersion>9.0.21022</ProductVersion>
+@@ -22,7 +22,6 @@
+     <UpgradeBackupLocation>
+     </UpgradeBackupLocation>
+     <OldToolsVersion>3.5</OldToolsVersion>
+-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+     <PublishUrl>publish\</PublishUrl>
+     <Install>true</Install>
+     <InstallFrom>Disk</InstallFrom>
+@@ -235,4 +234,4 @@
+     <PostBuildEvent>
+     </PostBuildEvent>
+   </PropertyGroup>
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/ClientUtilities/tests/resources/DebugOnly.csproj
+===================================================================
+--- nunit.orig/src/ClientUtilities/tests/resources/DebugOnly.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/ClientUtilities/tests/resources/DebugOnly.csproj	2014-09-16 12:23:49.742569229 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+@@ -10,7 +10,6 @@
+     <AppDesignerFolder>Properties</AppDesignerFolder>
+     <RootNamespace>DebugOnly</RootNamespace>
+     <AssemblyName>DebugOnly</AssemblyName>
+-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+     <FileAlignment>512</FileAlignment>
+   </PropertyGroup>
+   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+@@ -56,4 +55,4 @@
+   <Target Name="AfterBuild">
+   </Target>
+   -->
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/ClientUtilities/tests/resources/DisabledProject.csproj
+===================================================================
+--- nunit.orig/src/ClientUtilities/tests/resources/DisabledProject.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/ClientUtilities/tests/resources/DisabledProject.csproj	2014-09-16 12:12:40.318568904 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+@@ -10,7 +10,6 @@
+     <AppDesignerFolder>Properties</AppDesignerFolder>
+     <RootNamespace>DisabledProject</RootNamespace>
+     <AssemblyName>DisabledProject</AssemblyName>
+-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+     <FileAlignment>512</FileAlignment>
+   </PropertyGroup>
+   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+@@ -56,4 +55,4 @@
+   <Target Name="AfterBuild">
+   </Target>
+   -->
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/ClientUtilities/tests/resources/MissingOutputPath.csproj
+===================================================================
+--- nunit.orig/src/ClientUtilities/tests/resources/MissingOutputPath.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/ClientUtilities/tests/resources/MissingOutputPath.csproj	2014-09-16 12:24:49.818569258 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>    
+     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+     <ProductVersion>8.0.30703</ProductVersion>
+@@ -9,7 +9,6 @@
+     <AppDesignerFolder>Properties</AppDesignerFolder>
+     <RootNamespace>MissingOutputPath</RootNamespace>
+     <AssemblyName>MissingOutputPath</AssemblyName>
+-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+     <FileAlignment>512</FileAlignment>
+ 	<OutputPath>bin\Common\</OutputPath>
+   </PropertyGroup>
+@@ -48,4 +47,4 @@
+   <Target Name="AfterBuild">
+   </Target>
+   -->
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/ClientUtilities/util/nunit.util.dll.csproj
+===================================================================
+--- nunit.orig/src/ClientUtilities/util/nunit.util.dll.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/ClientUtilities/util/nunit.util.dll.csproj	2014-09-16 12:23:15.042569212 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <ProjectType>Local</ProjectType>
+     <ProductVersion>9.0.30729</ProductVersion>
+@@ -22,7 +22,6 @@
+     <UpgradeBackupLocation>
+     </UpgradeBackupLocation>
+     <OldToolsVersion>3.5</OldToolsVersion>
+-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+     <PublishUrl>publish\</PublishUrl>
+     <Install>true</Install>
+     <InstallFrom>Disk</InstallFrom>
+@@ -208,4 +207,4 @@
+     <PostBuildEvent>
+     </PostBuildEvent>
+   </PropertyGroup>
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/ConsoleRunner/nunit-console-exe/nunit-console.exe.csproj
+===================================================================
+--- nunit.orig/src/ConsoleRunner/nunit-console-exe/nunit-console.exe.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/ConsoleRunner/nunit-console-exe/nunit-console.exe.csproj	2014-09-16 12:15:39.994568992 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <ProjectType>Local</ProjectType>
+     <ProductVersion>9.0.21022</ProductVersion>
+@@ -23,7 +23,6 @@
+     </UpgradeBackupLocation>
+     <OldToolsVersion>3.5</OldToolsVersion>
+     <NoWin32Manifest>true</NoWin32Manifest>
+-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+     <PublishUrl>publish\</PublishUrl>
+     <Install>true</Install>
+     <InstallFrom>Disk</InstallFrom>
+@@ -138,4 +137,4 @@
+     <PostBuildEvent>
+     </PostBuildEvent>
+   </PropertyGroup>
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/ConsoleRunner/nunit-console/nunit-console.csproj
+===================================================================
+--- nunit.orig/src/ConsoleRunner/nunit-console/nunit-console.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/ConsoleRunner/nunit-console/nunit-console.csproj	2014-09-16 12:11:46.322568878 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <ProjectType>Local</ProjectType>
+     <ProductVersion>9.0.21022</ProductVersion>
+@@ -22,7 +22,6 @@
+     <UpgradeBackupLocation>
+     </UpgradeBackupLocation>
+     <OldToolsVersion>3.5</OldToolsVersion>
+-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+     <PublishUrl>publish\</PublishUrl>
+     <Install>true</Install>
+     <InstallFrom>Disk</InstallFrom>
+@@ -144,4 +143,4 @@
+     <PostBuildEvent>
+     </PostBuildEvent>
+   </PropertyGroup>
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/ConsoleRunner/tests/nunit-console.tests.csproj
+===================================================================
+--- nunit.orig/src/ConsoleRunner/tests/nunit-console.tests.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/ConsoleRunner/tests/nunit-console.tests.csproj	2014-09-16 12:15:57.666569000 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <ProjectType>Local</ProjectType>
+     <ProductVersion>9.0.21022</ProductVersion>
+@@ -22,7 +22,6 @@
+     <UpgradeBackupLocation>
+     </UpgradeBackupLocation>
+     <OldToolsVersion>3.5</OldToolsVersion>
+-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+     <PublishUrl>publish\</PublishUrl>
+     <Install>true</Install>
+     <InstallFrom>Disk</InstallFrom>
+@@ -156,4 +155,4 @@
+     <PostBuildEvent>
+     </PostBuildEvent>
+   </PropertyGroup>
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/GuiComponents/UiKit/nunit.uikit.dll.csproj
+===================================================================
+--- nunit.orig/src/GuiComponents/UiKit/nunit.uikit.dll.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/GuiComponents/UiKit/nunit.uikit.dll.csproj	2014-09-16 12:12:03.626568887 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <ProjectType>Local</ProjectType>
+     <ProductVersion>9.0.30729</ProductVersion>
+@@ -22,7 +22,6 @@
+     <UpgradeBackupLocation>
+     </UpgradeBackupLocation>
+     <OldToolsVersion>3.5</OldToolsVersion>
+-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+     <PublishUrl>publish\</PublishUrl>
+     <Install>true</Install>
+     <InstallFrom>Disk</InstallFrom>
+@@ -400,4 +399,4 @@
+     <PostBuildEvent>
+     </PostBuildEvent>
+   </PropertyGroup>
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/GuiComponents/tests/nunit.uikit.tests.csproj
+===================================================================
+--- nunit.orig/src/GuiComponents/tests/nunit.uikit.tests.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/GuiComponents/tests/nunit.uikit.tests.csproj	2014-09-16 12:22:59.286569205 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <ProjectType>Local</ProjectType>
+     <ProductVersion>9.0.21022</ProductVersion>
+@@ -22,7 +22,6 @@
+     <UpgradeBackupLocation>
+     </UpgradeBackupLocation>
+     <OldToolsVersion>3.5</OldToolsVersion>
+-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+     <PublishUrl>publish\</PublishUrl>
+     <Install>true</Install>
+     <InstallFrom>Disk</InstallFrom>
+@@ -169,4 +168,4 @@
+     <PostBuildEvent>
+     </PostBuildEvent>
+   </PropertyGroup>
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/GuiException/UiException/nunit.uiexception.dll.csproj
+===================================================================
+--- nunit.orig/src/GuiException/UiException/nunit.uiexception.dll.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/GuiException/UiException/nunit.uiexception.dll.csproj	2014-09-16 12:12:56.978568913 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+@@ -10,7 +10,6 @@
+     <AppDesignerFolder>Properties</AppDesignerFolder>
+     <RootNamespace>NUnit.UiException</RootNamespace>
+     <AssemblyName>nunit.uiexception</AssemblyName>
+-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+     <FileAlignment>512</FileAlignment>
+     <AssemblyOriginatorKeyFile>..\..\..\..\src\GuiException\UiException\stackSgKey.snk</AssemblyOriginatorKeyFile>
+     <FileUpgradeFlags>
+@@ -160,4 +159,4 @@
+   <Target Name="AfterBuild">
+   </Target>
+   -->
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/GuiException/tests/nunit.uiexception.tests.csproj
+===================================================================
+--- nunit.orig/src/GuiException/tests/nunit.uiexception.tests.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/GuiException/tests/nunit.uiexception.tests.csproj	2014-09-16 12:14:04.738568945 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+@@ -15,7 +15,6 @@
+     <OldToolsVersion>3.5</OldToolsVersion>
+     <UpgradeBackupLocation />
+     <TargetFrameworkProfile />
+-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+     <PublishUrl>publish\</PublishUrl>
+     <Install>true</Install>
+     <InstallFrom>Disk</InstallFrom>
+@@ -148,4 +147,4 @@
+   <Target Name="AfterBuild">
+   </Target>
+   -->
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/GuiRunner/nunit-gui-exe/nunit-gui.exe.csproj
+===================================================================
+--- nunit.orig/src/GuiRunner/nunit-gui-exe/nunit-gui.exe.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/GuiRunner/nunit-gui-exe/nunit-gui.exe.csproj	2014-09-16 12:10:11.026568832 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <ProjectType>Local</ProjectType>
+     <ProductVersion>9.0.21022</ProductVersion>
+@@ -26,7 +26,6 @@
+     <TargetZone>LocalIntranet</TargetZone>
+     <GenerateManifests>false</GenerateManifests>
+     <NoWin32Manifest>true</NoWin32Manifest>
+-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+     <PublishUrl>http://localhost/nunit/</PublishUrl>
+     <Install>true</Install>
+     <InstallFrom>Web</InstallFrom>
+@@ -152,4 +151,4 @@
+     <PostBuildEvent>
+     </PostBuildEvent>
+   </PropertyGroup>
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/GuiRunner/nunit-gui/nunit-gui.csproj
+===================================================================
+--- nunit.orig/src/GuiRunner/nunit-gui/nunit-gui.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/GuiRunner/nunit-gui/nunit-gui.csproj	2014-09-16 12:10:32.954568843 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <ProjectType>Local</ProjectType>
+     <ProductVersion>9.0.30729</ProductVersion>
+@@ -22,7 +22,6 @@
+     <UpgradeBackupLocation>
+     </UpgradeBackupLocation>
+     <OldToolsVersion>3.5</OldToolsVersion>
+-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+     <PublishUrl>publish\</PublishUrl>
+     <Install>true</Install>
+     <InstallFrom>Disk</InstallFrom>
+@@ -274,4 +273,4 @@
+     <PostBuildEvent>
+     </PostBuildEvent>
+   </PropertyGroup>
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/GuiRunner/tests/nunit-gui.tests.csproj
+===================================================================
+--- nunit.orig/src/GuiRunner/tests/nunit-gui.tests.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/GuiRunner/tests/nunit-gui.tests.csproj	2014-09-16 12:10:53.566568853 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <ProjectType>Local</ProjectType>
+     <ProductVersion>9.0.21022</ProductVersion>
+@@ -22,7 +22,6 @@
+     <UpgradeBackupLocation>
+     </UpgradeBackupLocation>
+     <OldToolsVersion>3.5</OldToolsVersion>
+-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+     <PublishUrl>publish\</PublishUrl>
+     <Install>true</Install>
+     <InstallFrom>Disk</InstallFrom>
+@@ -144,4 +143,4 @@
+     <PostBuildEvent>
+     </PostBuildEvent>
+   </PropertyGroup>
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/NUnitCore/core/nunit.core.dll.csproj
+===================================================================
+--- nunit.orig/src/NUnitCore/core/nunit.core.dll.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/NUnitCore/core/nunit.core.dll.csproj	2014-09-16 12:15:23.614568984 +0100
+@@ -1,5 +1,5 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <ProjectType>Local</ProjectType>
+     <ProductVersion>9.0.30729</ProductVersion>
+@@ -23,7 +23,6 @@
+     </UpgradeBackupLocation>
+     <OldToolsVersion>3.5</OldToolsVersion>
+     <IsWebBootstrapper>true</IsWebBootstrapper>
+-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+     <PublishUrl>http://localhost/nunit.core/</PublishUrl>
+     <Install>true</Install>
+     <InstallFrom>Web</InstallFrom>
+@@ -232,4 +231,4 @@
+     <PostBuildEvent>
+     </PostBuildEvent>
+   </PropertyGroup>
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/NUnitCore/interfaces/nunit.core.interfaces.dll.csproj
+===================================================================
+--- nunit.orig/src/NUnitCore/interfaces/nunit.core.interfaces.dll.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/NUnitCore/interfaces/nunit.core.interfaces.dll.csproj	2014-09-16 12:12:18.722568894 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <ProjectType>Local</ProjectType>
+     <ProductVersion>9.0.30729</ProductVersion>
+@@ -22,7 +22,6 @@
+     <UpgradeBackupLocation>
+     </UpgradeBackupLocation>
+     <OldToolsVersion>3.5</OldToolsVersion>
+-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+     <PublishUrl>publish\</PublishUrl>
+     <Install>true</Install>
+     <InstallFrom>Disk</InstallFrom>
+@@ -166,4 +165,4 @@
+     <PostBuildEvent>
+     </PostBuildEvent>
+   </PropertyGroup>
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/NUnitCore/tests/nunit.core.tests.csproj
+===================================================================
+--- nunit.orig/src/NUnitCore/tests/nunit.core.tests.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/NUnitCore/tests/nunit.core.tests.csproj	2014-09-16 12:16:56.182569029 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <ProjectType>Local</ProjectType>
+     <ProductVersion>9.0.30729</ProductVersion>
+@@ -23,7 +23,6 @@
+     </UpgradeBackupLocation>
+     <OldToolsVersion>3.5</OldToolsVersion>
+     <IsWebBootstrapper>true</IsWebBootstrapper>
+-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+     <PublishUrl>http://localhost/nunit.core.tests/</PublishUrl>
+     <Install>true</Install>
+     <InstallFrom>Web</InstallFrom>
+@@ -254,4 +253,4 @@
+     <PostBuildEvent>
+     </PostBuildEvent>
+   </PropertyGroup>
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/NUnitFramework/framework/nunit.framework.dll.csproj
+===================================================================
+--- nunit.orig/src/NUnitFramework/framework/nunit.framework.dll.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/NUnitFramework/framework/nunit.framework.dll.csproj	2014-09-16 12:20:02.346569119 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <ProjectType>Local</ProjectType>
+     <ProductVersion>9.0.30729</ProductVersion>
+@@ -22,7 +22,6 @@
+     <UpgradeBackupLocation>
+     </UpgradeBackupLocation>
+     <OldToolsVersion>3.5</OldToolsVersion>
+-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+     <PublishUrl>publish\</PublishUrl>
+     <Install>true</Install>
+     <InstallFrom>Disk</InstallFrom>
+@@ -281,4 +280,4 @@
+     <PostBuildEvent>
+     </PostBuildEvent>
+   </PropertyGroup>
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/NUnitFramework/tests/nunit.framework.tests.csproj
+===================================================================
+--- nunit.orig/src/NUnitFramework/tests/nunit.framework.tests.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/NUnitFramework/tests/nunit.framework.tests.csproj	2014-09-16 12:14:19.446568953 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <ProjectType>Local</ProjectType>
+     <ProductVersion>9.0.30729</ProductVersion>
+@@ -22,7 +22,6 @@
+     <UpgradeBackupLocation>
+     </UpgradeBackupLocation>
+     <OldToolsVersion>3.5</OldToolsVersion>
+-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+     <PublishUrl>publish\</PublishUrl>
+     <Install>true</Install>
+     <InstallFrom>Disk</InstallFrom>
+@@ -225,4 +224,4 @@
+     <PostBuildEvent>
+     </PostBuildEvent>
+   </PropertyGroup>
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/NUnitMocks/mocks/nunit.mocks.csproj
+===================================================================
+--- nunit.orig/src/NUnitMocks/mocks/nunit.mocks.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/NUnitMocks/mocks/nunit.mocks.csproj	2014-09-16 12:14:52.486568969 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <ProjectType>Local</ProjectType>
+     <ProductVersion>9.0.21022</ProductVersion>
+@@ -22,7 +22,6 @@
+     <UpgradeBackupLocation>
+     </UpgradeBackupLocation>
+     <OldToolsVersion>3.5</OldToolsVersion>
+-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+     <PublishUrl>publish\</PublishUrl>
+     <Install>true</Install>
+     <InstallFrom>Disk</InstallFrom>
+@@ -136,4 +135,4 @@
+     <PostBuildEvent>
+     </PostBuildEvent>
+   </PropertyGroup>
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/NUnitMocks/tests/nunit.mocks.tests.csproj
+===================================================================
+--- nunit.orig/src/NUnitMocks/tests/nunit.mocks.tests.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/NUnitMocks/tests/nunit.mocks.tests.csproj	2014-09-16 12:17:09.646569035 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <ProjectType>Local</ProjectType>
+     <ProductVersion>9.0.21022</ProductVersion>
+@@ -22,7 +22,6 @@
+     <UpgradeBackupLocation>
+     </UpgradeBackupLocation>
+     <OldToolsVersion>3.5</OldToolsVersion>
+-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+     <PublishUrl>publish\</PublishUrl>
+     <Install>true</Install>
+     <InstallFrom>Disk</InstallFrom>
+@@ -128,4 +127,4 @@
+     <PostBuildEvent>
+     </PostBuildEvent>
+   </PropertyGroup>
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/NUnitTestServer/nunit-agent-exe/nunit-agent.exe.csproj
+===================================================================
+--- nunit.orig/src/NUnitTestServer/nunit-agent-exe/nunit-agent.exe.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/NUnitTestServer/nunit-agent-exe/nunit-agent.exe.csproj	2014-09-16 12:15:06.914568976 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <ProjectType>Local</ProjectType>
+     <ProductVersion>9.0.21022</ProductVersion>
+@@ -23,7 +23,6 @@
+     </UpgradeBackupLocation>
+     <OldToolsVersion>3.5</OldToolsVersion>
+     <NoWin32Manifest>true</NoWin32Manifest>
+-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+     <PublishUrl>publish\</PublishUrl>
+     <Install>true</Install>
+     <InstallFrom>Disk</InstallFrom>
+@@ -145,4 +144,4 @@
+     <PostBuildEvent>
+     </PostBuildEvent>
+   </PropertyGroup>
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/PNUnit/agent/pnunit-agent.csproj
+===================================================================
+--- nunit.orig/src/PNUnit/agent/pnunit-agent.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/PNUnit/agent/pnunit-agent.csproj	2014-09-16 12:13:13.230568920 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <ProjectType>Local</ProjectType>
+     <ProductVersion>9.0.30729</ProductVersion>
+@@ -29,7 +29,6 @@
+     <OldToolsVersion>3.5</OldToolsVersion>
+     <UpgradeBackupLocation>
+     </UpgradeBackupLocation>
+-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+     <SccAuxPath>
+     </SccAuxPath>
+     <NoWin32Manifest>true</NoWin32Manifest>
+@@ -159,4 +158,4 @@
+     <PostBuildEvent>
+     </PostBuildEvent>
+   </PropertyGroup>
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/PNUnit/launcher/pnunit-launcher.csproj
+===================================================================
+--- nunit.orig/src/PNUnit/launcher/pnunit-launcher.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/PNUnit/launcher/pnunit-launcher.csproj	2014-09-16 12:16:26.410569014 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <ProjectType>Local</ProjectType>
+     <ProductVersion>9.0.30729</ProductVersion>
+@@ -31,7 +31,6 @@
+     <OldToolsVersion>3.5</OldToolsVersion>
+     <UpgradeBackupLocation>
+     </UpgradeBackupLocation>
+-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+     <NoWin32Manifest>true</NoWin32Manifest>
+     <PublishUrl>publish\</PublishUrl>
+     <Install>true</Install>
+@@ -161,4 +160,4 @@
+     <PostBuildEvent>
+     </PostBuildEvent>
+   </PropertyGroup>
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/PNUnit/pnunit.framework/pnunit.framework.csproj
+===================================================================
+--- nunit.orig/src/PNUnit/pnunit.framework/pnunit.framework.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/PNUnit/pnunit.framework/pnunit.framework.csproj	2014-09-16 12:16:09.926569006 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <ProjectType>Local</ProjectType>
+     <ProductVersion>9.0.30729</ProductVersion>
+@@ -28,7 +28,6 @@
+     <OldToolsVersion>3.5</OldToolsVersion>
+     <UpgradeBackupLocation>
+     </UpgradeBackupLocation>
+-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+     <SccAuxPath>
+     </SccAuxPath>
+     <PublishUrl>publish\</PublishUrl>
+@@ -131,4 +130,4 @@
+     <PostBuildEvent>
+     </PostBuildEvent>
+   </PropertyGroup>
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/PNUnit/tests/pnunit.tests.csproj
+===================================================================
+--- nunit.orig/src/PNUnit/tests/pnunit.tests.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/PNUnit/tests/pnunit.tests.csproj	2014-09-16 12:16:41.186569021 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <ProjectType>Local</ProjectType>
+     <ProductVersion>9.0.21022</ProductVersion>
+@@ -22,7 +22,6 @@
+     <UpgradeBackupLocation>
+     </UpgradeBackupLocation>
+     <OldToolsVersion>3.5</OldToolsVersion>
+-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+     <PublishUrl>publish\</PublishUrl>
+     <Install>true</Install>
+     <InstallFrom>Disk</InstallFrom>
+@@ -148,4 +147,4 @@
+     <PostBuildEvent>
+     </PostBuildEvent>
+   </PropertyGroup>
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/ProjectEditor/editor/nunit-editor.csproj
+===================================================================
+--- nunit.orig/src/ProjectEditor/editor/nunit-editor.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/ProjectEditor/editor/nunit-editor.csproj	2014-09-16 12:13:46.554568937 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+@@ -10,7 +10,6 @@
+     <AppDesignerFolder>Properties</AppDesignerFolder>
+     <RootNamespace>NUnit.ProjectEditor</RootNamespace>
+     <AssemblyName>nunit-editor</AssemblyName>
+-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+     <FileAlignment>512</FileAlignment>
+     <ApplicationIcon>App.ico</ApplicationIcon>
+     <FileUpgradeFlags>
+@@ -207,4 +206,4 @@
+   <Target Name="AfterBuild">
+   </Target>
+   -->
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/ProjectEditor/tests/nunit-editor.tests.csproj
+===================================================================
+--- nunit.orig/src/ProjectEditor/tests/nunit-editor.tests.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/ProjectEditor/tests/nunit-editor.tests.csproj	2014-09-16 12:13:32.158568930 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+@@ -11,7 +11,6 @@
+     <RootNamespace>NUnit.ProjectEditor.Tests</RootNamespace>
+     <AssemblyName>nunit-editor.tests</AssemblyName>
+     <FileAlignment>512</FileAlignment>
+-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+     <FileUpgradeFlags>
+     </FileUpgradeFlags>
+     <OldToolsVersion>3.5</OldToolsVersion>
+@@ -131,4 +130,4 @@
+   <Target Name="AfterBuild">
+   </Target>
+   -->
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/tests/mock-assembly/mock-assembly.csproj
+===================================================================
+--- nunit.orig/src/tests/mock-assembly/mock-assembly.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/tests/mock-assembly/mock-assembly.csproj	2014-09-16 12:24:34.550569251 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <ProjectType>Local</ProjectType>
+     <ProductVersion>9.0.21022</ProductVersion>
+@@ -22,7 +22,6 @@
+     <UpgradeBackupLocation>
+     </UpgradeBackupLocation>
+     <OldToolsVersion>3.5</OldToolsVersion>
+-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+     <PublishUrl>publish\</PublishUrl>
+     <Install>true</Install>
+     <InstallFrom>Disk</InstallFrom>
+@@ -132,4 +131,4 @@
+     <PostBuildEvent>
+     </PostBuildEvent>
+   </PropertyGroup>
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/tests/nonamespace-assembly/nonamespace-assembly.csproj
+===================================================================
+--- nunit.orig/src/tests/nonamespace-assembly/nonamespace-assembly.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/tests/nonamespace-assembly/nonamespace-assembly.csproj	2014-09-16 12:14:37.074568961 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <ProjectType>Local</ProjectType>
+     <ProductVersion>9.0.21022</ProductVersion>
+@@ -22,7 +22,6 @@
+     <UpgradeBackupLocation>
+     </UpgradeBackupLocation>
+     <OldToolsVersion>3.5</OldToolsVersion>
+-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+     <PublishUrl>publish\</PublishUrl>
+     <Install>true</Install>
+     <InstallFrom>Disk</InstallFrom>
+@@ -127,4 +126,4 @@
+     <PostBuildEvent>
+     </PostBuildEvent>
+   </PropertyGroup>
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/tests/test-assembly/test-assembly.csproj
+===================================================================
+--- nunit.orig/src/tests/test-assembly/test-assembly.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/tests/test-assembly/test-assembly.csproj	2014-09-16 12:24:06.446569237 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <ProjectType>Local</ProjectType>
+     <ProductVersion>9.0.21022</ProductVersion>
+@@ -23,7 +23,6 @@
+     </UpgradeBackupLocation>
+     <OldToolsVersion>3.5</OldToolsVersion>
+     <IsWebBootstrapper>true</IsWebBootstrapper>
+-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+     <PublishUrl>http://localhost/test-assembly/</PublishUrl>
+     <Install>true</Install>
+     <InstallFrom>Web</InstallFrom>
+@@ -185,4 +184,4 @@
+     <PostBuildEvent>
+     </PostBuildEvent>
+   </PropertyGroup>
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/tests/test-utilities/test-utilities.csproj
+===================================================================
+--- nunit.orig/src/tests/test-utilities/test-utilities.csproj	2014-09-16 12:08:47.414568792 +0100
++++ nunit/src/tests/test-utilities/test-utilities.csproj	2014-09-16 12:24:21.502569244 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <PropertyGroup>
+     <ProjectType>Local</ProjectType>
+     <ProductVersion>9.0.21022</ProductVersion>
+@@ -22,7 +22,6 @@
+     <UpgradeBackupLocation>
+     </UpgradeBackupLocation>
+     <OldToolsVersion>3.5</OldToolsVersion>
+-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+     <PublishUrl>publish\</PublishUrl>
+     <Install>true</Install>
+     <InstallFrom>Disk</InstallFrom>
+@@ -147,4 +146,4 @@
+     <PostBuildEvent>
+     </PostBuildEvent>
+   </PropertyGroup>
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/NUnitCore/tests-net45/nunit.core.tests.net45.csproj
+===================================================================
+--- nunit.orig/src/NUnitCore/tests-net45/nunit.core.tests.net45.csproj	2014-09-16 11:47:13.986568164 +0100
++++ nunit/src/NUnitCore/tests-net45/nunit.core.tests.net45.csproj	2014-09-16 12:25:54.506569290 +0100
+@@ -1,5 +1,5 @@
+ <?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+   <PropertyGroup>
+     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+@@ -9,7 +9,6 @@
+     <AppDesignerFolder>Properties</AppDesignerFolder>
+     <RootNamespace>nunit.core.tests.net45</RootNamespace>
+     <AssemblyName>nunit.core.tests.45</AssemblyName>
+-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+     <FileAlignment>512</FileAlignment>
+     <TargetFrameworkProfile />
+   </PropertyGroup>
+@@ -81,4 +80,4 @@
+   <Target Name="AfterBuild">
+   </Target>
+   -->
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/NUnitFramework/tests-net45/nunit.framework.tests.net45.csproj
+===================================================================
+--- nunit.orig/src/NUnitFramework/tests-net45/nunit.framework.tests.net45.csproj	2014-09-16 11:47:14.010568164 +0100
++++ nunit/src/NUnitFramework/tests-net45/nunit.framework.tests.net45.csproj	2014-09-16 12:27:08.190569325 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+   <PropertyGroup>
+     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+@@ -9,7 +9,6 @@
+     <AppDesignerFolder>Properties</AppDesignerFolder>
+     <RootNamespace>nunit.framework.tests.net45</RootNamespace>
+     <AssemblyName>nunit.framework.tests.net45</AssemblyName>
+-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+     <FileAlignment>512</FileAlignment>
+     <TargetFrameworkProfile />
+   </PropertyGroup>
+@@ -66,4 +65,4 @@
+   <Target Name="AfterBuild">
+   </Target>
+   -->
+-</Project>
+\ No newline at end of file
++</Project>
+Index: nunit/src/tests/test-assembly-net45/test-assembly-net45.csproj
+===================================================================
+--- nunit.orig/src/tests/test-assembly-net45/test-assembly-net45.csproj	2014-09-16 11:47:14.034568164 +0100
++++ nunit/src/tests/test-assembly-net45/test-assembly-net45.csproj	2014-09-16 12:26:39.338569311 +0100
+@@ -1,5 +1,5 @@
+ ﻿<?xml version="1.0" encoding="utf-8"?>
+-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+   <PropertyGroup>
+     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+@@ -9,7 +9,6 @@
+     <AppDesignerFolder>Properties</AppDesignerFolder>
+     <RootNamespace>test_assembly_net45</RootNamespace>
+     <AssemblyName>test-assembly-net45</AssemblyName>
+-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+     <FileAlignment>512</FileAlignment>
+   </PropertyGroup>
+   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+@@ -65,4 +64,4 @@
+   <Target Name="AfterBuild">
+   </Target>
+   -->
+-</Project>
+\ No newline at end of file
++</Project>
