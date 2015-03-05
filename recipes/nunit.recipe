@@ -3,8 +3,7 @@ import shutil
 
 BIN_TPL='''\
 #!/bin/sh
-PREFIX=%s
-exec $PREFIX/bin/mono-sgen $PREFIX/lib/cli/nunit/%s "$@"
+exec %s/bin/mono-sgen %s/lib/cli/nunit/%s "$@"
 '''
 PC_TPL='''\
 prefix=%s
@@ -26,18 +25,27 @@ class Recipe(recipe.Recipe):
     btype = BuildType.CUSTOM
     deps = ['mono']
     url = 'http://launchpad.net/nunitv2/trunk/2.6.3/+download/NUnit-2.6.3-src.zip'
+    patches = ['nunit/use_default_framework.patch']
     files_bin = [
             ]
     files_cli = [
             ]
 
     def compile(self):
-        shell.call('xbuild src/NUnitMocks/mocks/nunit.mocks.csproj '
-                '/property:Configuration=Release ',
-            self.build_dir)
-        shell.call('xbuild src/ConsoleRunner/nunit-console-exe/nunit-console.exe.csproj '
-                '/property:Configuration=Release ',
-            self.build_dir)
+        props = '/property:Configuration=Debug '\
+                ' /property:DefineConstants="MONO,CLR_4_0,NET_4_0,CS_4_0" '
+        shell.call('xbuild src/NUnitCore/interfaces/nunit.core.interfaces.dll.csproj ' +
+                props, self.build_dir)
+        shell.call('xbuild src/NUnitCore/core/nunit.core.dll.csproj ' +
+                props, self.build_dir)
+        shell.call('xbuild src/NUnitFramework/framework/nunit.framework.dll.csproj ' +
+                props, self.build_dir)
+        shell.call('xbuild src/NUnitMocks/mocks/nunit.mocks.csproj ' +
+                props, self.build_dir)
+        shell.call('xbuild src/ClientUtilities/util/nunit.util.dll.csproj ' +
+                props, self.build_dir)
+        shell.call('xbuild src/ConsoleRunner/nunit-console-exe/nunit-console.exe.csproj ' +
+                props, self.build_dir)
 
     def install(self):
         framework_cli = ['nunit.framework.dll', 'nunit.mocks.dll']
@@ -51,7 +59,7 @@ class Recipe(recipe.Recipe):
         except:
             pass
         os.makedirs (cli_dir)
-        bdir = os.path.join(self.build_dir, 'bin', 'Release');
+        bdir = os.path.join(self.build_dir, 'bin', 'Debug');
         for cli in framework_cli:
             shutil.copy (os.path.join(bdir, 'framework', cli), cli_dir)
         for cli in lib_cli:
@@ -59,6 +67,8 @@ class Recipe(recipe.Recipe):
         for cli in exe_cli:
             shutil.copy (os.path.join(bdir, cli), cli_dir)
         pc_file = os.path.join(self.config.prefix, 'lib', 'pkgconfig', 'nunit.pc')
+        for cli in framework_cli + lib_cli:
+            shell.call('gacutil -i %s' % cli, cli_dir)
         with open(pc_file, 'w+') as f:
             f.write(PC_TPL % (self.config.prefix, self.version,
                 ' '.join(['-r:${pkglibdir}/nunit/'+x for x in clis])))
@@ -66,5 +76,5 @@ class Recipe(recipe.Recipe):
         for app in ['nunit-console']:
             dest = os.path.join(self.config.prefix, 'bin', app)
             with open(dest, 'w+') as f:
-                f.write(BIN_TPL % (self.config.prefix, app + '.exe'))
+                f.write(BIN_TPL % (self.config.prefix, self.config.prefix, app + '.exe'))
             shell.call('chmod +x %s' % dest)
