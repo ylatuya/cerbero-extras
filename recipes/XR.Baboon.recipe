@@ -13,10 +13,9 @@ class Recipe(recipe.Recipe):
     version = 'git'
     licenses = [License.LGPL]
     btype = BuildType.CUSTOM
-    deps = ['mono']
     remotes = {'origin': 'https://github.com/inorton/XR.Baboon.git'}
     commit = 'origin/master'
-    deps = ['gtksourceview-sharp']
+    deps = ['mono', 'gtksourceview-sharp']
     files_bin = [
             'bin/covem',
             'bin/cov-html',
