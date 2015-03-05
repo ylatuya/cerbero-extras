@@ -1,0 +1,70 @@
+# -*- Mode: Python -*- vi:si:et:sw=4:sts=4:ts=4:syntax=python
+import shutil
+
+BIN_TPL='''\
+#!/bin/sh
+PREFIX=%s
+exec $PREFIX/bin/mono-sgen $PREFIX/lib/cli/nunit/%s "$@"
+'''
+PC_TPL='''\
+prefix=%s
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+pkglibdir=${libdir}/cli
+
+Name: NUnit
+Description: Testing framework for CLI
+Version: %s
+Libs: %s
+'''
+
+class Recipe(recipe.Recipe):
+    name = 'NUnit'
+    version = '2.6.3'
+    licenses = [License.LGPL]
+    stype = SourceType.TARBALL
+    btype = BuildType.CUSTOM
+    deps = ['mono']
+    url = 'http://launchpad.net/nunitv2/trunk/2.6.3/+download/NUnit-2.6.3-src.zip'
+    files_bin = [
+            ]
+    files_cli = [
+            ]
+
+    def compile(self):
+        shell.call('xbuild src/NUnitMocks/mocks/nunit.mocks.csproj '
+                '/property:Configuration=Release ',
+            self.build_dir)
+        shell.call('xbuild src/ConsoleRunner/nunit-console-exe/nunit-console.exe.csproj '
+                '/property:Configuration=Release ',
+            self.build_dir)
+
+    def install(self):
+        framework_cli = ['nunit.framework.dll', 'nunit.mocks.dll']
+        lib_cli = ['nunit.core.dll', 'nunit.core.interfaces.dll',
+                'nunit.util.dll', 'nunit-console-runner.dll']
+        exe_cli = ['nunit-console.exe']
+        clis = framework_cli + lib_cli + exe_cli
+        cli_dir = os.path.join(self.config.prefix, 'lib', 'cli', 'nunit')
+        try:
+            shutil.rmtree (cli_dir)
+        except:
+            pass
+        os.makedirs (cli_dir)
+        bdir = os.path.join(self.build_dir, 'bin', 'Release');
+        for cli in framework_cli:
+            shutil.copy (os.path.join(bdir, 'framework', cli), cli_dir)
+        for cli in lib_cli:
+            shutil.copy (os.path.join(bdir, 'lib', cli), cli_dir)
+        for cli in exe_cli:
+            shutil.copy (os.path.join(bdir, cli), cli_dir)
+        pc_file = os.path.join(self.config.prefix, 'lib', 'pkgconfig', 'nunit.pc')
+        with open(pc_file, 'w+') as f:
+            f.write(PC_TPL % (self.config.prefix, self.version,
+                ' '.join(['-r:${pkglibdir}/nunit/'+x for x in clis])))
+
+        for app in ['nunit-console']:
+            dest = os.path.join(self.config.prefix, 'bin', app)
+            with open(dest, 'w+') as f:
+                f.write(BIN_TPL % (self.config.prefix, app + '.exe'))
+            shell.call('chmod +x %s' % dest)
