@@ -7,7 +7,7 @@ class Recipe(recipe.Recipe):
     stype = SourceType.GIT
     btype = BuildType.CUSTOM
     deps = ['mono', 'Newtonsoft.Json']
-    remotes = {'github': 'https://github.com/fluendo/Couchbase.Lite-net.git'}
+    remotes = {'github': 'https://github.com/fluendo/couchbase-lite-net.git'}
     commit = 'github/mono'
     files_cli = [
       'lib/cli/Couchbase.Lite-1.0/Couchbase.Lite.dll',
