@@ -7,6 +7,8 @@ class Recipe(recipe.Recipe):
     licenses = [License.LGPL]
     stype = SourceType.TARBALL
     url = 'https://download.gnome.org/sources/gtksourceview/2.11/gtksourceview-2.11.2.tar.bz2'
+    patches = ['gtksourceview/fix_os_x_build.patch']
+    strip = 0
     deps = ['gtk+', 'mono']
 
     files_libs = ['libglade-2']
