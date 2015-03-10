@@ -15,7 +15,11 @@ class Recipe(recipe.Recipe):
     btype = BuildType.CUSTOM
     remotes = {'origin': 'https://github.com/inorton/XR.Baboon.git'}
     commit = 'origin/master'
-    deps = ['mono', 'gtksourceview-sharp']
+    deps = ['mono']
+    plaform_deps = {
+        Platform.LINUX: ['gtksourceview-sharp'],
+        Platform.DARWIN: ['gtksourceview-sharp'],
+        }
     files_bin = [
             'bin/covem',
             'bin/cov-html',
@@ -29,8 +33,15 @@ class Recipe(recipe.Recipe):
             ]
 
     def compile(self):
-        shell.call('xbuild covem.sln /property:Configuration=Release ',
+        shell.call('xbuild XR.Mono.Cover/XR.Mono.Cover.csproj /property:Configuration=Release ',
             self.build_dir)
+        shell.call('xbuild covtool/covtool.csproj /property:Configuration=Release ',
+            self.build_dir)
+        shell.call('xbuild cov-html/cov-html.csproj /property:Configuration=Release ',
+            self.build_dir)
+        if self.config.target_platform in [Platform.DARWIN, Platform.LINUX]:
+            shell.call('xbuild cov-gtk/cov-gtk.csproj /property:Configuration=Release ',
+                self.build_dir)
 
     def install(self):
         destdir = os.path.join(self.config.prefix, 'lib/cli/XR.Baboon')
@@ -38,7 +49,10 @@ class Recipe(recipe.Recipe):
             os.makedirs(destdir)
         shutil.copy(os.path.join(self.build_dir,
             'XR.Mono.Cover/bin/Release/XR.Mono.Cover.dll'), destdir)
-        for app in ['covem', 'cov-gtk', 'cov-html']:
+        apps = ['covem', 'cov-html']
+        if self.config.target_platform in [Platform.DARWIN, Platform.LINUX]:
+            apps.append('cov-gtk')
+        for app in apps:
             dest = os.path.join(self.config.prefix, 'bin', app)
             shutil.copy(os.path.join(self.build_dir, 'covtool/bin/%s.exe' %
                 app), destdir)
