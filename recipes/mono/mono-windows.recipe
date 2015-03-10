@@ -65,6 +65,8 @@ class Recipe(recipe.Recipe):
                 if not os.path.splitext(dest)[1] in ['.dll', '.a', '.la', '.pc', '.exe']:
                     shell.replace(dest, {'C:/cygwin/usr/local': self.config.prefix})
                     shell.replace(dest, {'/usr/local': self.config.prefix})
+        shutil.copy (os.path.join(self.config.prefix, 'bin', 'dmcs'),
+            os.path.join(self.config.prefix, 'bin', 'mcs'))
         # Remove broken links
         shutil.copy (os.path.join(self.config.prefix, 'bin', 'mono-sgen.exe'),
             os.path.join(self.config.prefix, 'bin', 'mono.exe'))
