@@ -1,5 +1,17 @@
 # -*- Mode: Python -*- vi:si:et:sw=4:sts=4:ts=4:syntax=python
 
+PC_TPL ='''\
+prefix=${pcfiledir}/../..
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+
+Name: Couchbase.Lite
+Description: Couchbase.Lite framework for .NET
+Version: %s
+Libs: -r:${libdir}/cli/Couchbase.Lite-1.0/Couchbase.Lite.dll
+'''
+
+
 class Recipe(recipe.Recipe):
     name = 'Couchbase.Lite'
     version = '1.0.4'
@@ -25,3 +37,7 @@ class Recipe(recipe.Recipe):
             os.makedirs(destdir)
         shell.call('cp src/Couchbase.Lite.Mono/bin/Release/*.dll %s' % destdir,
             self.build_dir)
+        pc_file = os.path.join(self.config.prefix, 'lib/pkgconfig/couchbase-lite.pc')
+        with open(pc_file, 'w+') as f:
+            f.write(PC_TPL % self.version)
+
