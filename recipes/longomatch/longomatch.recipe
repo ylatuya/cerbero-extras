@@ -15,7 +15,8 @@ class Recipe(recipe.Recipe):
     commit = 'github/master'
     config_sh = 'sh autogen.sh'
     deps = ['gstreamer', 'gst-plugins-base', 'libav', 'Newtonsoft.Json', 'librsvg', 'ubuntu-font-family',
-            'mono', 'mono-addins', 'db4o', 'gtk-sharp', 'NUnit', 'XR.Baboon']
+            'mono', 'mono-addins', 'db4o', 'gtk-sharp', 'NUnit', 'XR.Baboon',
+            'Couchbase.Lite']
 
     platform_deps = {
         Platform.WINDOWS: ['mkbundle'],
