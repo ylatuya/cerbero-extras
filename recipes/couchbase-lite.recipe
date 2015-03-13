@@ -8,7 +8,9 @@ libdir=${exec_prefix}/lib
 Name: Couchbase.Lite
 Description: Couchbase.Lite framework for .NET
 Version: %s
-Libs: -r:${libdir}/cli/Couchbase.Lite-1.0/Couchbase.Lite.dll
+Libs: -r:${libdir}/cli/Couchbase.Lite-1.0/Couchbase.Lite.dll\
+ -r:${libdir}/cli/Couchbase.Lite-1.0/SQLitePCL.raw.dll\
+ -r:${libdir}/cli/Couchbase.Lite-1.0/SQLitePCL.ugly.dll
 '''
 
 
