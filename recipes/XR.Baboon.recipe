@@ -16,7 +16,7 @@ class Recipe(recipe.Recipe):
     remotes = {'origin': 'https://github.com/inorton/XR.Baboon.git'}
     commit = 'origin/master'
     deps = ['mono']
-    plaform_deps = {
+    platform_deps = {
         Platform.LINUX: ['gtksourceview-sharp'],
         Platform.DARWIN: ['gtksourceview-sharp'],
         }
