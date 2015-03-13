@@ -6,11 +6,12 @@ Index: nunit/src/ClientUtilities/tests/nunit.util.tests.csproj
 ===================================================================
 --- nunit.orig/src/ClientUtilities/tests/nunit.util.tests.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/ClientUtilities/tests/nunit.util.tests.csproj	2014-09-16 12:23:32.066569221 +0100
-@@ -22,7 +22,6 @@
+@@ -22,7 +22,7 @@
      <UpgradeBackupLocation>
      </UpgradeBackupLocation>
      <OldToolsVersion>3.5</OldToolsVersion>
 -    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <PublishUrl>publish\</PublishUrl>
      <Install>true</Install>
      <InstallFrom>Disk</InstallFrom>
@@ -32,11 +33,12 @@ Index: nunit/src/ClientUtilities/tests/resources/DebugOnly.csproj
    <PropertyGroup>
      <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
      <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-@@ -10,7 +10,6 @@
+@@ -10,7 +10,7 @@
      <AppDesignerFolder>Properties</AppDesignerFolder>
      <RootNamespace>DebugOnly</RootNamespace>
      <AssemblyName>DebugOnly</AssemblyName>
 -    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <FileAlignment>512</FileAlignment>
    </PropertyGroup>
    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -58,11 +60,12 @@ Index: nunit/src/ClientUtilities/tests/resources/DisabledProject.csproj
    <PropertyGroup>
      <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
      <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-@@ -10,7 +10,6 @@
+@@ -10,7 +10,7 @@
      <AppDesignerFolder>Properties</AppDesignerFolder>
      <RootNamespace>DisabledProject</RootNamespace>
      <AssemblyName>DisabledProject</AssemblyName>
 -    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <FileAlignment>512</FileAlignment>
    </PropertyGroup>
    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -77,11 +80,12 @@ Index: nunit/src/ClientUtilities/tests/resources/MissingOutputPath.csproj
 ===================================================================
 --- nunit.orig/src/ClientUtilities/tests/resources/MissingOutputPath.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/ClientUtilities/tests/resources/MissingOutputPath.csproj	2014-09-16 12:24:49.818569258 +0100
-@@ -9,7 +9,6 @@
+@@ -9,7 +9,7 @@
      <AppDesignerFolder>Properties</AppDesignerFolder>
      <RootNamespace>MissingOutputPath</RootNamespace>
      <AssemblyName>MissingOutputPath</AssemblyName>
 -    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <FileAlignment>512</FileAlignment>
  	<OutputPath>bin\Common\</OutputPath>
    </PropertyGroup>
@@ -96,11 +100,12 @@ Index: nunit/src/ClientUtilities/util/nunit.util.dll.csproj
 ===================================================================
 --- nunit.orig/src/ClientUtilities/util/nunit.util.dll.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/ClientUtilities/util/nunit.util.dll.csproj	2014-09-16 12:23:15.042569212 +0100
-@@ -22,7 +22,6 @@
+@@ -22,7 +22,7 @@
      <UpgradeBackupLocation>
      </UpgradeBackupLocation>
      <OldToolsVersion>3.5</OldToolsVersion>
 -    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <PublishUrl>publish\</PublishUrl>
      <Install>true</Install>
      <InstallFrom>Disk</InstallFrom>
@@ -115,11 +120,12 @@ Index: nunit/src/ConsoleRunner/nunit-console-exe/nunit-console.exe.csproj
 ===================================================================
 --- nunit.orig/src/ConsoleRunner/nunit-console-exe/nunit-console.exe.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/ConsoleRunner/nunit-console-exe/nunit-console.exe.csproj	2014-09-16 12:15:39.994568992 +0100
-@@ -23,7 +23,6 @@
+@@ -23,7 +23,7 @@
      </UpgradeBackupLocation>
      <OldToolsVersion>3.5</OldToolsVersion>
      <NoWin32Manifest>true</NoWin32Manifest>
 -    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <PublishUrl>publish\</PublishUrl>
      <Install>true</Install>
      <InstallFrom>Disk</InstallFrom>
@@ -134,11 +140,12 @@ Index: nunit/src/ConsoleRunner/nunit-console/nunit-console.csproj
 ===================================================================
 --- nunit.orig/src/ConsoleRunner/nunit-console/nunit-console.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/ConsoleRunner/nunit-console/nunit-console.csproj	2014-09-16 12:11:46.322568878 +0100
-@@ -22,7 +22,6 @@
+@@ -22,7 +22,7 @@
      <UpgradeBackupLocation>
      </UpgradeBackupLocation>
      <OldToolsVersion>3.5</OldToolsVersion>
 -    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <PublishUrl>publish\</PublishUrl>
      <Install>true</Install>
      <InstallFrom>Disk</InstallFrom>
@@ -153,11 +160,12 @@ Index: nunit/src/ConsoleRunner/tests/nunit-console.tests.csproj
 ===================================================================
 --- nunit.orig/src/ConsoleRunner/tests/nunit-console.tests.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/ConsoleRunner/tests/nunit-console.tests.csproj	2014-09-16 12:15:57.666569000 +0100
-@@ -22,7 +22,6 @@
+@@ -22,7 +22,7 @@
      <UpgradeBackupLocation>
      </UpgradeBackupLocation>
      <OldToolsVersion>3.5</OldToolsVersion>
 -    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <PublishUrl>publish\</PublishUrl>
      <Install>true</Install>
      <InstallFrom>Disk</InstallFrom>
@@ -172,11 +180,12 @@ Index: nunit/src/GuiComponents/UiKit/nunit.uikit.dll.csproj
 ===================================================================
 --- nunit.orig/src/GuiComponents/UiKit/nunit.uikit.dll.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/GuiComponents/UiKit/nunit.uikit.dll.csproj	2014-09-16 12:12:03.626568887 +0100
-@@ -22,7 +22,6 @@
+@@ -22,7 +22,7 @@
      <UpgradeBackupLocation>
      </UpgradeBackupLocation>
      <OldToolsVersion>3.5</OldToolsVersion>
 -    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <PublishUrl>publish\</PublishUrl>
      <Install>true</Install>
      <InstallFrom>Disk</InstallFrom>
@@ -191,11 +200,12 @@ Index: nunit/src/GuiComponents/tests/nunit.uikit.tests.csproj
 ===================================================================
 --- nunit.orig/src/GuiComponents/tests/nunit.uikit.tests.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/GuiComponents/tests/nunit.uikit.tests.csproj	2014-09-16 12:22:59.286569205 +0100
-@@ -22,7 +22,6 @@
+@@ -22,7 +22,7 @@
      <UpgradeBackupLocation>
      </UpgradeBackupLocation>
      <OldToolsVersion>3.5</OldToolsVersion>
 -    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <PublishUrl>publish\</PublishUrl>
      <Install>true</Install>
      <InstallFrom>Disk</InstallFrom>
@@ -210,11 +220,12 @@ Index: nunit/src/GuiException/UiException/nunit.uiexception.dll.csproj
 ===================================================================
 --- nunit.orig/src/GuiException/UiException/nunit.uiexception.dll.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/GuiException/UiException/nunit.uiexception.dll.csproj	2014-09-16 12:12:56.978568913 +0100
-@@ -10,7 +10,6 @@
+@@ -10,7 +10,7 @@
      <AppDesignerFolder>Properties</AppDesignerFolder>
      <RootNamespace>NUnit.UiException</RootNamespace>
      <AssemblyName>nunit.uiexception</AssemblyName>
 -    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <FileAlignment>512</FileAlignment>
      <AssemblyOriginatorKeyFile>..\..\..\..\src\GuiException\UiException\stackSgKey.snk</AssemblyOriginatorKeyFile>
      <FileUpgradeFlags>
@@ -229,11 +240,12 @@ Index: nunit/src/GuiException/tests/nunit.uiexception.tests.csproj
 ===================================================================
 --- nunit.orig/src/GuiException/tests/nunit.uiexception.tests.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/GuiException/tests/nunit.uiexception.tests.csproj	2014-09-16 12:14:04.738568945 +0100
-@@ -15,7 +15,6 @@
+@@ -15,7 +15,7 @@
      <OldToolsVersion>3.5</OldToolsVersion>
      <UpgradeBackupLocation />
      <TargetFrameworkProfile />
 -    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <PublishUrl>publish\</PublishUrl>
      <Install>true</Install>
      <InstallFrom>Disk</InstallFrom>
@@ -248,11 +260,12 @@ Index: nunit/src/GuiRunner/nunit-gui-exe/nunit-gui.exe.csproj
 ===================================================================
 --- nunit.orig/src/GuiRunner/nunit-gui-exe/nunit-gui.exe.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/GuiRunner/nunit-gui-exe/nunit-gui.exe.csproj	2014-09-16 12:10:11.026568832 +0100
-@@ -26,7 +26,6 @@
+@@ -26,7 +26,7 @@
      <TargetZone>LocalIntranet</TargetZone>
      <GenerateManifests>false</GenerateManifests>
      <NoWin32Manifest>true</NoWin32Manifest>
 -    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <PublishUrl>http://localhost/nunit/</PublishUrl>
      <Install>true</Install>
      <InstallFrom>Web</InstallFrom>
@@ -267,11 +280,12 @@ Index: nunit/src/GuiRunner/nunit-gui/nunit-gui.csproj
 ===================================================================
 --- nunit.orig/src/GuiRunner/nunit-gui/nunit-gui.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/GuiRunner/nunit-gui/nunit-gui.csproj	2014-09-16 12:10:32.954568843 +0100
-@@ -22,7 +22,6 @@
+@@ -22,7 +22,7 @@
      <UpgradeBackupLocation>
      </UpgradeBackupLocation>
      <OldToolsVersion>3.5</OldToolsVersion>
 -    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <PublishUrl>publish\</PublishUrl>
      <Install>true</Install>
      <InstallFrom>Disk</InstallFrom>
@@ -286,11 +300,12 @@ Index: nunit/src/GuiRunner/tests/nunit-gui.tests.csproj
 ===================================================================
 --- nunit.orig/src/GuiRunner/tests/nunit-gui.tests.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/GuiRunner/tests/nunit-gui.tests.csproj	2014-09-16 12:10:53.566568853 +0100
-@@ -22,7 +22,6 @@
+@@ -22,7 +22,7 @@
      <UpgradeBackupLocation>
      </UpgradeBackupLocation>
      <OldToolsVersion>3.5</OldToolsVersion>
 -    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <PublishUrl>publish\</PublishUrl>
      <Install>true</Install>
      <InstallFrom>Disk</InstallFrom>
@@ -305,11 +320,12 @@ Index: nunit/src/NUnitCore/core/nunit.core.dll.csproj
 ===================================================================
 --- nunit.orig/src/NUnitCore/core/nunit.core.dll.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/NUnitCore/core/nunit.core.dll.csproj	2014-09-16 12:15:23.614568984 +0100
-@@ -23,7 +23,6 @@
+@@ -23,7 +23,7 @@
      </UpgradeBackupLocation>
      <OldToolsVersion>3.5</OldToolsVersion>
      <IsWebBootstrapper>true</IsWebBootstrapper>
 -    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <PublishUrl>http://localhost/nunit.core/</PublishUrl>
      <Install>true</Install>
      <InstallFrom>Web</InstallFrom>
@@ -324,11 +340,12 @@ Index: nunit/src/NUnitCore/interfaces/nunit.core.interfaces.dll.csproj
 ===================================================================
 --- nunit.orig/src/NUnitCore/interfaces/nunit.core.interfaces.dll.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/NUnitCore/interfaces/nunit.core.interfaces.dll.csproj	2014-09-16 12:12:18.722568894 +0100
-@@ -22,7 +22,6 @@
+@@ -22,7 +22,7 @@
      <UpgradeBackupLocation>
      </UpgradeBackupLocation>
      <OldToolsVersion>3.5</OldToolsVersion>
 -    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <PublishUrl>publish\</PublishUrl>
      <Install>true</Install>
      <InstallFrom>Disk</InstallFrom>
@@ -343,11 +360,12 @@ Index: nunit/src/NUnitCore/tests/nunit.core.tests.csproj
 ===================================================================
 --- nunit.orig/src/NUnitCore/tests/nunit.core.tests.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/NUnitCore/tests/nunit.core.tests.csproj	2014-09-16 12:16:56.182569029 +0100
-@@ -23,7 +23,6 @@
+@@ -23,7 +23,7 @@
      </UpgradeBackupLocation>
      <OldToolsVersion>3.5</OldToolsVersion>
      <IsWebBootstrapper>true</IsWebBootstrapper>
 -    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <PublishUrl>http://localhost/nunit.core.tests/</PublishUrl>
      <Install>true</Install>
      <InstallFrom>Web</InstallFrom>
@@ -362,11 +380,12 @@ Index: nunit/src/NUnitFramework/framework/nunit.framework.dll.csproj
 ===================================================================
 --- nunit.orig/src/NUnitFramework/framework/nunit.framework.dll.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/NUnitFramework/framework/nunit.framework.dll.csproj	2014-09-16 12:20:02.346569119 +0100
-@@ -22,7 +22,6 @@
+@@ -22,7 +22,7 @@
      <UpgradeBackupLocation>
      </UpgradeBackupLocation>
      <OldToolsVersion>3.5</OldToolsVersion>
 -    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <PublishUrl>publish\</PublishUrl>
      <Install>true</Install>
      <InstallFrom>Disk</InstallFrom>
@@ -381,11 +400,12 @@ Index: nunit/src/NUnitFramework/tests/nunit.framework.tests.csproj
 ===================================================================
 --- nunit.orig/src/NUnitFramework/tests/nunit.framework.tests.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/NUnitFramework/tests/nunit.framework.tests.csproj	2014-09-16 12:14:19.446568953 +0100
-@@ -22,7 +22,6 @@
+@@ -22,7 +22,7 @@
      <UpgradeBackupLocation>
      </UpgradeBackupLocation>
      <OldToolsVersion>3.5</OldToolsVersion>
 -    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <PublishUrl>publish\</PublishUrl>
      <Install>true</Install>
      <InstallFrom>Disk</InstallFrom>
@@ -400,11 +420,12 @@ Index: nunit/src/NUnitMocks/mocks/nunit.mocks.csproj
 ===================================================================
 --- nunit.orig/src/NUnitMocks/mocks/nunit.mocks.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/NUnitMocks/mocks/nunit.mocks.csproj	2014-09-16 12:14:52.486568969 +0100
-@@ -22,7 +22,6 @@
+@@ -22,7 +22,7 @@
      <UpgradeBackupLocation>
      </UpgradeBackupLocation>
      <OldToolsVersion>3.5</OldToolsVersion>
 -    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <PublishUrl>publish\</PublishUrl>
      <Install>true</Install>
      <InstallFrom>Disk</InstallFrom>
@@ -419,11 +440,12 @@ Index: nunit/src/NUnitMocks/tests/nunit.mocks.tests.csproj
 ===================================================================
 --- nunit.orig/src/NUnitMocks/tests/nunit.mocks.tests.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/NUnitMocks/tests/nunit.mocks.tests.csproj	2014-09-16 12:17:09.646569035 +0100
-@@ -22,7 +22,6 @@
+@@ -22,7 +22,7 @@
      <UpgradeBackupLocation>
      </UpgradeBackupLocation>
      <OldToolsVersion>3.5</OldToolsVersion>
 -    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <PublishUrl>publish\</PublishUrl>
      <Install>true</Install>
      <InstallFrom>Disk</InstallFrom>
@@ -438,11 +460,12 @@ Index: nunit/src/NUnitTestServer/nunit-agent-exe/nunit-agent.exe.csproj
 ===================================================================
 --- nunit.orig/src/NUnitTestServer/nunit-agent-exe/nunit-agent.exe.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/NUnitTestServer/nunit-agent-exe/nunit-agent.exe.csproj	2014-09-16 12:15:06.914568976 +0100
-@@ -23,7 +23,6 @@
+@@ -23,7 +23,7 @@
      </UpgradeBackupLocation>
      <OldToolsVersion>3.5</OldToolsVersion>
      <NoWin32Manifest>true</NoWin32Manifest>
 -    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <PublishUrl>publish\</PublishUrl>
      <Install>true</Install>
      <InstallFrom>Disk</InstallFrom>
@@ -457,11 +480,12 @@ Index: nunit/src/PNUnit/agent/pnunit-agent.csproj
 ===================================================================
 --- nunit.orig/src/PNUnit/agent/pnunit-agent.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/PNUnit/agent/pnunit-agent.csproj	2014-09-16 12:13:13.230568920 +0100
-@@ -29,7 +29,6 @@
+@@ -29,7 +29,7 @@
      <OldToolsVersion>3.5</OldToolsVersion>
      <UpgradeBackupLocation>
      </UpgradeBackupLocation>
 -    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <SccAuxPath>
      </SccAuxPath>
      <NoWin32Manifest>true</NoWin32Manifest>
@@ -476,11 +500,12 @@ Index: nunit/src/PNUnit/launcher/pnunit-launcher.csproj
 ===================================================================
 --- nunit.orig/src/PNUnit/launcher/pnunit-launcher.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/PNUnit/launcher/pnunit-launcher.csproj	2014-09-16 12:16:26.410569014 +0100
-@@ -31,7 +31,6 @@
+@@ -31,7 +31,7 @@
      <OldToolsVersion>3.5</OldToolsVersion>
      <UpgradeBackupLocation>
      </UpgradeBackupLocation>
 -    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <NoWin32Manifest>true</NoWin32Manifest>
      <PublishUrl>publish\</PublishUrl>
      <Install>true</Install>
@@ -495,11 +520,12 @@ Index: nunit/src/PNUnit/pnunit.framework/pnunit.framework.csproj
 ===================================================================
 --- nunit.orig/src/PNUnit/pnunit.framework/pnunit.framework.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/PNUnit/pnunit.framework/pnunit.framework.csproj	2014-09-16 12:16:09.926569006 +0100
-@@ -28,7 +28,6 @@
+@@ -28,7 +28,7 @@
      <OldToolsVersion>3.5</OldToolsVersion>
      <UpgradeBackupLocation>
      </UpgradeBackupLocation>
 -    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <SccAuxPath>
      </SccAuxPath>
      <PublishUrl>publish\</PublishUrl>
@@ -514,11 +540,12 @@ Index: nunit/src/PNUnit/tests/pnunit.tests.csproj
 ===================================================================
 --- nunit.orig/src/PNUnit/tests/pnunit.tests.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/PNUnit/tests/pnunit.tests.csproj	2014-09-16 12:16:41.186569021 +0100
-@@ -22,7 +22,6 @@
+@@ -22,7 +22,7 @@
      <UpgradeBackupLocation>
      </UpgradeBackupLocation>
      <OldToolsVersion>3.5</OldToolsVersion>
 -    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <PublishUrl>publish\</PublishUrl>
      <Install>true</Install>
      <InstallFrom>Disk</InstallFrom>
@@ -533,11 +560,12 @@ Index: nunit/src/ProjectEditor/editor/nunit-editor.csproj
 ===================================================================
 --- nunit.orig/src/ProjectEditor/editor/nunit-editor.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/ProjectEditor/editor/nunit-editor.csproj	2014-09-16 12:13:46.554568937 +0100
-@@ -10,7 +10,6 @@
+@@ -10,7 +10,7 @@
      <AppDesignerFolder>Properties</AppDesignerFolder>
      <RootNamespace>NUnit.ProjectEditor</RootNamespace>
      <AssemblyName>nunit-editor</AssemblyName>
 -    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <FileAlignment>512</FileAlignment>
      <ApplicationIcon>App.ico</ApplicationIcon>
      <FileUpgradeFlags>
@@ -552,11 +580,12 @@ Index: nunit/src/ProjectEditor/tests/nunit-editor.tests.csproj
 ===================================================================
 --- nunit.orig/src/ProjectEditor/tests/nunit-editor.tests.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/ProjectEditor/tests/nunit-editor.tests.csproj	2014-09-16 12:13:32.158568930 +0100
-@@ -11,7 +11,6 @@
+@@ -11,7 +11,7 @@
      <RootNamespace>NUnit.ProjectEditor.Tests</RootNamespace>
      <AssemblyName>nunit-editor.tests</AssemblyName>
      <FileAlignment>512</FileAlignment>
 -    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <FileUpgradeFlags>
      </FileUpgradeFlags>
      <OldToolsVersion>3.5</OldToolsVersion>
@@ -571,11 +600,12 @@ Index: nunit/src/tests/mock-assembly/mock-assembly.csproj
 ===================================================================
 --- nunit.orig/src/tests/mock-assembly/mock-assembly.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/tests/mock-assembly/mock-assembly.csproj	2014-09-16 12:24:34.550569251 +0100
-@@ -22,7 +22,6 @@
+@@ -22,7 +22,7 @@
      <UpgradeBackupLocation>
      </UpgradeBackupLocation>
      <OldToolsVersion>3.5</OldToolsVersion>
 -    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <PublishUrl>publish\</PublishUrl>
      <Install>true</Install>
      <InstallFrom>Disk</InstallFrom>
@@ -590,11 +620,12 @@ Index: nunit/src/tests/nonamespace-assembly/nonamespace-assembly.csproj
 ===================================================================
 --- nunit.orig/src/tests/nonamespace-assembly/nonamespace-assembly.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/tests/nonamespace-assembly/nonamespace-assembly.csproj	2014-09-16 12:14:37.074568961 +0100
-@@ -22,7 +22,6 @@
+@@ -22,7 +22,7 @@
      <UpgradeBackupLocation>
      </UpgradeBackupLocation>
      <OldToolsVersion>3.5</OldToolsVersion>
 -    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <PublishUrl>publish\</PublishUrl>
      <Install>true</Install>
      <InstallFrom>Disk</InstallFrom>
@@ -609,11 +640,12 @@ Index: nunit/src/tests/test-assembly/test-assembly.csproj
 ===================================================================
 --- nunit.orig/src/tests/test-assembly/test-assembly.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/tests/test-assembly/test-assembly.csproj	2014-09-16 12:24:06.446569237 +0100
-@@ -23,7 +23,6 @@
+@@ -23,7 +23,7 @@
      </UpgradeBackupLocation>
      <OldToolsVersion>3.5</OldToolsVersion>
      <IsWebBootstrapper>true</IsWebBootstrapper>
 -    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <PublishUrl>http://localhost/test-assembly/</PublishUrl>
      <Install>true</Install>
      <InstallFrom>Web</InstallFrom>
@@ -628,11 +660,12 @@ Index: nunit/src/tests/test-utilities/test-utilities.csproj
 ===================================================================
 --- nunit.orig/src/tests/test-utilities/test-utilities.csproj	2014-09-16 12:08:47.414568792 +0100
 +++ nunit/src/tests/test-utilities/test-utilities.csproj	2014-09-16 12:24:21.502569244 +0100
-@@ -22,7 +22,6 @@
+@@ -22,7 +22,7 @@
      <UpgradeBackupLocation>
      </UpgradeBackupLocation>
      <OldToolsVersion>3.5</OldToolsVersion>
 -    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <PublishUrl>publish\</PublishUrl>
      <Install>true</Install>
      <InstallFrom>Disk</InstallFrom>
@@ -647,11 +680,12 @@ Index: nunit/src/NUnitCore/tests-net45/nunit.core.tests.net45.csproj
 ===================================================================
 --- nunit.orig/src/NUnitCore/tests-net45/nunit.core.tests.net45.csproj	2014-09-16 11:47:13.986568164 +0100
 +++ nunit/src/NUnitCore/tests-net45/nunit.core.tests.net45.csproj	2014-09-16 12:25:54.506569290 +0100
-@@ -9,7 +9,6 @@
+@@ -9,7 +9,7 @@
      <AppDesignerFolder>Properties</AppDesignerFolder>
      <RootNamespace>nunit.core.tests.net45</RootNamespace>
      <AssemblyName>nunit.core.tests.45</AssemblyName>
 -    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <FileAlignment>512</FileAlignment>
      <TargetFrameworkProfile />
    </PropertyGroup>
@@ -666,11 +700,12 @@ Index: nunit/src/NUnitFramework/tests-net45/nunit.framework.tests.net45.csproj
 ===================================================================
 --- nunit.orig/src/NUnitFramework/tests-net45/nunit.framework.tests.net45.csproj	2014-09-16 11:47:14.010568164 +0100
 +++ nunit/src/NUnitFramework/tests-net45/nunit.framework.tests.net45.csproj	2014-09-16 12:27:08.190569325 +0100
-@@ -9,7 +9,6 @@
+@@ -9,7 +9,7 @@
      <AppDesignerFolder>Properties</AppDesignerFolder>
      <RootNamespace>nunit.framework.tests.net45</RootNamespace>
      <AssemblyName>nunit.framework.tests.net45</AssemblyName>
 -    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <FileAlignment>512</FileAlignment>
      <TargetFrameworkProfile />
    </PropertyGroup>
@@ -685,11 +720,12 @@ Index: nunit/src/tests/test-assembly-net45/test-assembly-net45.csproj
 ===================================================================
 --- nunit.orig/src/tests/test-assembly-net45/test-assembly-net45.csproj	2014-09-16 11:47:14.034568164 +0100
 +++ nunit/src/tests/test-assembly-net45/test-assembly-net45.csproj	2014-09-16 12:26:39.338569311 +0100
-@@ -9,7 +9,6 @@
+@@ -9,7 +9,7 @@
      <AppDesignerFolder>Properties</AppDesignerFolder>
      <RootNamespace>test_assembly_net45</RootNamespace>
      <AssemblyName>test-assembly-net45</AssemblyName>
 -    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
++    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
      <FileAlignment>512</FileAlignment>
    </PropertyGroup>
    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
