@@ -11,6 +11,7 @@ class Recipe(recipe.Recipe):
     btype = BuildType.CUSTOM
     url = 'http://www.dynamicdevices.co.uk/downloads/Mono-3.10.0.zip'
     tarball_dirname = 'Mono-%(version)s'
+    files_config = ['etc/mono/config', 'etc/mono/4.5/machine.config']
 
     _mono = [
         'bin/al',
