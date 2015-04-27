@@ -34,6 +34,8 @@ class Package(package.Package):
             'lib/mono/4.5/System.Security.dll',
             'lib/mono/4.5/System.Xml.dll',
             'lib/mono/4.5/System.Xml.Linq.dll',
+            'lib/mono/4.5/System.Xaml.dll',
+            'lib/mono/4.5/WindowsBase.dll',
         ]
         if self.config.target_platform == Platform.LINUX:
             prefix = self.config.prefix
