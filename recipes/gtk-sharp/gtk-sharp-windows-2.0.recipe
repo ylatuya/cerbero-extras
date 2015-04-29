@@ -38,7 +38,8 @@ class Recipe(recipe.Recipe):
             raise InvalidRecipeError()
 
     def install(self):
-        mono_prefix_dir = os.path.join(os.environ['PROGRAMFILES(X86)'], "mono")
+        mono_prefix_dir = os.path.join(os.environ.get ('PROGRAMFILES(X86)',
+            os.environ['PROGRAMFILES']), "mono")
         if not os.path.exists(mono_prefix_dir):
             m.error("ERROR: Mono 3.12 not found!")
             raise FatalError("Mono 3.12 not found!")
