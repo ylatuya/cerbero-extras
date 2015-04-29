@@ -19,12 +19,12 @@ class Recipe(recipe.Recipe):
     ]
 
     files_mono = [
-        'lib/mono/gtk-sharp-2.0/atk-sharp.dll',
-        'lib/mono/gtk-sharp-2.0/gtk-sharp.dll',
-        'lib/mono/gtk-sharp-2.0/gdk-sharp.dll',
-        'lib/mono/gtk-sharp-2.0/pango-sharp.dll',
-        'lib/mono/gtk-sharp-2.0/glib-sharp.dll',
-        'lib/mono/gtk-sharp-2.0/glade-sharp.dll',
+        'lib/gtk-sharp-2.0/atk-sharp.dll',
+        'lib/gtk-sharp-2.0/gtk-sharp.dll',
+        'lib/gtk-sharp-2.0/gdk-sharp.dll',
+        'lib/gtk-sharp-2.0/pango-sharp.dll',
+        'lib/gtk-sharp-2.0/glib-sharp.dll',
+        'lib/gtk-sharp-2.0/glade-sharp.dll',
     ]
 
     files_mono_devel = [
@@ -38,12 +38,10 @@ class Recipe(recipe.Recipe):
             raise InvalidRecipeError()
 
     def install(self):
-        mono_prefix_dir = 'c:/Program Files (x86)/Mono-3.2.3'
+        mono_prefix_dir = os.path.join(os.environ['PROGRAMFILES(X86)'], "mono")
         if not os.path.exists(mono_prefix_dir):
-            mono_prefix_dir = 'c:/Program Files/Mono-3.2.3'
-            if not os.path.exists(mono_prefix_dir):
-                m.error("ERROR: Mono not found!")
-                raise FatalError("Mono not found!")
+            m.error("ERROR: Mono 3.12 not found!")
+            raise FatalError("Mono 3.12 not found!")
 
         for f in self.files_glue + self.files_mono + self.files_mono_devel:
             src = os.path.join(mono_prefix_dir, f)
@@ -55,8 +53,5 @@ class Recipe(recipe.Recipe):
                     os.makedirs(os.path.dirname(dest))
                 shutil.copy(src, dest)
 
-        monodir = os.path.join(self.config.prefix, 'lib', 'mono')
-        for d in ['atk', 'gdk', 'glade', 'glib', 'gtk', 'pango']:
-            gtkdir = os.path.join(monodir, 'gtk-sharp-2.0')
-            apath = os.path.join(gtkdir, '%s-sharp.dll' % d)
-            shell.call('gacutil -i %s' % apath)
+        for d in self.files_mono:
+            shell.call('gacutil -i %s' % os.path.join(self.config.prefix, d))
