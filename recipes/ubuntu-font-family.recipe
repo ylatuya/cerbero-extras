@@ -18,3 +18,15 @@ class Recipe(recipe.Recipe):
             if not f.endswith(".ttf"):
                 continue
             shutil.copy(os.path.join(self.build_dir, f), fonts_dir)
+
+        if self.config.target_platform == Platform.WINDOWS:
+            pango_aliases_filename = os.path.join(self.config.prefix, 'etc', 'pango', 'pango.aliases')
+            with open(pango_aliases_filename,'w') as f:
+                f.write('ubuntu = ubuntu\n')
+                # Simplified Chinese fonts
+                f.write('ubuntu += "NSimSun"\n')
+                f.write('ubuntu += "SimSun"\n')
+                # Japanese fonts
+                f.write('ubuntu += "MS PMincho"\n')
+                f.write('ubuntu += "MS Mincho"\n')
+            self.files_fonts.append(pango_aliases_filename)
