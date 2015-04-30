@@ -9,6 +9,9 @@ class Recipe(recipe.Recipe):
     btype = BuildType.CUSTOM
     url = 'http://font.ubuntu.com/download/ubuntu-font-family-%s.zip' % version
     files_fonts = [ 'share/fonts/truetype/ubuntu-font-family' ]
+    platform_files_fonts = {
+        Platform.WINDOWS: ['etc/pango/pango.aliases'],
+    }
 
     def install(self):
         fonts_dir = os.path.join(self.config.prefix, 'share', 'fonts', 'truetype', 'ubuntu-font-family')
@@ -29,4 +32,3 @@ class Recipe(recipe.Recipe):
                 # Japanese fonts
                 f.write('ubuntu += "MS PMincho"\n')
                 f.write('ubuntu += "MS Mincho"\n')
-            self.files_fonts.append(pango_aliases_filename)
