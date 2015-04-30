@@ -28,7 +28,7 @@
 +  etc_path = g_build_filename (exe_path, "etc", NULL);
 +  mono_lib_path = g_build_filename (exe_path, "lib", "mono", "4.5",
 +      NULL);
-+  gtk_path  = g_build_filename (exe_path, "lib", "mono",
++  gtk_path  = g_build_filename (exe_path, "lib",
 +      "gtk-sharp-2.0", NULL);
 +  db40_path = g_build_filename (exe_path, "lib", "cli", "Db4objects.Db4o-8.0",
 +      NULL);
