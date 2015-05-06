@@ -11,7 +11,6 @@ class Recipe(recipe.Recipe):
     btype = BuildType.CUSTOM
     url = 'http://www.dynamicdevices.co.uk/downloads/Mono-3.10.0.zip'
     tarball_dirname = 'Mono-%(version)s'
-    files_config = ['etc/mono/config', 'etc/mono/4.5/machine.config']
 
     _mono = [
         'bin/al',
@@ -46,7 +45,7 @@ class Recipe(recipe.Recipe):
     files_bins = ['mono-sgen']
     files_libs = ['libmonosgen-2.0']
     files_posix_helper = ['%(sdir)s/libMonoPosixHelper%(srext)s']
-    files_config = ['etc/mono/config']
+    files_config = ['etc/mono/config', 'etc/mono/4.5/machine.config']
 
     def prepare(self):
         if self.config.target_platform != Platform.WINDOWS:
