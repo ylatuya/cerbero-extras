@@ -30,14 +30,14 @@ class Recipe(recipe.Recipe):
     ]
 
     def compile(self):
-        shell.call('xbuild src/Couchbase.Lite.sln /target:Couchbase_Lite_Mono',
+        shell.call('xbuild src/Couchbase.Lite.sln /target:Couchbase_Lite_Net45',
             self.build_dir)
 
     def install(self):
         destdir = os.path.join(self.config.prefix, 'lib/cli/Couchbase.Lite-1.0')
         if not os.path.exists(destdir):
             os.makedirs(destdir)
-        shell.call('cp src/Couchbase.Lite.Mono/bin/Release/*.dll %s' % destdir,
+        shell.call('cp src/Couchbase.Lite.Net45/bin/Debug/*.dll %s' % destdir,
             self.build_dir)
         pc_file = os.path.join(self.config.prefix, 'lib/pkgconfig/couchbase-lite.pc')
         with open(pc_file, 'w+') as f:
