@@ -5,4 +5,4 @@ libdir=${exec_prefix}/lib
 Name: Newtonsoft.Json
 Description: A high-performance JSON framework for .NET
 Version: @VERSION@
-Libs: -r:${libdir}/cli/Newtonsoft.Json-5.0/Newtonsoft.Json.dll
+Libs: -r:${libdir}/cli/Newtonsoft.Json-6.0/Newtonsoft.Json.dll

@@ -2,7 +2,7 @@
 
 class Recipe(recipe.Recipe):
     name = 'Newtonsoft.Json'
-    version = '5.0.8'
+    version = '6.0.8'
     licenses = [License.LGPL]
     stype = SourceType.TARBALL
     btype = BuildType.CUSTOM
@@ -10,7 +10,7 @@ class Recipe(recipe.Recipe):
     url = 'https://github.com/JamesNK/Newtonsoft.Json/archive/%(version)s.tar.gz'
     patches = ['newtonsoft-json/0001-Fix-build-with-the-Client-target-profile.patch']
     config_sh = 'sh autogen.sh'
-    files_cli = ['lib/cli/Newtonsoft.Json-5.0/Newtonsoft.Json.dll']
+    files_cli = ['lib/cli/Newtonsoft.Json-6.0/Newtonsoft.Json.dll']
 
     def compile(self):
         shell.call('xbuild Src/Newtonsoft.Json/Newtonsoft.Json.Net40.csproj ' \
@@ -21,7 +21,7 @@ class Recipe(recipe.Recipe):
             self.build_dir)
 
     def install(self):
-        destdir = os.path.join(self.config.prefix, 'lib/cli/Newtonsoft.Json-5.0')
+        destdir = os.path.join(self.config.prefix, 'lib/cli/Newtonsoft.Json-6.0')
         if not os.path.exists(destdir):
             os.makedirs(destdir)
         shell.call('cp Src/Newtonsoft.Json/bin/Release/Net40/Newtonsoft.Json.dll %s' % destdir,
