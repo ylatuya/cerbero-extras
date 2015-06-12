@@ -23,10 +23,6 @@ export GTK2_RC_FILES=$PREFIX/etc/gtk-2.0/gtkrc
 # FontConfig
 export FONTCONFIG_PATH="$PREFIX/etc/fonts"
 
-# To prevent a crash in GSettings
-export XDG_DATA_DIRS=$PREFIX/share
-export XDG_CONFIG_DIRS=$PREFIX/etc/xdg
-
 export GDK_PIXBUF_MODULEDIR=$PREFIX/lib/gdk-pixbuf-2.0/2.10.0/loaders/
 export GDK_PIXBUF_MODULE_FILE=$PREFIX/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache
 
