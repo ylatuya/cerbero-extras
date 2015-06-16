@@ -17,6 +17,7 @@ class Recipe(recipe.Recipe):
                    '/property:SignAssembly=true ' \
                    '/property:AssemblyOriginatorKeyFile=Dynamic.snk ' \
                    '/property:Configuration=Release ' \
+                   '/property:TargetFrameworkVersion="v4.5" ' \
                    '/property:DefineConstants=\'SIGNED NET40 TRACE\' ',
             self.build_dir)
 
