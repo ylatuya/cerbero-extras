@@ -7,9 +7,9 @@ class Recipe(recipe.Recipe):
     licenses = [License.LGPLv2Plus]
     config_sh = 'sh ./autogen.sh --noconfigure && ./configure'
     configure_options = "--disable-introspection --disable-examples --disable-iec958 --disable-mpegstream --disable-cdio --disable-sidplay --disable-twolame --with-package-origin='http://www.gstreamer.com' --with-package-name='GStreamer Ugly Plugins (GStreamer SDK)' "
-    remotes = {'upstream': 'git://anongit.freedesktop.org/gstreamer/gst-plugins-ugly'}
+    remotes = {'origin': 'git@github.com:fluendo/gst-plugins-ugly'}
     deps = ['gstreamer', 'gst-plugins-base', 'a52dec', 'opencore-amr',
-            'libdvdread', 'libmpeg2', 'libmad', 'x264', 'faac', 'lame']
+            'libmpeg2', 'libmad', 'x264', 'faac', 'lame']
 
     files_plugins_codecs_restricted = [
              'lib/gstreamer-0.10/libgsta52dec%(mext)s',
@@ -27,7 +27,6 @@ class Recipe(recipe.Recipe):
 
     files_plugins_dvd = [
              'lib/gstreamer-0.10/libgstdvdlpcmdec%(mext)s',
-             'lib/gstreamer-0.10/libgstdvdread%(mext)s',
     ]
 
     files_lang = ['gst-plugins-ugly-0.10']
