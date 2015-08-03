@@ -38,11 +38,11 @@ class Recipe(recipe.Recipe):
             raise InvalidRecipeError()
 
     def install(self):
-        mono_prefix_dir = os.path.join(os.environ.get ('PROGRAMFILES(X86)',
-            os.environ['PROGRAMFILES']), "mono")
+        pf = os.environ.get('PROGRAMFILES(X86)', os.environ['PROGRAMFILES'])
+        mono_prefix_dir = os.path.join(pf, 'Mono')
         if not os.path.exists(mono_prefix_dir):
-            m.error("ERROR: Mono 3.12 not found!")
-            raise FatalError("Mono 3.12 not found!")
+            m.error("ERROR: Mono not found!")
+            raise FatalError("Mono not found!")
 
         for f in self.files_glue + self.files_mono + self.files_mono_devel:
             src = os.path.join(mono_prefix_dir, f)
@@ -54,5 +54,7 @@ class Recipe(recipe.Recipe):
                     os.makedirs(os.path.dirname(dest))
                 shutil.copy(src, dest)
 
-        for d in self.files_mono:
-            shell.call('gacutil -i %s' % os.path.join(self.config.prefix, d))
+        gtkdir = os.path.join(self.config.prefix, 'lib', 'gtk-sharp-2.0')
+        for d in ['atk', 'gdk', 'glade', 'glib', 'gtk', 'pango']:
+            apath = os.path.join(gtkdir, '%s-sharp.dll' % d)
+            shell.call('gacutil -i %s' % apath)
