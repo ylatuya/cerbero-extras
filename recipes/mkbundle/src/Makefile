@@ -8,5 +8,5 @@ SOURCES= \
 	reflect/Impl/*.cs
 
 all:
-	dmcs -out:mkbundle.exe -target:exe -r:System.Security -resource:template.c -resource:template_main.c ${SOURCES}
+	mcs -out:mkbundle.exe -target:exe -r:System.Security -resource:template.c -resource:template_main.c ${SOURCES}
 
