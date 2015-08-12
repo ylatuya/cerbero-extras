@@ -32,7 +32,7 @@
 +      "gtk-sharp-2.0", NULL);
 +  db40_path = g_build_filename (exe_path, "lib", "cli", "Db4objects.Db4o-8.0",
 +      NULL);
-+  json_path = g_build_filename (exe_path, "lib", "cli", "Newtonsoft.Json-5.0",
++  json_path = g_build_filename (exe_path, "lib", "cli", "Newtonsoft.Json-6.0",
 +      NULL);
 +  addins_path = g_build_filename (exe_path, "lib", "mono",
 +      "mono-addins", NULL);
