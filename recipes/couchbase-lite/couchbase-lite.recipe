@@ -1,4 +1,5 @@
 # -*- Mode: Python -*- vi:si:et:sw=4:sts=4:ts=4:syntax=python
+import shutil
 
 PC_TPL ='''\
 prefix=${pcfiledir}/../..
@@ -32,6 +33,9 @@ class Recipe(recipe.Recipe):
     def compile(self):
         shell.call('xbuild src/Couchbase.Lite.sln /target:Couchbase_Lite_Net45 '
                    '/property:Configuration=Release', self.build_dir)
+        shutil.copy(self.relative_path('couchbase-lite.nuspec'), self.build_dir)
+        shell.call('mono src/.nuget/NuGet.exe pack -BasePath . couchbase-lite.nuspec',
+                self.build_dir)
 
     def install(self):
         destdir = os.path.join(self.config.prefix, 'lib/cli/Couchbase.Lite-1.0')
@@ -42,4 +46,9 @@ class Recipe(recipe.Recipe):
         pc_file = os.path.join(self.config.prefix, 'lib/pkgconfig/couchbase-lite.pc')
         with open(pc_file, 'w+') as f:
             f.write(PC_TPL % self.version)
+        nugetdir = os.path.join(self.config.prefix, 'share', 'nuget')
+        if not os.path.exists(nugetdir):
+            os.makedirs(nugetdir)
+        shutil.copy(os.path.join(self.build_dir, 'Couchbase.Lite.LM.1.0.4.1.nupkg'),
+                nugetdir)
 
