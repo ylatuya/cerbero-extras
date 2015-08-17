@@ -2,7 +2,7 @@
 import shutil
 
 from cerbero.errors import FatalError
-from cerbero.utils import shell
+from cerbero.utils import shell, to_winpath
 from cerbero.build.build import modify_environment
 from cerbero.build.filesprovider import FilesProvider
 
@@ -95,6 +95,10 @@ class Recipe(recipe.Recipe):
                 self.new_env['AS'] = 'as -arch i386'
             cc = os.environ.get('CC', 'gcc')
             self.new_env['CC'] = '%s %s' % (cc, os.environ['CFLAGS'])
+        if self.config.target_platform == Platform.WINDOWS:
+            self.configure_tpl = "%%(config-sh)s --prefix %s "\
+                "--libdir %%(libdir)s %%(options)s" % \
+                to_winpath(self.config.prefix)
 
     def _search_langfiles(self, files):
         fs = []
