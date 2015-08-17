@@ -23,7 +23,6 @@ class Recipe(recipe.Recipe):
         Platform.WINDOWS: ['mkbundle'],
         }
 
-    files_bins = ['avconv']
     platform_files_libs = {
         Platform.LINUX: ['libcesarplayer'],
         Platform.DARWIN: ['libcesarplayer'],
@@ -34,10 +33,29 @@ class Recipe(recipe.Recipe):
              'pt_BR', 'ro', 'ru', 'sr', 'sr@latin', 'sv', 'zh_CN', 'ja']
 
     files_share = ['share/longomatch']
+    files_devel = [
+        'lib/pkgconfig/longomatch-addins.pc',
+        'lib/pkgconfig/longomatch-core.pc',
+        'lib/pkgconfig/longomatch-drawing-cairo.pc',
+        'lib/pkgconfig/longomatch-drawing.pc',
+        'lib/pkgconfig/longomatch-gui-helpers.pc',
+        'lib/pkgconfig/longomatch-gui-multimedia.pc',
+        'lib/pkgconfig/longomatch-gui.pc',
+        'lib/pkgconfig/longomatch-multimedia.pc',
+        'lib/pkgconfig/longomatch-oxyplot.pc',
+        'lib/pkgconfig/longomatch-services.pc',
+    ]
     files_longomatch = [
+        'lib/longomatch/Couchbase.Lite.dll',
+        'lib/longomatch/Newtonsoft.Json.dll',
+        'lib/longomatch/SQLitePCL.raw.dll',
+        'lib/longomatch/SQLitePCL.ugly.dll',
         'lib/longomatch/LongoMatch.Addins.dll',
-        'lib/longomatch/LongoMatch.Addins.dll.mdb',
+        'lib/longomatch/LongoMatch.Addins.mdb',
+        'lib/longomatch/LongoMatch.DB.dll',
+        'lib/longomatch/LongoMatch.DB.dll.mdb',
         'lib/longomatch/LongoMatch.GUI.Multimedia.dll',
+        'lib/longomatch/LongoMatch.GUI.Multimedia.dll.mdb',
         'lib/longomatch/LongoMatch.GUI.dll',
         'lib/longomatch/LongoMatch.GUI.dll.mdb',
         'lib/longomatch/LongoMatch.GUI.Helpers.dll',
@@ -55,10 +73,15 @@ class Recipe(recipe.Recipe):
         'lib/longomatch/LongoMatch.Core.dll',
         'lib/longomatch/LongoMatch.Core.dll.mdb',
         'lib/longomatch/OxyPlotMono.dll',
+        'lib/longomatch/OxyPlotMono.dll.mdb',
         'lib/longomatch/LongoMatch.exe',
+        'lib/longomatch/LongoMatch.exe.mdb',
         'lib/longomatch/migration/LongoMatch.exe',
+        'lib/longomatch/migration/LongoMatch.exe.mdb',
         'lib/longomatch/plugins/LongoMatch.Plugins.dll',
+        'lib/longomatch/plugins/LongoMatch.Plugins.dll.mdb',
         'lib/longomatch/plugins/LongoMatch.Plugins.Stats.dll',
+        'lib/longomatch/plugins/LongoMatch.Plugins.Stats.dll.mdb',
     ]
     platform_files_longomatch = {
         # We need a copy of LongoMatch.Addins in the same folder as LongoMatch.exe

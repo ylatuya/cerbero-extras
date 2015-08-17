@@ -10,7 +10,6 @@ class Package(package.Package):
     files = ['ubuntu-font-family:fonts',
              'gtk-sharp',
              'libglade:libs',
-             'Newtonsoft.Json:cli',
              'db4o:cli',
              'mono-addins:cli',
              ]
