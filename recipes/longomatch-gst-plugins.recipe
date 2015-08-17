@@ -5,17 +5,14 @@ from cerbero.build.cookbook import CookBook
 class Recipe(recipe.Recipe):
     name = 'longomatch-gstreamer-plugins'
     version = '1.0.0'
-    stype = SourceType.GIT
-    remotes = {'github': 'https://github.com/ylatuya/longomatch.git',
-               'gnome': 'git://git.gnome.org/longomatch'}
-    commit = 'github/master'
-    deps = ['longomatch']
-    config_sh = 'sh autogen.sh'
-    make_install = 'make -C LongoMatch.Plugins.GStreamer install'
+    stype = SourceType.CUSTOM
+    btype = BuildType.CUSTOM
     deps = ['longomatch', 'gst-plugins-bad', 'gst-plugins-ugly', 'gst-ffmpeg']
 
     files_longomatch = [
-        'lib/longomatch/plugins/LongoMatch.Plugins.GStreamer'
+        'lib/longomatch/plugins/LongoMatch.Plugins.GStreamer.dll',
+        'lib/longomatch/plugins/LongoMatch.Plugins.GStreamer.dll.config',
+        'lib/longomatch/plugins/LongoMatch.Plugins.GStreamer.dll.mdb',
     ]
 
     _files = ['a52dec:libs', 'opencore-amr:libs', 'libmad:libs', 'libmpeg2:libs',
@@ -25,7 +22,6 @@ class Recipe(recipe.Recipe):
               'gst-plugins-bad:plugins_codecs_restricted']
 
     def prepare(self):
-        self.repo_dir = os.path.join(self.config.local_sources, 'longomatch')
         self.pluginsdir = 'lib/longomatch/plugins/gstreamer-0.10'
 
     def dist_files_list(self):
