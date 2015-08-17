@@ -51,7 +51,7 @@ class Recipe(recipe.Recipe):
         'lib/longomatch/SQLitePCL.raw.dll',
         'lib/longomatch/SQLitePCL.ugly.dll',
         'lib/longomatch/LongoMatch.Addins.dll',
-        'lib/longomatch/LongoMatch.Addins.mdb',
+        'lib/longomatch/LongoMatch.Addins.dll.mdb',
         'lib/longomatch/LongoMatch.DB.dll',
         'lib/longomatch/LongoMatch.DB.dll.mdb',
         'lib/longomatch/LongoMatch.GUI.Multimedia.dll',
