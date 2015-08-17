@@ -14,6 +14,7 @@ class Recipe(recipe.Recipe):
                'gnome': 'git://git.gnome.org/longomatch'}
     commit = 'github/master'
     config_sh = 'sh autogen.sh'
+    configure_options = '--without-multimedia-tools'
     deps = ['gstreamer', 'gst-plugins-base', 'libav', 'Newtonsoft.Json', 'librsvg', 'ubuntu-font-family',
             'mono', 'mono-addins', 'db4o', 'gtk-sharp', 'NUnit', 'XR.Baboon',
             'Moq', 'Couchbase.Lite']
