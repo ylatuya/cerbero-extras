@@ -33,7 +33,12 @@ class Recipe(recipe.Recipe):
     def compile(self):
         shell.call('xbuild src/Couchbase.Lite.sln /target:Couchbase_Lite_Net45 '
                    '/property:Configuration=Release', self.build_dir)
-        shutil.copy(self.relative_path('couchbase-lite.nuspec'), self.build_dir)
+        if self.config.platform == Platform.WINDOWS:
+            spec = 'couchbase-lite-win.nuspec'
+        else:
+            spec = 'couchbase-lite.nuspec'
+        shutil.copy(self.relative_path(spec),
+                os.path.join(self.build_dir, 'couchbase-lite.nuspec'))
         shell.call('mono src/.nuget/NuGet.exe pack -BasePath . couchbase-lite.nuspec',
                 self.build_dir)
 
