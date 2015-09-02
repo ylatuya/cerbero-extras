@@ -14,7 +14,7 @@ class Recipe(recipe.Recipe):
 
     def compile(self):
         shell.download('http://nuget.org/nuget.exe',
-                os.path.join(self.build_dir, 'NuGet.exe'))
+                os.path.join(self.build_dir, 'NuGet.exe'), check_cert=False)
         for conf in ['NuGet/packages.config']:
             shell.call('mono NuGet.exe restore -SolutionDirectory . %s' % conf,
                     self.build_dir)
