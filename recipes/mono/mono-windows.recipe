@@ -5,7 +5,7 @@ from cerbero.utils import shell
 
 class Recipe(recipe.Recipe):
     name = 'mono'
-    version = '4.0.2'
+    version = '4.0.3'
     licenses = [License.LGPL]
     stype = SourceType.CUSTOM
     btype = BuildType.CUSTOM
@@ -15,17 +15,12 @@ class Recipe(recipe.Recipe):
         'bin/mcs',
         'bin/mcs.bat',
         'bin/dmcs',
-        'bin/dmcs.bat',
-        'bin/gmcs',
-        'bin/gmcs.bat',
         'bin/gacutil',
-        'bin/gluezilla.dll',
         'bin/intl.dll',
         'bin/monosgen-2.0.dll',
         'bin/mono-sgen.exe',
         'bin/libMonoPosixHelper.dll',
         'bin/resgen',
-        'bin/sqlite3.dll',
         'bin/xbuild',
         'bin/zlib1.dll',
         'etc/mono',
@@ -68,6 +63,8 @@ class Recipe(recipe.Recipe):
                 if not os.path.exists(os.path.dirname(dest)):
                     os.makedirs(os.path.dirname(dest))
                 shutil.copy(src, dest)
+            else:
+                print "WARNING: %s not found" % f
         shutil.copy(os.path.join(self.config.prefix, 'bin', 'mono-sgen.exe'),
                     os.path.join(self.config.prefix, 'bin', 'mono.exe'))
         shutil.copy(os.path.join(self.config.prefix, 'bin', 'mcs'),
