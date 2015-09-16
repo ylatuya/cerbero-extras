@@ -28,6 +28,7 @@ class Package(package.Package):
             'lib/mono/4.5/System.Core.dll',
             'lib/mono/4.5/System.Data.dll',
             'lib/mono/4.5/System.Drawing.dll',
+            'lib/mono/4.5/System.Net.Http.dll',
             'lib/mono/4.5/System.Numerics.dll',
             'lib/mono/4.5/System.Runtime.Serialization.dll',
             'lib/mono/4.5/System.Security.dll',
