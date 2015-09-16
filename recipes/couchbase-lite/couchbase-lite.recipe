@@ -1,5 +1,6 @@
 # -*- Mode: Python -*- vi:si:et:sw=4:sts=4:ts=4:syntax=python
 import shutil
+from cerbero.build.build import modify_environment
 
 PC_TPL ='''\
 prefix=${pcfiledir}/../..
@@ -30,11 +31,29 @@ class Recipe(recipe.Recipe):
       'lib/cli/Couchbase.Lite-1.0/SQLitePCL.ugly.dll'
     ]
 
+    def prepare(self):
+        super(Recipe, self).prepare()
+        self.append_env = {}
+        self.new_env =  {}
+        if self.config.platform == Platform.DARWIN:
+            self.append_env = {}
+            self.new_env =  {'MONO_PATH' : None}
+
+    @modify_environment
     def compile(self):
         shell.call('xbuild src/Couchbase.Lite.sln /target:Couchbase_Lite_Net45 '
                    '/property:Configuration=Release', self.build_dir)
+        if self.config.platform == Platform.DARWIN:
+            shell.call('/Applications/Xamarin\ Studio.app/Contents/MacOS/mdtool '
+                   'build -c:Release src/Couchbase.Lite.iOS/Couchbase.Lite.iOS.csproj',
+                   self.build_dir) 
+            shell.call('/Applications/Xamarin\ Studio.app/Contents/MacOS/mdtool '
+                   'build -c:Release src/Couchbase.Lite.Android/Couchbase.Lite.Android.csproj',
+                   self.build_dir) 
         if self.config.platform == Platform.WINDOWS:
             spec = 'couchbase-lite-win.nuspec'
+        elif self.config.platform == Platform.DARWIN:
+            spec = 'couchbase-lite-osx.nuspec'
         else:
             spec = 'couchbase-lite.nuspec'
         shutil.copy(self.relative_path(spec),
