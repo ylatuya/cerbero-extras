@@ -51,7 +51,7 @@ class Recipe(recipe.Recipe):
         'lib/longomatch/SQLitePCL.raw.dll',
         'lib/longomatch/SQLitePCL.ugly.dll',
         'lib/longomatch/ICSharpCode.SharpZipLib.dll',
-        'lib/longomatch/PropertyChanged.Fody.dll',
+        'lib/longomatch/PropertyChanged.dll',
         'lib/longomatch/LongoMatch.Addins.dll',
         'lib/longomatch/LongoMatch.Addins.dll.mdb',
         'lib/longomatch/LongoMatch.DB.dll',
