@@ -45,12 +45,15 @@ class Recipe(recipe.Recipe):
         shell.call('xbuild src/Couchbase.Lite.sln /target:Couchbase_Lite_Net45 '
                    '/property:Configuration=Release', self.build_dir)
         if self.config.platform == Platform.DARWIN:
-            shell.call('/Applications/Xamarin\ Studio.app/Contents/MacOS/mdtool '
-                   'build -c:Release src/Couchbase.Lite.iOS/Couchbase.Lite.iOS.csproj',
-                   self.build_dir) 
-            shell.call('/Applications/Xamarin\ Studio.app/Contents/MacOS/mdtool '
-                   'build -c:Release src/Couchbase.Lite.Android/Couchbase.Lite.Android.csproj',
-                   self.build_dir) 
+            try:
+                shell.call('/Applications/Xamarin\ Studio.app/Contents/MacOS/mdtool '
+                       'build -c:Release src/Couchbase.Lite.iOS/Couchbase.Lite.iOS.csproj',
+                       self.build_dir)
+                shell.call('/Applications/Xamarin\ Studio.app/Contents/MacOS/mdtool '
+                       'build -c:Release src/Couchbase.Lite.Android/Couchbase.Lite.Android.csproj',
+                       self.build_dir)
+            except:
+                pass
         if self.config.platform == Platform.WINDOWS:
             spec = 'couchbase-lite-win.nuspec'
         elif self.config.platform == Platform.DARWIN:
@@ -59,8 +62,11 @@ class Recipe(recipe.Recipe):
             spec = 'couchbase-lite.nuspec'
         shutil.copy(self.relative_path(spec),
                 os.path.join(self.build_dir, 'couchbase-lite.nuspec'))
-        shell.call('mono src/.nuget/NuGet.exe pack -BasePath . couchbase-lite.nuspec',
-                self.build_dir)
+        try:
+            shell.call('mono src/.nuget/NuGet.exe pack -BasePath . couchbase-lite.nuspec',
+                    self.build_dir)
+        except:
+            pass
 
     def install(self):
         destdir = os.path.join(self.config.prefix, 'lib/cli/Couchbase.Lite-1.0')
