@@ -46,6 +46,12 @@ class Recipe(recipe.Recipe):
                    '/property:Configuration=Release', self.build_dir)
         if self.config.platform == Platform.DARWIN:
             try:
+                shell.call("mono src/.nuget/NuGet.exe restore " \
+                        "-SolutionDirectory src src/Couchbase.Lite.Android/packages.config",
+                        self.build_dir)
+                shell.call("mono src/.nuget/NuGet.exe restore " \
+                        "-SolutionDirectory src src/Couchbase.Lite.iOS/packages.config",
+                        self.build_dir)
                 shell.call('/Applications/Xamarin\ Studio.app/Contents/MacOS/mdtool '
                        'build -c:Release src/Couchbase.Lite.iOS/Couchbase.Lite.iOS.csproj',
                        self.build_dir)
