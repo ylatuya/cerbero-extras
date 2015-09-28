@@ -22,10 +22,9 @@ class Recipe(recipe.Recipe):
     licenses = [License.Apachev2]
     stype = SourceType.GIT
     btype = BuildType.CUSTOM
-    deps = ['mono', 'Newtonsoft.Json']
+    deps = ['mono', 'Newtonsoft.Json', 'sqlite3']
     remotes = {'github': 'https://github.com/fluendo/couchbase-lite-net.git'}
     commit = 'github/mono'
-    deps = ['sqlite3']
     files_cli = [
       'lib/cli/Couchbase.Lite-1.0/Couchbase.Lite.dll',
       'lib/cli/Couchbase.Lite-1.0/SQLitePCL.raw.dll',
