@@ -14,6 +14,7 @@ class App(package.App):
     uuid = '5f446666-4165-511f-8287-e8f2a895f853'
     org = "org.chronojump"
     app_recipe = 'chronojump'
+    relocate_osx_binaries = True
     deps = ['base-system', 'gstreamer-core', 'gstreamer-codecs', 'gstreamer-system',
             'gstreamer-capture', 'gstreamer-libav', 'gstreamer-editing', 'gstreamer-codecs-gpl',
             'gstreamer-codecs-restricted', 'gstreamer-playback', 'gtk+-2.0', 'chronojump-deps']
