@@ -29,6 +29,9 @@ export GDK_PIXBUF_MODULE_FILE=$PREFIX/lib/gdk-pixbuf-2.0/2.10.0/loaders/cache
 export DYLD_FALLBACK_LIBRARY_PATH=$PREFIX/lib:/usr/lib
 export PATH=$PREFIX/bin:$PATH
 
-export MONO_PATH=$PREFIX/lib/mono/4.5:$PREFIX/lib/mono/gtk-sharp-2.0/
-cd $PREFIX/bin
-./mono-sgen --config $PREFIX/etc/mono/config $PREFIX/lib/chronojump/ChronoJump.exe
+export MONO_PATH=$PREFIX/lib/mono/4.5:$PREFIX/lib/mono/4.5/Facades:$PREFIX/lib/mono/gtk-sharp-2.0/
+export MONO_CONFIG=$PREFIX/etc/mono/config
+export MONO_CFG_DIR=$PREFIX/etc
+
+cd "$PREFIX/bin"
+./mono-sgen  "$PREFIX/lib/chronojump/ChronoJump.exe"

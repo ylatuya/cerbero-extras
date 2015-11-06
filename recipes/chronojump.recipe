@@ -28,16 +28,12 @@ class Recipe(recipe.Recipe):
     files_icons = ['share/icons/hicolor/48x48/apps/chronojump.png']
     files_pyhon = ['lib/chronojump/python']
     platform_files_bin = {
-        Platform.DARWIN: ['%(sdir)s/Chronojump.exe'],
         Platform.WINDOWS: ['%(sdir)s/Chronojump.exe'],
     }
     platform_files_bins = {
         Platform.LINUX: ['chronojump']
     }
     files_chronojump = ['lib/chronojump']
-    platform_files_chronojump = {
-        Platform.DARWIN: ['lib/longomatch/libcesarplayer.0.dylib']
-        }
 
     def prepare(self):
         if self.config.target_platform in [Platform.WINDOWS, Platform.DARWIN]:
