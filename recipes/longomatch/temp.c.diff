@@ -1,52 +1,19 @@
---- temp.c	2014-09-17 19:18:25 +0200
-+++ /usr/home/andoni/git/cerbero/cerbero-extras/recipes/longomatch/temp.c	2014-09-17 19:18:24 +0200
-@@ -1,5 +1,7 @@
-+/* This source code was produced by mkbundle, do not edit */
+--- temp.c	2015-12-10 18:21:21.000000000 +0100
++++ temp.c	2015-12-10 18:21:19.000000000 +0100
+@@ -1,3 +1,4 @@
++#include "init.c"
  #include <mono/metadata/mono-config.h>
  #include <mono/metadata/assembly.h>
-+#include <glib.h>
  
- extern const unsigned char assembly_data_LongoMatch_exe [];
- static const MonoBundledAssembly assembly_bundle_LongoMatch_exe = {"LongoMatch.exe", assembly_data_LongoMatch_exe, 8192};
-@@ -76,6 +78,8 @@
- {
- 	char **newargs;
- 	int i, k = 0;
-+  gchar *win_path, *exe_path, *mono_path, *db40_path, *lgm_path, *lib_path;
-+  gchar *addins_path, *mono_lib_path, *etc_path, *gtk_path, *json_path, *gst_path;
- 
- 	newargs = (char **) malloc (sizeof (char *) * (argc + 2 + count_mono_options_args ()));
- 
-@@ -94,8 +98,30 @@
+@@ -91,9 +92,8 @@
  	}
  	newargs [k] = NULL;
  	
 -	if (config_dir != NULL && getenv ("MONO_CFG_DIR") == NULL)
 -		mono_set_dirs (getenv ("MONO_PATH"), config_dir);
-+  exe_path = g_win32_get_package_installation_directory_of_module (NULL);
-+  lib_path = g_build_filename (exe_path, "lib", NULL);
-+  etc_path = g_build_filename (exe_path, "etc", NULL);
-+  mono_lib_path = g_build_filename (exe_path, "lib", "mono", "4.5",
-+      NULL);
-+  gtk_path  = g_build_filename (exe_path, "lib",
-+      "gtk-sharp-2.0", NULL);
-+  db40_path = g_build_filename (exe_path, "lib", "cli", "Db4objects.Db4o-8.0",
-+      NULL);
-+  json_path = g_build_filename (exe_path, "lib", "cli", "Newtonsoft.Json-6.0",
-+      NULL);
-+  addins_path = g_build_filename (exe_path, "lib", "mono",
-+      "mono-addins", NULL);
-+  lgm_path = g_build_filename (exe_path, "lib", "longomatch", NULL);
-+  gst_path = g_build_filename (exe_path, "lib", "longomatch", "plugins", "gstreamer-0.10", NULL);
-+  win_path = g_strdup_printf ("%s;%s", getenv ("PATH"), gst_path);
+-	
++	custom_init ();
 +
-+  g_setenv ("PATH", win_path, TRUE);
-+  mono_path = g_strdup_printf("%s;%s;%s;%s;%s;%s", mono_lib_path,
-+      gtk_path, db40_path, addins_path, lgm_path, json_path);
-+  g_setenv ("MONO_PATH", mono_path, TRUE);
-+	mono_set_dirs (lib_path, etc_path);
-+  g_print ("Using PATH %s\n", win_path);
-+  g_print ("Using MONO_PATH %s\n", mono_path);
- 	
  	mono_mkbundle_init();
  
+ 	return mono_main (k, newargs);
