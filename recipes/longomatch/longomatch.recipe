@@ -46,6 +46,7 @@ class Recipe(recipe.Recipe):
     files_longomatch = [
         'lib/longomatch/Couchbase.Lite.dll',
         'lib/longomatch/Newtonsoft.Json.dll',
+        'lib/longomatch/Stateless.dll',
         'lib/longomatch/SQLitePCL.raw.dll',
         'lib/longomatch/SQLitePCL.ugly.dll',
         'lib/longomatch/ICSharpCode.SharpZipLib.dll',

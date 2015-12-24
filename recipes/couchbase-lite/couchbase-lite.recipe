@@ -18,13 +18,13 @@ Libs: -r:${libdir}/cli/Couchbase.Lite-1.0/Couchbase.Lite.dll\
 
 class Recipe(recipe.Recipe):
     name = 'Couchbase.Lite'
-    version = '1.1'
+    version = '1.1.2'
     licenses = [License.Apachev2]
     stype = SourceType.GIT
     btype = BuildType.CUSTOM
     deps = ['mono', 'Newtonsoft.Json', 'sqlite3']
     remotes = {'github': 'https://github.com/fluendo/couchbase-lite-net.git'}
-    commit = 'github/mono'
+    commit = 'github/1.1.2'
     files_cli = [
       'lib/cli/Couchbase.Lite-1.0/Couchbase.Lite.dll',
       'lib/cli/Couchbase.Lite-1.0/SQLitePCL.raw.dll',
@@ -41,6 +41,8 @@ class Recipe(recipe.Recipe):
 
     @modify_environment
     def compile(self):
+        shell.call("mono src/.nuget/NuGet.exe restore " \
+                   "-SolutionDirectory src src/Couchbase.Lite.Net45/packages.config", self.build_dir)
         shell.call('xbuild src/Couchbase.Lite.sln /target:Couchbase_Lite_Net45 '
                    '/property:Configuration=Release', self.build_dir)
         if self.config.platform == Platform.DARWIN:
@@ -59,14 +61,15 @@ class Recipe(recipe.Recipe):
                        self.build_dir)
             except:
                 pass
-        if self.config.platform == Platform.WINDOWS:
-            spec = 'couchbase-lite-win.nuspec'
-        elif self.config.platform == Platform.DARWIN:
-            spec = 'couchbase-lite-osx.nuspec'
-        else:
-            spec = 'couchbase-lite.nuspec'
-        shutil.copy(self.relative_path(spec),
-                os.path.join(self.build_dir, 'couchbase-lite.nuspec'))
+        nuspec = os.path.join(self.build_dir, 'couchbase-lite.nuspec')
+        shutil.copy(os.path.join(self.build_dir, 'packaging', 'nuget', 'couchbase-lite.nuspec'),
+                nuspec)
+        replacements = {'<id>Couchbase.Lite</id>': '<id>Couchbase.Lite.LM</id>'}
+        # We only build Android and iOS nuget packages in OS X
+        if self.config.platform == Platform.DARWIN:
+            replacements['<file target="lib/MonoAndroid" src="src/Couchbase.Lite.Android/bin/Release/Couchbase.Lite.*" />'] = ""
+            replacements['<file target="lib/Xamarin.iOS10" src="src/Couchbase.Lite.iOS/bin/Release/Couchbase.Lite.*" />'] = ""
+        shell.replace(nuspec, replacements)
         try:
             shell.call('mono src/.nuget/NuGet.exe pack -BasePath . couchbase-lite.nuspec',
                     self.build_dir)
@@ -85,6 +88,6 @@ class Recipe(recipe.Recipe):
         nugetdir = os.path.join(self.config.prefix, 'share', 'nuget')
         if not os.path.exists(nugetdir):
             os.makedirs(nugetdir)
-        shutil.copy(os.path.join(self.build_dir, 'Couchbase.Lite.LM.1.0.4.1.nupkg'),
+        shutil.copy(os.path.join(self.build_dir, 'Couchbase.Lite.LM.1.1.2.0.nupkg'),
                 nugetdir)
 
