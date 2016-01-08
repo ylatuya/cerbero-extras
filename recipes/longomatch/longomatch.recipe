@@ -133,6 +133,16 @@ class Recipe(recipe.Recipe):
                 fs.append(x)
         return fs
 
+    def compile(self):
+        #HACK: Temporal workaround for https://bugzilla.xamarin.com/show_bug.cgi?id=37478
+        if self.config.target_platform == Platform.WINDOWS:
+            csproj = os.path.join(self.build_dir, 'LongoMatch.DB/LongoMatch.DB.Net45.csproj')
+            dllpath = shell.check_call(
+                "sed -n 's:.*<HintPath>\(.*SharpZipLib.*\)</HintPath>.*:\\1:p' %s" % csproj)
+            dllpath = dllpath.split('\n')[0].replace("\\", "/").replace("$(SolutionDir)", self.build_dir)
+            shutil.copy(dllpath, os.path.join(self.build_dir, 'bin'))
+        super(recipe.Recipe, self).compile()
+
     @modify_environment
     def post_install(self):
         if self.config.target_platform in [Platform.LINUX, Platform.DARWIN]:
