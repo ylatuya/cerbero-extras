@@ -69,9 +69,14 @@ class Recipe(recipe.Recipe):
         if self.config.platform != Platform.DARWIN:
             replacements['<file target="lib/MonoAndroid" src="src/Couchbase.Lite.Android/bin/Release/Couchbase.Lite.*" />'] = ""
             replacements['<file target="lib/Xamarin.iOS10" src="src/Couchbase.Lite.iOS/bin/Release/Couchbase.Lite.*" />'] = ""
+        # Windows needs backslashes in the path
+        if self.config.platform == Platform.WINDOWS:
+            net45lib = '<file target="lib/net45" src="src/Couchbase.Lite.Net45/bin/Release/Couchbase.Lite.*" />'
+            net45libfixed = '<file target="lib\\net45" src="src\\Couchbase.Lite.Net45\\bin\\Release\\Couchbase.Lite.*" />'
+            replacements[net45lib] = net45libfixed
         shell.replace(nuspec, replacements)
         try:
-            shell.call('mono src/.nuget/NuGet.exe pack -BasePath . couchbase-lite.nuspec',
+            shell.call('mono src/.nuget/NuGet.exe pack -Verbose -BasePath . couchbase-lite.nuspec',
                     self.build_dir)
         except:
             pass
