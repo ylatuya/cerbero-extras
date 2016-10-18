@@ -19,8 +19,8 @@ class Recipe(recipe.Recipe):
     }
 
     platform_files_libs = {
-        Platform.DARWIN: ['libcesarplayer'],
-        Platform.WINDOWS: ['libcesarplayer'],
+        Platform.DARWIN: ['libvas'],
+        Platform.WINDOWS: ['libvas'],
     }
     files_lang = ['chronojump']
     files_share = ['share/chronojump']
@@ -55,13 +55,13 @@ class Recipe(recipe.Recipe):
     def post_install(self):
         if self.config.target_platform in [Platform.WINDOWS]:
             longomatchlib = os.path.join(self.config.prefix, 'lib', 'chronojump')
-            dll = 'libcesarplayer-0%(srext)s' % self.extensions
-            libcesarplayer = os.path.join(longomatchlib, dll)
+            dll = 'libvas-0%(srext)s' % self.extensions
+            libvas = os.path.join(longomatchlib, dll)
             shutil.copy(os.path.join(longomatchlib, '..', 'bin', dll),
-                        libcesarplayer)
+                        libvas)
             libdir = os.path.join(self.config.prefix, 'bin')
             bindir = os.path.join(self.config.prefix, 'bin')
-            shutil.copy(libcesarplayer, libdir)
+            shutil.copy(libvas, libdir)
 
             crlib = os.path.join(self.config.prefix, 'lib', 'chronojump')
             binary = os.path.join(self.config.prefix, self.extensions['sdir'],

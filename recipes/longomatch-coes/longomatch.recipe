@@ -23,8 +23,8 @@ class Recipe(recipe.Recipe):
 
     files_bins = ['avconv']
     platform_files_libs = {
-        Platform.DARWIN: ['libcesarplayer'],
-        Platform.WINDOWS: ['libcesarplayer'],
+        Platform.DARWIN: ['libvas'],
+        Platform.WINDOWS: ['libvas'],
     }
     files_lang = ['longomatch']
     files_share = ['share/longomatch']
@@ -65,7 +65,7 @@ class Recipe(recipe.Recipe):
     ]
     platform_files_longomatch = {
         Platform.DARWIN: [
-            'lib/longomatch/libcesarplayer.0.dylib'
+            'lib/longomatch/libvas.0.dylib'
         ],
         # We need a copy of LongoMatch.Addins in the same folder as LongoMatchGtk.exe
         Platform.WINDOWS: [
@@ -122,19 +122,19 @@ class Recipe(recipe.Recipe):
         if self.config.target_platform in [Platform.WINDOWS, Platform.DARWIN]:
             longomatchlib = os.path.join(self.config.prefix, 'lib', 'longomatch')
             if self.config.target_platform == Platform.WINDOWS:
-                dll = 'libcesarplayer-0%(srext)s' % self.extensions
-                libcesarplayer = os.path.join(longomatchlib, dll)
+                dll = 'libvas-0%(srext)s' % self.extensions
+                libvas = os.path.join(longomatchlib, dll)
                 shutil.copy(os.path.join(longomatchlib, '..', 'bin', dll),
-                            libcesarplayer)
+                            libvas)
                 shutil.copy(os.path.join(longomatchlib, 'LongoMatch.Addins.dll'),
                             os.path.join(self.config.prefix, 'bin'))
                 libdir = os.path.join(self.config.prefix, 'bin')
             elif self.config.target_platform == Platform.DARWIN:
-                libcesarplayer = os.path.join(longomatchlib,
-                    'libcesarplayer.0%(srext)s' % self.extensions)
+                libvas = os.path.join(longomatchlib,
+                    'libvas.0%(srext)s' % self.extensions)
                 libdir = os.path.join(self.config.prefix, 'lib', 'mono', '4.0')
             bindir = os.path.join(self.config.prefix, 'bin')
-            shutil.copy(libcesarplayer, libdir)
+            shutil.copy(libvas, libdir)
 
             if self.config.target_platform == Platform.WINDOWS:
                 binary = os.path.join(self.config.prefix, self.extensions['sdir'],
